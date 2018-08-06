@@ -1,0 +1,14 @@
+.search
+{
+    border: cadetblue;
+    border-style: solid;
+    width: 70%;
+}
+
+input {
+    margin-right: 5px;
+}
+
+.login {
+    margin-right: 20px;
+}
