@@ -5,6 +5,7 @@ import '../css/Home.css'
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import StarRatings from '../../node_modules/react-star-ratings';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 export default class Home extends React.Component{
     constructor(props) {

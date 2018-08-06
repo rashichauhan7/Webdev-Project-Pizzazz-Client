@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import config from '../config.json';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 class App extends Component {
 
@@ -71,18 +72,26 @@ class App extends Component {
                 </div>
             ) :
             (
-                <div>
+                <div className="container-fluid">
                     <FacebookLogin
                         appId={config.FACEBOOK_APP_ID}
                         autoLoad={false}
                         fields="name,email,picture"
-                        callback={this.facebookResponse} />
+                        callback={this.facebookResponse}
+                        cssClass="my-facebook-button-class"
+                        icon="fa-facebook"/>
+                    <br/>
+                    <br/>
                     <GoogleLogin
                         clientId={config.GOOGLE_CLIENT_ID}
-                        buttonText="Login"
                         onSuccess={this.googleResponse}
                         onFailure={this.onFailure}
-                    />
+                    >
+                        <span>
+                            <i className="fa fa-google"/>
+                        </span>
+                    <span> Login with Google</span>
+                    </GoogleLogin>
                 </div>
             );
         return (
@@ -116,7 +125,7 @@ class App extends Component {
                     </button>
                 </div>
                 <br/>
-                or
+                <div className="container-fluid"> or </div>
                 <br/>
                 <div className="App">
                     {content}
