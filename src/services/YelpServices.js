@@ -1,5 +1,5 @@
 let _singleton = Symbol();
-const YELP_API_URL ='http://localhost:4000/search';
+const YELP_API_URL ='http://localhost:2000/search';
 
 export default class YelpApiService {
     constructor(singletonToken) {
