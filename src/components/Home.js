@@ -1,11 +1,12 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import YelpApiService from '../services/YelpServices'
 import '../css/Home.css'
+import logo from '../css/img/logo.png'
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import StarRatings from '../../node_modules/react-star-ratings';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 export default class Home extends React.Component{
     constructor(props) {
@@ -15,6 +16,7 @@ export default class Home extends React.Component{
             location: 'boston , ma',
             salons:[]
         };
+        let selectedLabel;
         this.yelp = YelpApiService.instance;
         this.getSalons = this.getSalons.bind(this);
         this.renderSalons = this.renderSalons.bind(this);
@@ -34,11 +36,17 @@ export default class Home extends React.Component{
     }
     getSalons()
     {
+
         this.yelp.searchSalons(this.state.keyword, this.state.location)
             .then((response)=> {
                 this.setState({salons: []});
                 for(var i = 0; i < response.length; i++) {
                     if(response[i].name.toString().toLowerCase().includes(this.state.keyword.toLowerCase().substr(0,3)) && response[i].distance < 1500) {
+                        this.setState({
+                            salons: [response[i], ...this.state.salons]
+                        });
+                    }
+                    else {
                         this.setState({
                             salons: [...this.state.salons, response[i]]
                         });
@@ -49,17 +57,18 @@ export default class Home extends React.Component{
     }
     renderSalons()
     {
+
         let salons = this.state.salons.map((salons) =>
         {
 
-            return <div className="card col-sm-6"  >
-                <div style={{width: '100%'}}>
-                    <img className="card-img-top"
-                         width="100"
-                         height="400"
-                         src = {salons.image_url}/>
+            return <div className="card col-sm-3" adivgn="center">
+                <div>
+                    <a href={salons.name} className="card-title"><h4>{salons.name}</h4></a>
                 </div>
-                <h5 className="card-title">{salons.name}</h5>
+                <div style={{width: '100%'}}>
+                    <img className="card-img-top" width="200" height="200" src = {salons.image_url}/>
+                </div>
+
                 <p className="card-text">{salons.phone}</p>
                 <span> <StarRatings
                     rating={salons.rating}
@@ -85,12 +94,12 @@ export default class Home extends React.Component{
     defaultData() {
         this.yelp.searchSalons('salons', this.state.location)
             .then((response)=> {
-                for(var i = 0; i < 10; i++) {
+                for(var i = 0; i < 9; i++) {
                     // console.log(response[i]);
                     this.setState({
                         salons: [...this.state.salons, response[i]]
                     });
-                    console.log(this.state.salons);
+                    //console.log(this.state.salons);
                 }
             })
     }
@@ -114,23 +123,84 @@ export default class Home extends React.Component{
                               className="login">
                             Login
                         </Link>
-                        <Link to="/register" classname = "input">Register</Link>
+                        <Link to="/register" className = "input">Register</Link>
                     </div>
                 </div>
-                <br/>
-                <div className="row container-fluid">
-                    <div align="center" className="input-group col-6">
-                        <input onKeyPress={this._handleKeyPress}
-                               onChange={this.titleChanged}
-                               className="form-control"
-                               placeholder="Find Salons, Spas and more.."/>
-                        <button className="btn btn-danger"
-                                onClick={this.getSalons}>Find</button>
+                <div className="container-fluid align-content-center" >
+                    <div className="mainbody">
+                        <img className="logo" src={logo}/>
+                        <div className="topBanner" ref="topBanner">
+
+                            <div align="center">
+                                <label className="search">
+                                    <input onKeyPress={this._handleKeyPress} onChange={this.titleChanged} className="form-control" align="center" placeholder="Find Salons, Spas and more.."/>
+                                </label>
+                                <label align = "center"><button className="btn btn-danger" onClick={this.getSalons}>Search</button></label>
+                            </div>
+                            <div className="row">
+
+                                <div className="col-2">
+                                    <div onClick={(e) =>
+                                    {
+                                        this.state.keyword = "Spas";
+                                        this.getSalons();
+                                        this.refs.topBanner.style.paddingBottom = "2%";
+                                    }}>
+                                        <i className="fa fa-chevron-circle-right float-left"><label>Spas</label></i>
+                                    </div>
+                                </div>
+                                <div className="col-2">
+                                    <div onClick={(e) =>
+                                    {
+                                        this.state.keyword = "Haircuts";
+                                        this.getSalons();
+                                        this.refs.topBanner.style.paddingBottom = "2%";
+                                    }}>
+                                        <i className="fa fa-chevron-circle-right float-left"><label>Haircuts</label></i>
+                                    </div>
+                                </div><div className="col-2">
+                                <div onClick={(e) =>
+                                {
+                                    this.state.keyword = "Skin Treatment";
+                                    this.getSalons();
+                                    this.refs.topBanner.style.paddingBottom = "2%";
+                                }}>
+                                    <i className="fa fa-chevron-circle-right float-left"><label> Skin Treatment</label></i>
+                                </div>
+                            </div><div className="col-2">
+                                <div onClick={(e) =>
+                                {
+                                    this.state.keyword = "Massage";
+                                    this.getSalons();
+                                    this.refs.topBanner.style.paddingBottom = "2%";
+                                }}>
+                                    <i className="fa fa-chevron-circle-right float-left"><label>Massage</label></i>
+                                </div>
+                            </div><div className="col-2">
+                                <div onClick={(e) =>
+                                {
+                                    this.state.keyword = "Facial";
+                                    this.getSalons();
+                                    this.refs.topBanner.style.paddingBottom = "2%";
+                                }}>
+                                    <i className="fa fa-chevron-circle-right float-left"><label>Facial</label></i>
+                                </div>
+                            </div><div className="col-2">
+                                <div onClick={(e) =>
+                                {
+                                    this.state.keyword = "Styling";
+                                    this.getSalons();
+                                    this.refs.topBanner.style.paddingBottom = "2%";
+                                }}>
+                                    <i className="fa fa-chevron-circle-right float-left"><label> Styling</label></i>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <div className="row container-fluid">
-                    {this.renderSalons()}
+                    <div className="row">
+                        {this.renderSalons()}
+                    </div>
                 </div>
             </div>
         );

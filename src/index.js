@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import '../src/css/index.css';
 import Home from "./components/Home";
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import Register from './components/Register'
 import App from './components/Login'
-
 
 class Main extends React.Component {
     render() {

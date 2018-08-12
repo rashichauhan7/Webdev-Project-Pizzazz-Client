@@ -90,7 +90,7 @@ class App extends Component {
                         <span>
                             <i className="fa fa-google"/>
                         </span>
-                    <span> Login with Google</span>
+                        <span> Login with Google</span>
                     </GoogleLogin>
                 </div>
             );

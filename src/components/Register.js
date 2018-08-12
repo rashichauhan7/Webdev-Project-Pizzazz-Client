@@ -37,7 +37,7 @@ export default class Register extends React.Component{
                 </div>
                 <br/>
                 <div className="btn btn-success input">
-                        Register
+                    Register
                 </div>
             </div>
         )

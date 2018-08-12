@@ -1,14 +1,101 @@
+.mainbody
+{
+    /*background-color: darkred;*/
+    /*height: 90%;*/
+    border-radius: 5px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.topBanner {
+    /*background-color: rgba(255, 0, 0, 0.2);*/
+    background-image: url("http://redsalonpa.com/wp-content/uploads/2014/04/p-background2.jpg");
+    opacity: 0.8;
+    margin-left: 6%;
+    margin-right: 6%;
+    align-content: center;
+   padding-top: 20%;
+    padding-bottom: 25%;
+}
+
 .search
 {
-    border: cadetblue;
-    border-style: solid;
+
     width: 70%;
-}
-
-input {
     margin-right: 5px;
+
 }
 
-.login {
-    margin-right: 20px;
+.logo
+{
+    position: absolute;
+    z-index: 10;
+    top: 40px;
+    margin-left:40% ;
 }
+
+.btn
+{
+    position: relative;
+}
+.card
+{
+    margin: 20px;
+    width: max-content;
+    height: 400px;
+    /*background-color: rgba(170, 51, 51, .5) ;*/
+}
+
+.card-title {
+    color: black;
+}
+
+.card-title:hover {
+    color: black;
+}
+.row {
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+label
+{
+    font-size: large;
+}
+
+.heading
+{
+    font-size: medium;
+    font-family: Arial;
+}
+
+
+
+.row div div{
+
+    color: white;
+
+    text-decoration: none;
+
+}
+
+
+
+.row div div:hover {
+
+    text-decoration: none;
+
+    color: darkblue;
+
+}
+
+
+
+.row div div:active, .row div div:focus {
+
+    text-decoration: none;
+    color: darkblue;
+
+}
+
+
+
