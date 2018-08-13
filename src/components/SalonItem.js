@@ -77,7 +77,7 @@ export default class SalonItem extends React.Component{
                       </div>
                     <div className="card col-lg-12">
                         <div style={{width: '100%'}}>
-                        <img className="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&sensor=false&key=AIzaSyCzl1R3lOawX15aFS8OIBZsGDnoJXAkpQo"/>
+                        <img className="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyCzl1R3lOawX15aFS8OIBZsGDnoJXAkpQo"/>
                         </div>
                         <h4 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h4>
                         <p className="card-text">{this.state.salon.location.cross_streets}</p>
