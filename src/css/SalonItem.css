@@ -1,0 +1,52 @@
+h1
+{
+    margin-top: 2%;
+    font-family: "Times New Roman";
+}
+
+.item
+{
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.image
+{
+    margin: 10px;
+    /*border-radius: 8px;*/
+    transition: transform .5s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.image:hover
+{
+    transform:scale(1.5);
+}
+
+.category1{
+
+    color: red;
+
+    text-decoration: black;
+    font-size: medium;
+    margin: 2px;
+}
+
+
+
+.category1:hover {
+
+    text-decoration: none;
+
+    color: black;
+
+}
+
+
+
+.category1:active, .category1:focus {
+
+    text-decoration: none;
+    color: black;
+
+}

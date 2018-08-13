@@ -3,18 +3,43 @@
     /*background-color: darkred;*/
     /*height: 90%;*/
     border-radius: 5px;
-    margin-left: 2%;
-    margin-right: 2%;
+    /*margin-left: 2%;*/
+    /*margin-right: 2%;*/
 }
 .topBanner {
     /*background-color: rgba(255, 0, 0, 0.2);*/
     background-image: url("http://redsalonpa.com/wp-content/uploads/2014/04/p-background2.jpg");
-    opacity: 0.8;
-    margin-left: 6%;
-    margin-right: 6%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    margin-left: 0%;
+    margin-right: 0%;
     align-content: center;
    padding-top: 20%;
     padding-bottom: 25%;
+}
+.signIns
+{
+    position: absolute;
+    margin-left: 96%;
+    margin-top: 0%;
+    z-index: 10;
+}
+.google
+{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    padding-top:10px;
+    z-index: 10;
+}
+.facebook
+{
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+    background-color:blue ;
+    padding-top: 10px;
 }
 
 .search
@@ -25,6 +50,7 @@
 
 }
 
+
 .logo
 {
     position: absolute;
@@ -32,7 +58,14 @@
     top: 40px;
     margin-left:40% ;
 }
-
+.logo1
+{
+    position: absolute;
+    z-index: 10;
+    size: B4;
+    visibility: hidden;
+    /*margin-left:0% ;*/
+}
 .btn
 {
     position: relative;
@@ -70,7 +103,7 @@ label
 
 
 
-.row div div{
+.category{
 
     color: white;
 
@@ -80,7 +113,7 @@ label
 
 
 
-.row div div:hover {
+.category:hover {
 
     text-decoration: none;
 
@@ -90,7 +123,7 @@ label
 
 
 
-.row div div:active, .row div div:focus {
+.category:active, .category:focus {
 
     text-decoration: none;
     color: darkblue;
