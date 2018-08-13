@@ -1,6 +1,6 @@
 let _singleton = Symbol();
-// const YELP_API_URL ='https://rocky-caverns-99102.herokuapp.com';
-const YELP_API_URL ='http://localhost:2000';
+const YELP_API_URL ='https://rocky-caverns-99102.herokuapp.com';
+// const YELP_API_URL ='http://localhost:2000';
 
 
 export default class YelpApiService {
