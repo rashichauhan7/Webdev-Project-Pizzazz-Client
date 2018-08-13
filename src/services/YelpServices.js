@@ -1,5 +1,5 @@
 let _singleton = Symbol();
-const YELP_API_URL ='http://localhost:2000/search';
+const YELP_API_URL ='http://localhost:2000';
 
 export default class YelpApiService {
     constructor(singletonToken) {
@@ -13,13 +13,33 @@ export default class YelpApiService {
         return this[_singleton]
     }
 
-    searchSalons(keyword, location)
-    {
+    searchSalons(keyword, location) {
         const searchString = {
             searchTerm: keyword,
             location: location
         };
-        return fetch(YELP_API_URL,{
+        return fetch(YELP_API_URL + '/search', {
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(searchString),
+            method: 'post'
+        }).then(function (response) {
+            return response.json();
+
+        })
+    }
+
+    getSalon = (id) =>
+        fetch(YELP_API_URL + '/business/' + id)
+            .then(response => response.json())
+
+    getAutocomplete = (keyword, location) => {
+        const searchString = {
+            text: keyword,
+            locale: location
+        };
+        return fetch(YELP_API_URL + '/autocomplete', {
             headers: {
                 'content-type': 'application/json'
             },
