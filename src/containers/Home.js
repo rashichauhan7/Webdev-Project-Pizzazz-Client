@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import YelpApiService from '../services/YelpServices'
 import '../css/Home.css'
@@ -6,8 +7,6 @@ import logo from '../css/img/logo1.png'
 import logo1 from '../css/img/logo1.png'
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import {Link} from 'react-router-dom';
-import InitialList from '../components/IntialList'
-import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
 export default class Home extends React.Component{
@@ -24,6 +23,7 @@ export default class Home extends React.Component{
         this.yelp = YelpApiService.instance;
         this.getOptions = this.getOptions.bind(this);
         this.handleChange=  this.handleChange.bind(this);
+        this.searchBtn = React.createRef();
     }
 
 
@@ -54,6 +54,8 @@ let options = [];
         this.setState({ value: event.target.value });
         this.setState({ keyword: event.target.value });
         this.refs.searchbar.size = 1;
+        var homeLink = ReactDOM.findDOMNode(this.refs.searchBtn);
+        homeLink.focus();
     };
 
 
@@ -71,10 +73,10 @@ let options = [];
 
                 <div align="center">
                     <label className="search">
-                <input onChange={this.titleChanged} onFocus={this.titleChanged} className="form-control" align="center" placeholder="Find Salons, Spas and more.." value={this.state.keyword}/>
+                <input onChange={this.titleChanged} onFocus={this.titleChanged}  className="form-control" align="center" placeholder="Find Salons, Spas and more.." value={this.state.keyword}/>
                     </label>
-                    <label align = "center">
-                        <Link className="btn btn-danger" to={`/search/${this.state.keyword}`} onClick={() =>
+                    <label align = "center" >
+                        <Link className="btn btn-danger" ref="searchBtn" to={`/search/${this.state.keyword}`} onClick={() =>
                         { this.refs.topBanner.style.paddingBottom = "2%";
                             this.refs.topBanner.style.paddingTop = "2%";
                             this.refs.logo.style.visibility = 'hidden';
@@ -83,7 +85,7 @@ let options = [];
                             Search</Link>
                     </label>
                     <div className="search">
-                    <select style={{visibility: 'hidden'}} className="form-control" onChange={this.handleChange} value={this.state.value} ref="searchbar">
+                    <select style={{visibility: 'hidden'}} className="form-control" onFocusOff={() => this.refs.searchbar.size = 1} onChange={this.handleChange} value={this.state.value} ref="searchbar">
                            <option key='1' value='1'>Select ..</option>
                             {this.state.options.map(item => (
                                 <option key={item.name} value={item.name}>
