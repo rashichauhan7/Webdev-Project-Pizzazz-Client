@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import YelpApiService from '../services/YelpServices'
 import '../css/Home.css'
-import logo from '../css/img/logo1.png'
+import logo from '../css/img/logo.png'
 import logo1 from '../css/img/logo1.png'
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import {Link} from 'react-router-dom';
-import 'react-dropdown/style.css'
 
 export default class Home extends React.Component{
     constructor(props) {
