@@ -68,7 +68,7 @@ export default class SalonItem extends React.Component{
                </span>
                <span><h4>Reviews {this.state.salon.review_count}</h4></span>
                <span><button className="btn btn-danger ">
-                   <StarRatings rating= {1.0} starDimension="30px"
+                   <StarRatings rating= {1.0} starDimension="25px"
                                 starRatedColor="white" numberOfStars="5"/>Write a Review</button></span>
 
                       <div style={{marginTop: '10px'}}>
@@ -77,7 +77,10 @@ export default class SalonItem extends React.Component{
                       </div>
                     <div className="card col-lg-12">
                         <div style={{width: '100%'}}>
-                        <img className="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyD1u5UTNKKSebmTxUnG6qoz7e4uO1TP_Vg"/>
+                        <img className="card-img-top" src={'https://maps.googleapis.com/maps/api/staticmap?center='+
+                        this.state.salon.location.display_address[0] + ','
+                        + this.state.salon.location.display_address[0] +
+                        '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBp8gPpJ1UADCI1B4jc9JWkC4378KYtdTc'}/>
                         </div>
                         <h4 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h4>
                         <p className="card-text">{this.state.salon.location.cross_streets}</p>
