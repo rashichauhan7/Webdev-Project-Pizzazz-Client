@@ -3,12 +3,14 @@ import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import config from '../config.json';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
+import UserService from "../services/UserService";
 
 class App extends Component {
 
     constructor() {
         super();
-        this.state = { isAuthenticated: false, user: null, token: ''};
+        this.state = { isAuthenticated: false, user: null, token: '' , username : '' , password : '' , loginUser : ''};
+        this.userService = UserService.instance;
     }
 
     logout = () => {
@@ -17,6 +19,35 @@ class App extends Component {
 
     onFailure = (error) => {
         alert(error);
+    };
+
+    loginUser = () => {
+
+            this.state.loginUser = {
+                username : this.state.username,
+                password : this.state.password
+            }
+
+        console.log(this.state.loginUser);
+        this.userService.findUserByUsernameAndPassword(this.state.loginUser)
+            .then((loginUser)=>{alert('login successful')})
+
+    };
+
+    formChanged = (event) => {
+        console.log(event.target.value);
+        console.log(this.state.username);
+        this.setState({
+                username: event.target.value
+            })
+    };
+
+    formChanged2 = (event) => {
+        console.log(event.target.value);
+        console.log(this.state.password);
+        this.setState({
+                password: event.target.value
+            })
     };
 
 
@@ -106,7 +137,8 @@ class App extends Component {
                         <input type="text"
                                className="form-control wbdv"
                                placeholder="alice"
-                               id="username"/>
+                               id="username"
+                    onChange={this.formChanged}/>
                     </div>
 
                     <div>
@@ -116,10 +148,11 @@ class App extends Component {
                         <input type="password"
                                className="form-control wbdv"
                                placeholder="1234qwerasdf"
-                               id="password"/>
+                               id="password"
+                    onChange={this.formChanged2}/>
                     </div>
                     <br/>
-                    <button className="btn btn-primary"
+                    <button className="btn btn-primary" onClick={this.loginUser}
                             id="loginBtn">
                         Login
                     </button>
