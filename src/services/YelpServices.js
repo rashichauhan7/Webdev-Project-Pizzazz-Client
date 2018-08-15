@@ -1,6 +1,6 @@
 let _singleton = Symbol();
 const YELP_API_URL ='https://rocky-caverns-99102.herokuapp.com';
-// const YELP_API_URL ='http://localhost:2000';
+// const YELP_API_URL ='http://localhost:4000';
 
 
 export default class YelpApiService {
@@ -34,6 +34,10 @@ export default class YelpApiService {
 
     getSalon = (id) =>
         fetch(YELP_API_URL + '/business/' + id)
+            .then(response => response.json())
+
+    getReviews = (id) =>
+        fetch(YELP_API_URL + '/business/' + id + '/reviews')
             .then(response => response.json())
 
     getAutocomplete = (keyword, location) => {

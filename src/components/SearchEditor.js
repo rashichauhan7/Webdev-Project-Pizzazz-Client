@@ -50,7 +50,7 @@ export default class SearchEditor extends React.Component {
 
                 for(var i = 0; i < response.length; i++) {
 
-                    if(response[i].name.toString().toLowerCase().includes(keyword.toLowerCase().substr(0,3)) && response[i].distance < 1500) {
+                    if(response[i].name.toString().toLowerCase().includes(keyword.toLowerCase().substr(0,2)) && response[i].distance < 1500) {
 
                         this.setState({
 
