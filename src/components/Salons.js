@@ -24,27 +24,23 @@ export default class Salon extends React.Component{
     render () {
         return (
             <div className="card col-sm-3" align="center">
+                <div style={{width: '100%'}}>
+                    <img className="card-img-top" width="20%" height="250px" src = {this.props.salons.image_url}></img>
+                </div>
                 <div>
                     <Link to={`/salon/${this.props.salons.id}`} className="card-title">
                         <h4>{this.props.salons.name}</h4>
                     </Link>
                 </div>
-                <div style={{width: '100%'}}>
-                    <img className="card-img-top" width="200" height="200" src = {this.props.salons.image_url}></img>
-                </div>
-
-                <p className="card-text">{this.props.salons.phone}</p>
-                <span> <StarRatings
+                <span>
+                    <StarRatings
                     rating={this.props.salons.rating}
                     starDimension="20px"
                     starSpacing="2px"
                     starRatedColor="gold"
                 /></span>
 
-                <label>{this.props.salons.location.display_address[0]}&nbsp;
-                    {this.props.salons.location.display_address[1]}&nbsp;
-                    {this.props.salons.location.display_address[2]}
-                    <span className="float-right">Distance :{parseFloat(this.props.salons.distance).toFixed(0)}m</span></label>
+
 
             </div>
         );

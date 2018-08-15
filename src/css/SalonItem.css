@@ -10,6 +10,18 @@ h1
     margin-left: 10%;
 }
 
+.card
+{
+    padding: 0%;
+    font-family:  "Times New Roman";
+    margin-left: 0%;
+}
+
+.card-text
+{
+    padding: 2%;
+
+}
 .image
 {
     margin: 10px;
@@ -22,6 +34,7 @@ h1
 {
     transform:scale(1.5);
 }
+
 
 .category1{
 
@@ -49,4 +62,61 @@ h1
     text-decoration: none;
     color: black;
 
+}
+
+.side
+{
+    margin-top: 20%;
+}
+
+.timing
+{
+    margin-left: 20%;
+    font-size: medium;
+    font-family: "Verdana";
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    width: 40%;
+    height: 12%;
+    padding-right: 0%;
+    margin-bottom: 0%;
+    margin-top: 0%;
+
+}
+.clock{
+    width: 10%;
+    padding-top: 7%;
+    padding-left: 5%;
+    padding-bottom: 2%;
+}
+
+
+.time-text{
+    width: 100%;
+    border-style: none;
+    margin-left: 2%;
+    margin-right: 20%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    padding-right: 0%;
+
+}
+
+.time {
+    padding-right: 0px;
+}
+
+.time-text .fa
+{
+    color : red;
+}
+
+.reviews
+{
+    border-style: none;
+    padding: 10px;
+}
+
+.reviews p {
+    height: max-content;
 }

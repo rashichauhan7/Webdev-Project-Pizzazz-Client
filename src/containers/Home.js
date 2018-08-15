@@ -62,10 +62,6 @@ let options = [];
         return (
             <div className="align-content-center" >
                 <div className="mainbody">
-                    <div className="signIns">
-                        <div align="center" className="google"><i className="fa fab fa-google fa-2x"></i></div>
-                        <div align="center" className="facebook"><i className="fa fab fa-facebook-f fa-2x"></i></div>
-                    </div>
                     <img className="logo" src={logo} ref="logo"/>
                     <img width="150px" className="logo1" src={logo1} ref="logo1" />
                 <div className="topBanner" ref="topBanner">

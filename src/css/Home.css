@@ -12,34 +12,9 @@
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.9;
-    margin-left: 0%;
-    margin-right: 0%;
     align-content: center;
    padding-top: 20%;
     padding-bottom: 25%;
-}
-.signIns
-{
-    position: absolute;
-    margin-left: 96%;
-    margin-top: 0%;
-    z-index: 10;
-}
-.google
-{
-    width: 50px;
-    height: 50px;
-    background-color: red;
-    padding-top:10px;
-    z-index: 10;
-}
-.facebook
-{
-    z-index: 1;
-    width: 50px;
-    height: 50px;
-    background-color:blue ;
-    padding-top: 10px;
 }
 
 .search
@@ -75,11 +50,13 @@
     margin: 20px;
     width: max-content;
     height: 400px;
+    padding: 0%;
     /*background-color: rgba(170, 51, 51, .5) ;*/
 }
 
 .card-title {
     color: black;
+    padding: 2%;
 }
 
 .card-title:hover {
