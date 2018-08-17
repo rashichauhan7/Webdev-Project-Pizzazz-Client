@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import StarRatings from '../../node_modules/react-star-ratings';
-import '../css/Salons.css'
+let cssLoaded = false;
 export default class Salon extends React.Component{
 
     constructor(props)
@@ -27,7 +27,14 @@ export default class Salon extends React.Component{
         this.setState({is_open_now: !newProps.salons.is_closed});
 
     }
+
     render () {
+        if (cssLoaded === false) {
+            cssLoaded = true;
+            import('../css/Salons.css');
+        }
+
+
         return (
             <div className="row salonItem " align="center" style={{marginLeft:"20%"}}>
                 <div className=" col-2 imgdiv float-left ">

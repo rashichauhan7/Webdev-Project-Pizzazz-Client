@@ -147,7 +147,7 @@ export default class SalonItem extends React.Component{
                         <img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center='+
                         this.state.salon.location.display_address[0] + ','
                         + this.state.salon.location.display_address[1] +
-                        '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyD1u5UTNKKSebmTxUnG6qoz7e4uO1TP_Vg'}/>
+                        '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBscU1D1hPtGZ0rQK-3ajLJBJEZC3ua1j8'}/>
                         </div>
                         <h5 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h5>
                         <span className="card-text">{this.state.salon.location.cross_streets}</span>

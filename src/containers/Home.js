@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import YelpApiService from '../services/YelpServices'
 import '../css/Home.css'
+import app from '../css/Home.css'
 import logo from '../css/img/logo3.png'
 import logo1 from '../css/img/logo3.png'
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
