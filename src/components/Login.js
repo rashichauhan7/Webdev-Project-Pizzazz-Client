@@ -104,7 +104,7 @@ class App extends Component {
                             Username
                         </label>
                         <input type="text"
-                               className="form-control wbdv"
+                               className="form-control"
                                placeholder="alice"
                                id="username"/>
                     </div>
@@ -114,12 +114,12 @@ class App extends Component {
                             Password
                         </label>
                         <input type="password"
-                               className="form-control wbdv"
+                               className="form-control"
                                placeholder="1234qwerasdf"
                                id="password"/>
                     </div>
                     <br/>
-                    <button className="btn btn-primary"
+                    <button className="btn btn-primary form-control"
                             id="loginBtn">
                         Login
                     </button>

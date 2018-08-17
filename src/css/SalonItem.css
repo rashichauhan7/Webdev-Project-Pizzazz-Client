@@ -120,3 +120,10 @@ h1
 .reviews p {
     height: max-content;
 }
+
+.submit
+{
+    margin-left: 25%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

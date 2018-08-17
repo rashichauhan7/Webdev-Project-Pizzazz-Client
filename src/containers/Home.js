@@ -80,7 +80,12 @@ let options = [];
                             Search</Link>
                     </label>
                     <div className="search">
-                    <select style={{visibility: 'hidden'}} className="form-control" onFocusOff={() => this.refs.searchbar.size = 1} onChange={this.handleChange} value={this.state.value} ref="searchbar">
+                    <select style={{visibility: 'hidden'}}
+                            className="form-control"
+                            onFocusOff={() => this.refs.searchbar.size = 1}
+                            onChange={this.handleChange}
+                            value={this.state.value}
+                            ref="searchbar">
                            <option key='1' value='1'>Select ..</option>
                             {this.state.options.map(item => (
                                 <option key={item.name} value={item.name}>
