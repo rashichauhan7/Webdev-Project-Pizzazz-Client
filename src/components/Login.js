@@ -105,64 +105,57 @@ class App extends Component {
             ) :
             (
                 <div className="container-fluid">
-                    <FacebookLogin
+                    {/*<FacebookLogin
                         appId={config.FACEBOOK_APP_ID}
                         autoLoad={false}
                         fields="name,email,picture"
                         callback={this.facebookResponse}
                         cssClass="my-facebook-button-class"
-                        icon="fa-facebook"/>
-                    <br/>
-                    <br/>
+                        icon="fa fa-facebook"/>
+
                     <GoogleLogin
                         clientId={config.GOOGLE_CLIENT_ID}
                         onSuccess={this.googleResponse}
-                        onFailure={this.onFailure}
-                    >
+                        onFailure={this.onFailure}>
                         <span>
                             <i className="fa fa-google"/>
                         </span>
                         <span> Login with Google</span>
-                    </GoogleLogin>
+                    </GoogleLogin>*/}
+
+                    <a className="btn btn-social-icon btn-google">
+                        <span className="fa fa-google"></span>
+                    </a>
+                    <a className="btn btn-social-icon btn-facebook">
+                        <span className="fa fa-facebook"></span>
+                    </a>
                 </div>
             );
         return (
+
+
             <div className="popup_inner">
-                <div className="container-fluid">
+
+            <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/> </button>
+                <form className="text-center border border-light p-5">
                     <h1>Sign In</h1>
+                    <input type="text" className="form-control mb-4 wbdv" placeholder="username" onChange={this.formChanged}/>
+                        <input type="password" id="defaultLoginFormPassword" className="form-control mb-4"
+                               placeholder="Password"  onChange={this.formChanged2}/>
 
-                    <div>
-                        <label htmlFor="username">
-                            Username
-                        </label>
-                        <input type="text"
-                               className="form-control wbdv"
-                               placeholder="alice"
-                               id="username"
-                    onChange={this.formChanged}/>
+                            <button className="btn btn-dark btn-block my-4" type="submit" onClick={this.loginUser}>Continue</button>
+
+                    <p>Not a member?
+                        <a href="">Register</a>
+                    </p>
+
+                    <p>or sign in with:</p>
+                    <div className="App">
+                        {content}
                     </div>
 
-                    <div>
-                        <label htmlFor="password">
-                            Password
-                        </label>
-                        <input type="password"
-                               className="form-control wbdv"
-                               placeholder="1234qwerasdf"
-                               id="password"
-                    onChange={this.formChanged2}/>
-                    </div>
-                    <button className="btn btn-primary" onClick={this.loginUser}
-                            id="loginBtn">
-                        Login
-                    </button>
-                </div>
+                </form>
 
-                <div className="container-fluid"> or </div>
-
-                <div className="App">
-                    {content}
-                </div>
             </div>
         );
     }

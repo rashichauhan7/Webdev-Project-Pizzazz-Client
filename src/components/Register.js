@@ -1,7 +1,7 @@
 import React from'react';
 import{Link}from'react-router-dom';
 import UserService from"../services/UserService";
-import '../css/Login.css'
+import '../css/Register.css'
 export default class Register extends React.Component {
 
     constructor(props) {
@@ -75,52 +75,62 @@ export default class Register extends React.Component {
 
 
     render(){ return(
-<<<<<<< HEAD
+
         <div className="popup_inner">
-=======
-    <div className="popup_inner">
-        <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/> </button>
->>>>>>> 14c9f8fb827af8743aefe4dd9d560b4174455e2d
-        <div className="container-fluid">
-        <h1>Sign Up</h1>
-        <div>
-    <label htmlFor="firstname"> First Name </label> <input type="text"
-        className="form-control wbdv" placeholder="firstname" id="firstname"
-        onChange={this.formChangedFirstName} />
-        </div>
+            <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/>
+            </button>
 
-        <div>
-        <label htmlFor="lastname"> Last Name </label> <input type="text"
-        className="form-control wbdv" placeholder="lastname" id="lastname"
-        onChange={this.formChangedLastName} />
+            <form className="text-center border border-light p-5">
 
-        <div>
-        <label htmlFor="username"> Username </label> <input type="text"
-        className="form-control wbdv" placeholder="username" id="username"
-        onChange={this.formChangedusername} />
-        </div>
+                <h1>Sign Up</h1>
 
-        <div>
-        <label htmlFor="email"> Email </label> <input type="text"
-        className="form-control wbdv" placeholder="email" id="email"
-        onChange={this.formChangedEmail} />
-        </div>
+                <div className="form-row mb-4">
+                    <div className="col">
 
-        <div>
-        <label htmlFor="password"> Password </label> <input type="password"
-        className="form-control wbdv" placeholder="password" id="password"
-        onChange={this.formChangedpassword} />
-        </div>
-        <div>
-            <input type="checkbox" name="role" value="false" onClick={this.formChangedRole} /> <label
-        htmlFor="role" > Register as Business Owner </label>
-        </div>
+                        <input type="text" id="defaultRegisterFormFirstName" className="form-control"
+                               placeholder="First name" onChange={this.formChangedFirstName}/>
+                    </div>
+                    <div className="col">
+
+                        <input type="text" id="defaultRegisterFormLastName" className="form-control"
+                               placeholder="Last name" onChange={this.formChangedLastName}/>
+                    </div>
+                </div>
+
+                <input type="email" id="defaultRegisterFormEmail" className="form-control mb-4" placeholder="E-mail"
+                       onChange={this.formChangedEmail}/>
 
 
-        </div>
 
-        <div className="btn btn-success input" onClick={this.saveUser}>Register</div>
-        </div>
+
+                <input type="username" id="defaultRegisterForm" className="form-control" placeholder="Username"
+                       aria-describedby="defaultRegisterFormPasswordHelpBlock" onChange={this.formChangedusername}/>
+                    <small id="defaultRegisterFormPasswordHelpBlock" className="form-text text-muted mb-4">
+                        Use this to Login
+                    </small>
+
+
+
+                <input type="password" id="defaultRegisterFormPassword" className="form-control" placeholder="Password"
+
+                       onChange={this.formChangedpassword}/>
+
+                    <div className="custom-control custom-checkbox">
+                        <input type="checkbox" className="custom-control-input" id="defaultRegisterFormNewsletter"
+                               onClick={this.formChangedRole}/>
+                        <label className="custom-control-label" htmlFor="defaultRegisterFormNewsletter">Register as a
+                            salon owner</label>
+                    </div>
+
+
+                    <button className="btn btn-dark my-4 btn-block" type="submit" onClick={this.saveUser}>Register
+                    </button>
+
+                        <p>By clicking
+                            <em>Register</em> you agree to our
+                            <a href="" target="_blank">terms of service</a> and
+                            <a href="" target="_blank">terms of service</a>. </p>
+            </form>
 </div>
     ) }
 }
