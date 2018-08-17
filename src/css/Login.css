@@ -1,13 +1,15 @@
 .popup_inner {
     border-radius: 5px;
     z-index: 20;
-    position: absolute;
+    position: fixed;
     left: 25%;
     right: 25%;
     top: 25%;
     bottom: 25%;
     margin: auto;
     background: white;
+    align-self: center;
+    border-style: groove;
 }
 .mainbody
 {

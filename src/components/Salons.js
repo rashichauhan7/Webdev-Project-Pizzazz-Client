@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import StarRatings from '../../node_modules/react-star-ratings';
-
+import '../css/Salons.css'
 export default class Salon extends React.Component{
 
     constructor(props)
@@ -9,7 +9,8 @@ export default class Salon extends React.Component{
         super(props);
         this.state =
             {
-                salons: {}
+                salons: {},
+                showPopUp : false
             }
     }
 
@@ -23,24 +24,44 @@ export default class Salon extends React.Component{
     }
     render () {
         return (
-            <div className="card col-sm-3" align="center">
-                <div style={{width: '100%'}}>
-                    <img className="card-img-top" width="20%" height="250px" src = {this.props.salons.image_url}></img>
+            <div className="row salonItem " align="center" style={{marginLeft:"20%"}}>
+                <div className=" col-2 imgdiv float-left ">
+                    <img className="img" src = {this.props.salons.image_url}/>
                 </div>
-                <div>
-                    <Link to={`/salon/${this.props.salons.id}`} className="card-title">
-                        <h4>{this.props.salons.name}</h4>
-                    </Link>
+                    <div className="col-8 name list-group ">
+                        <Link to={`/salon/${this.props.salons.id}`} className="title list-group-item">
+                            <h2 className="float-left" style={{color: 'darkred' }}>{this.props.salons.name}</h2>
+                        </Link>
+                        <div className="list-group-item">
+                            <h4 className="float-left ">{this.props.salons.location.display_address[0]}</h4>
+                        </div>
+                        <label className="call" onClick={() => {this.setState({showPopUp:true});
+                        console.log(this.state.showPopUp)}}>
+                            Call
+                        </label>
+                    </div>
+
+                <div className="col-2"><label className="btn" style={{color: "white" , backgroundColor: "#cdd614"}}>
+                    {this.props.salons.rating.toPrecision(2)}</label>&nbsp;
+                    <label>{this.props.salons.review_count} reviews</label>
                 </div>
-                <span>
-                    <StarRatings
-                    rating={this.props.salons.rating}
-                    starDimension="20px"
-                    starSpacing="2px"
-                    starRatedColor="gold"
-                /></span>
 
 
+                {this.state.showPopUp ?
+                <div className="popup_inner list-group">
+                        <div className="float-right">
+                        <button className="float-right btn btn-danger" style={{width: '8%'}}
+                                onClick={() => this.setState({showPopUp:false})}><i className="fa fa-close"></i> </button>
+                        </div>
+                    <div className="list-group-item float-left">
+                    <h2>{this.props.salons.name}</h2>
+                    </div>
+                    <div className="list-group-item">
+                        <b> Phone Number :</b>
+                        <br/>
+                        <i className="fa fa-phone"></i> {this.props.salons.phone}
+                    </div>
+                </div>: null}
 
             </div>
         );

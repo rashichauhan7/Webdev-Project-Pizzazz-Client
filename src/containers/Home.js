@@ -20,7 +20,8 @@ export default class Home extends React.Component{
             options:[],
             value:'Select option',
             showLogin: false,
-            showSignUp: false
+            showSignUp: false,
+            mainPage: true
         };
         this.titleChanged = this.titleChanged.bind(this);
         this.yelp = YelpApiService.instance;
@@ -95,6 +96,7 @@ let options = [];
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
+                            this.setState({mainPage: true})
                             var homeLink = ReactDOM.findDOMNode(this.refs.searchBtn);
                             // homeLink.focus(false);
                         }}>
@@ -102,93 +104,106 @@ let options = [];
                     </label>
                     <div className="search">
                     <select style={{visibility: 'hidden'}} className="form-control" onFocusOff={() => this.refs.searchbar.size = 1} onChange={this.handleChange} value={this.state.value} ref="searchbar">
-                           <option key='1' value='1'>Categories ..</option>
+                           <option key='1' value=''>Categories ..</option>
                             {this.state.options.map(item => (
                                 <option key={item.name} value={item.name}>
                                     {item}
                                 </option>
                             ))}
                         </select>
-                        </div>
-
-
-
+                    </div>
                 </div>
-                    <div className="row">
+                    <div className="nav nav-pills ">
 
-                        <div className="col-2">
-                            <Link className="category" to='/category/Spas' onClick={(e) =>
-                            {
-                                this.state.keyword = "Spas";
-                                this.refs.topBanner.style.paddingBottom = "0%";
-                                this.refs.topBanner.style.paddingTop = "4%";
-                                this.refs.logo.style.visibility = 'hidden';
-                                this.refs.logo1.style.visibility = 'visible';
-                            }}>
-                                <i className="fa fa-chevron-circle-right float-left"><label>Spas</label></i>
+                        <div className="nav-item" onClick={(e) =>
+                        {
+                            this.state.keyword = "Spas";
+                            this.refs.topBanner.style.paddingBottom = "0%";
+                            this.refs.topBanner.style.paddingTop = "4%";
+                            this.refs.logo.style.visibility = 'hidden';
+                            this.refs.logo1.style.visibility = 'visible';
+                            this.setState({mainPage: false});
+                        }}>
+                            <Link className="" to='/category/Spas' >
+                             <label>Spas</label>
                             </Link>
                         </div>
-                        <div className="col-2">
-                            <Link className="category"  to='/category/Haircuts' onClick={(e) =>
-                            {
-                                this.state.keyword = "Haircuts";
-                                this.refs.topBanner.style.paddingBottom = "0%";
-                                this.refs.topBanner.style.paddingTop = "4%";
-                                this.refs.logo.style.visibility = 'hidden';
-                                this.refs.logo1.style.visibility = 'visible';
-                            }}>
-                                <i className="fa fa-chevron-circle-right float-left"><label>Haircuts</label></i>
+                        <div className="nav-item" onClick={(e) =>
+                        {
+                            this.state.keyword = "Haircuts";
+                            this.refs.topBanner.style.paddingBottom = "0%";
+                            this.refs.topBanner.style.paddingTop = "4%";
+                            this.refs.logo.style.visibility = 'hidden';
+                            this.refs.logo1.style.visibility = 'visible';
+                            this.setState({mainPage: false});
+                        }}>
+                            <Link className="category"  to='/category/Haircuts' >
+                               <label>Haircuts</label>
                             </Link>
                         </div>
-                        <div className="col-2">
-                        <Link className="category" to='/category/Skin' onClick={(e) =>
+                        <div className="nav-item"onClick={(e) =>
                         {
                             this.state.keyword = "Skin Treatment";
                             this.refs.topBanner.style.paddingBottom = "0%";
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
+                            this.setState({mainPage: false});
                         }}>
-                            <i className="fa fa-chevron-circle-right float-left"><label> Skin Treatment</label></i>
+                        <Link className="category" to='/category/Skin'>
+                            <label> Skin Treatment</label>
                         </Link>
-                    </div><div className="col-2">
-                        <Link className="category" to='/category/Massage' onClick={(e) =>
-                        {
-                            this.state.keyword = "Massage";
-                            this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
-                            this.refs.logo.style.visibility = 'hidden';
-                            this.refs.logo1.style.visibility = 'visible';
-                        }}>
-                            <i className="fa fa-chevron-circle-right float-left"><label>Massage</label></i>
+                    </div><div className="nav-item" onClick={(e) =>
+                    {
+                        this.state.keyword = "Massage";
+                        this.refs.topBanner.style.paddingBottom = "0%";
+                        this.refs.topBanner.style.paddingTop = "4%";
+                        this.refs.logo.style.visibility = 'hidden';
+                        this.refs.logo1.style.visibility = 'visible';
+                        this.setState({mainPage: false});
+                    }}>
+                        <Link className="category" to='/category/Massage' >
+                            <label>Massage</label>
                         </Link>
                     </div>
-                        <div className="col-2">
-                        <Link className="category" to='/category/Facial' onClick={(e) =>
+                        <div className="nav-item" onClick={(e) =>
                         {
                             this.state.keyword = "Facial";
                             this.refs.topBanner.style.paddingBottom = "0%";
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
+                            this.setState({mainPage: false});
                         }}>
-                            <i className="fa fa-chevron-circle-right float-left"><label>Facial</label></i>
+                        <Link className="category" to='/category/Facial' >
+                            <label>Facial</label>
                         </Link>
-                    </div><div className="col-2">
-                        <Link className="category" to='/category/Styling' onClick={(e) =>
-                        {
-                            this.state.keyword = "Styling";
-                            this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
-                            this.refs.logo.style.visibility = 'hidden';
-                            this.refs.logo1.style.visibility = 'visible';
-                        }}>
-                            <i className="fa fa-chevron-circle-right float-left"><label> Styling</label></i>
+                    </div><div className="nav-item"  onClick={(e) =>
+                    {
+                        this.state.keyword = "Styling";
+                        this.refs.topBanner.style.paddingBottom = "0%";
+                        this.refs.topBanner.style.paddingTop = "4%";
+                        this.refs.logo.style.visibility = 'hidden';
+                        this.refs.logo1.style.visibility = 'visible';
+                        this.setState({mainPage: false});
+                    }}>
+                        <Link className="category" to='/category/Styling'>
+                           <label> Styling</label>
                         </Link>
                     </div>
                     </div>
+                    {!this.state.mainPage ? <div  ref = 'sidebar' className="w3-sidebar w3-bar-block" style={{width:"20%",border: "1px solid lightgray" , visibility: this.state.mainPage === true? 'hidden':'visible'}}>
+                        <h4 className="w3-bar-item"><b>Filters</b></h4>
+                        <h5 className='w3-bar-item'>Sort by:</h5>
+                        <a href="#" className="w3-bar-item w3-button ">Sort By</a>
+                        <a href="#" className="w3-bar-item w3-button">Cost Increasing</a>
+                        <a href="#" className="w3-bar-item w3-button">Cost Decreasing</a>
+                        <a href="#" className="w3-bar-item w3-button">Rating</a>
+                        <a href="#" className="w3-bar-item w3-button">Open</a>
+                    </div> : null}
                 </div>
                 </div>
+
               </div>
         );
     }

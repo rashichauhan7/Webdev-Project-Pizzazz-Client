@@ -76,7 +76,7 @@ export default class Category extends React.Component {
 
         return (
 
-            <div className="row">
+            <div className="list-group">
 
                 {this.renderSalons()}
 

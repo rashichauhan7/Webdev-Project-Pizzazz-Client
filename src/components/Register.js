@@ -76,6 +76,7 @@ class Register extends React.Component {
 
     render(){ return(
     <div className="popup_inner">
+        <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/> </button>
         <div className="container-fluid">
         <h1>Sign Up</h1>
         <div>

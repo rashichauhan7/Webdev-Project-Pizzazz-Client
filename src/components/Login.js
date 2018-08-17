@@ -5,6 +5,7 @@ import { GoogleLogin } from 'react-google-login';
 import config from '../config.json';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../css/Login.css'
+import UserService from'../services/UserService';
 
 class App extends Component {
 
