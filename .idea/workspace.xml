@@ -45,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="YelpServices.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="YelpServices.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+            <state relative-caret-position="57">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -117,7 +117,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/Home.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="380">
@@ -156,10 +156,10 @@
         <option value="$PROJECT_DIR$/src/css/index.css" />
         <option value="$PROJECT_DIR$/src/css/Home.css" />
         <option value="$PROJECT_DIR$/src/components/Salons.js" />
-        <option value="$PROJECT_DIR$/src/services/YelpServices.js" />
         <option value="$PROJECT_DIR$/src/css/SalonItem.css" />
         <option value="$PROJECT_DIR$/src/components/SalonItem.js" />
         <option value="$PROJECT_DIR$/src/containers/Home.js" />
+        <option value="$PROJECT_DIR$/src/services/YelpServices.js" />
       </list>
     </option>
   </component>
@@ -268,12 +268,12 @@
       <workItem from="1533245623062" duration="242000" />
       <workItem from="1533851099100" duration="19012000" />
       <workItem from="1534282168568" duration="16299000" />
-      <workItem from="1534301260980" duration="2871000" />
+      <workItem from="1534301260980" duration="3159000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61445000" />
+    <option name="totallyTimeSpent" value="61733000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -651,13 +651,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/css/SalonItem.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="577">
@@ -682,6 +675,13 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>

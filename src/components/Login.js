@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import config from '../config.json';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
+import '../css/Login.css'
 
 class App extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { isAuthenticated: false, user: null, token: ''};
+
+    }
+    componentDidMount()
+    {
+        // ReactDOM.findDOMNode(this.props.mainbody).style.opacity = 0.5;
     }
 
+    componentWillReceiveProps(newprops)
+    {
+        ReactDOM.findDOMNode(newprops.mainbody).style.opacity = 0.5;
+    }
     logout = () => {
         this.setState({isAuthenticated: false, token: '', user: null})
     };
@@ -57,6 +68,7 @@ class App extends Component {
     };
 
     render() {
+
         let content = this.state.isAuthenticated ?
             (
                 <div>
@@ -95,8 +107,9 @@ class App extends Component {
                 </div>
             );
         return (
-            <div>
+            <div className="popup_inner">
                 <div className="container-fluid">
+                    <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/> </button>
                     <h1>Sign In</h1>
 
                     <div>
@@ -118,15 +131,13 @@ class App extends Component {
                                placeholder="1234qwerasdf"
                                id="password"/>
                     </div>
-                    <br/>
                     <button className="btn btn-primary"
                             id="loginBtn">
                         Login
                     </button>
                 </div>
-                <br/>
-                <div className="container-fluid"> or </div>
-                <br/>
+                <div className="container-fluid"> or
+                </div>
                 <div className="App">
                     {content}
                 </div>

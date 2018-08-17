@@ -1,0 +1,16 @@
+.popup_inner {
+    border-radius: 5px;
+    z-index: 20;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    margin: auto;
+    background: white;
+}
+.mainbody
+{
+    background-color: rgba(0, 0 , 0, 0.1);
+    background: rgba(0, 0 , 0 , 0.1);
+}

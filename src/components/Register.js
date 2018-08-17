@@ -1,10 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
+import '../css/Login.css'
 export default class Register extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render(){
         return(
+            <div className="popup_inner">
             <div className="container-fluid">
+                <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/> </button>
+
                 <h1>Register</h1>
                 <div>
                     <label htmlFor="username">
@@ -39,6 +45,7 @@ export default class Register extends React.Component {
                 <div className="btn btn-success input">
                     Register
                 </div>
+            </div>
             </div>
         )
     }
