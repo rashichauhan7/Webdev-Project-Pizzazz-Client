@@ -30,7 +30,7 @@ class App extends Component {
 
         console.log(this.state.loginUser);
         this.userService.findUserByUsernameAndPassword(this.state.loginUser)
-            .then((loginUser)=>{alert('login successful')})
+            .then((loginUser)=>{(window.location.replace(`/profile`))})
 
     };
 
@@ -126,7 +126,7 @@ class App extends Component {
                 </div>
             );
         return (
-            <div>
+            <div className="popup_inner">
                 <div className="container-fluid">
                     <h1>Sign In</h1>
 
@@ -151,15 +151,15 @@ class App extends Component {
                                id="password"
                     onChange={this.formChanged2}/>
                     </div>
-                    <br/>
+
                     <button className="btn btn-primary" onClick={this.loginUser}
                             id="loginBtn">
                         Login
                     </button>
                 </div>
-                <br/>
+
                 <div className="container-fluid"> or </div>
-                <br/>
+
                 <div className="App">
                     {content}
                 </div>

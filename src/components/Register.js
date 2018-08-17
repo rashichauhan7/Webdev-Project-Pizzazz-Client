@@ -1,21 +1,21 @@
 import React from'react';import{Link}from'react-router-dom';
-import UserService from"../services/UserService";export default
-
-class Register extends React.Component {
-    constructor() {
-        super();
+import UserService from"../services/UserService";
+import '../css/Login.css'
+export default class Register extends React.Component {
+    constructor(props) {
+        super(props);
         this.userService = UserService.instance;
         this.state = {
-            currentUser: {},
-            newUser:{},
-            password :{},
-            firstname:{},
-            lastname:{},
-            email:{},
+            currentUser: '',
+            newUser:'',
+            password :'',
+            firstname:'',
+            lastname:'',
+            email:'',
             role:''
         }; }
 
-        saveUser=()=> {
+    saveUser=()=> {
         this.state.newUser = {
             username : this.state.username,
             password : this.state.password,
@@ -73,6 +73,7 @@ class Register extends React.Component {
 
 
     render(){ return(
+        <div className="popup_inner">
         <div className="container-fluid">
         <h1>Sign Up</h1>
     <div>
@@ -103,24 +104,17 @@ class Register extends React.Component {
         className="form-control wbdv" placeholder="password" id="password"
         onChange={this.formChangedpassword} />
         </div>
-
         <div>
-        <label htmlFor="password2"> Verify Password </label> <input
-        type="password" className="form-control wbdv"
-        placeholder="verify password" id="password2" />
-            </div>
-            <div>
             <input type="checkbox" name="role" value="false" onClick={this.formChangedRole} /> <label
         htmlFor="role" > Register as Business Owner </label>
         </div>
 
 
         </div>
-        <br />
 
         <div className="btn btn-success input" onClick={this.saveUser}>Register</div>
         </div>
-
+</div>
 
     ) }
 }

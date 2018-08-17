@@ -22,6 +22,7 @@ export default class SalonItem extends React.Component{
         this.categories = this.categories.bind(this);
         this.getTime = this.getTime.bind(this);
         this.getReviews = this.getReviews.bind(this);
+        this.sendReview = this.sendReview.bind(this);
     }
 
 
@@ -104,6 +105,11 @@ export default class SalonItem extends React.Component{
         }
     }
 
+    sendReview()
+    {
+
+    }
+
     render () {
         return (
            <div className="item container-fluid">
@@ -118,7 +124,7 @@ export default class SalonItem extends React.Component{
                />
                </span>
                <span><h4>Reviews {this.state.salon.review_count}</h4></span>
-               <span><button className="btn btn-danger ">
+               <span><button className="btn btn-danger" onClick={this.sendReview}>
                    <StarRatings rating= {1.0} starDimension="25px"
                                 starRatedColor="white" numberOfStars="5"/>Write a Review</button></span>
 

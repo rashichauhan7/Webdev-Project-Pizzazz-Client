@@ -1,39 +1,28 @@
 let _singleton = Symbol();
 const SALON_API_URL =
-    'http://localhost:8080/api/user';
+    'http://localhost:8080/api/salon';
 /*'https://hw1akriti.herokuapp.com/api/course';*/
 
 
-class UserService {
+class SalonService {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
     }
     static get instance() {
         if(!this[_singleton])
-            this[_singleton] = new UserService(_singleton);
+            this[_singleton] = new SalonService(_singleton);
         return this[_singleton]
     }
-    findAllUsers() {
+    findAllSalons() {
         return fetch(SALON_API_URL)
             .then(function(response){
                 return response.json();
             });
     }
-    findUserByUsernameAndPassword(user){
-        return fetch('http://localhost:8080/api/username', {
-            method: 'post',
-            credentials : 'include',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        }).then(function (response) {
-            return response.json();
-        })}
 
-    findCurrentUser(){
-        return fetch('http://localhost:8080/api/checkLogin', {
+    findCurrentSalon(){
+        return fetch('http://localhost:8080/api/checkSalon', {
             method: 'get',
             credentials : 'include',
             headers: {
@@ -43,9 +32,10 @@ class UserService {
             return response.json();
         })}
 
-    createUser(user) {
+    createSalon(salon) {
         return fetch(SALON_API_URL, {
-            body: JSON.stringify(user),
+            body: JSON.stringify(salon),
+            credentials : 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -54,18 +44,9 @@ class UserService {
             return response.json();
         })}
 
-    deleteUser(userId) {
-        return fetch(SALON_API_URL + '/' + userId, {
-            method: 'delete'
-        })
-            .then(function(response){
-                return response;
-            });
-    }
-
-    updateUser(userId,user) {
-        return fetch(SALON_API_URL + '/' + userId, {
-            body: JSON.stringify(user),
+    updateSalon(salonId,salon) {
+        return fetch(SALON_API_URL + '/' + salonId, {
+            body: JSON.stringify(salon),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -74,4 +55,4 @@ class UserService {
             return response.json();
         })}
 }
-export default UserService;
+export default SalonService;

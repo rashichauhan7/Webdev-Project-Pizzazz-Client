@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import UserService from "../services/UserService";
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import SalonManagerComponent from "./SalonManager";
 
 class ProfileComponent extends Component {
 
@@ -7,13 +9,13 @@ class ProfileComponent extends Component {
         super();
         this.userService = UserService.instance;
         this.state = {
-            currentUser: {},
-            newUser:{},
-            password :{},
-            firstname:{},
-            lastname:{},
-            email:{},
-            phone:{}
+            currentUser: '',
+            newUser:'',
+            password :'',
+            firstname:'',
+            lastname:'',
+            email:'',
+            phone:''
         };
 
     }
@@ -129,7 +131,7 @@ class ProfileComponent extends Component {
                     <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
                     <div className="col-sm-10">
                         <input type="text" className="form-control" id="email"
-        value= {this.state.currentUser.email} onChange={this.formChanged4}/>
+        placeholder= {this.state.currentUser.email} onChange={this.formChanged4}/>
                     </div>
                 </div>
 
@@ -141,23 +143,19 @@ class ProfileComponent extends Component {
                     </div>
                 </div>
 
-                <div className="form-group row">
-                    <label htmlFor="role" className="col-sm-2 col-form-label">Role</label>
-                    <div className="col-sm-10">
-                        <select className="custom-select mr-sm-2" id="role">
-                            <option value="Faculty">Owner</option>
-                            <option value="Student">Customer</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button id="updateBtn" type="button" onClick={this.saveUser} className="btn btn-success btn-block">Save Changes</button>
-
-                <button id="logoutBtn" type="button" className="btn btn-danger btn-block">Cancel</button>
-            </div>
 
 
+            <div className="container-fluid">
+        <button id="updateBtn" type="button" onClick={this.saveUser} className="btn btn-success">Save Changes</button>
 
+        <button id="logoutBtn" type="button" className="btn btn-danger ">Cancel</button>
+
+        <a className="btn btn-primary" hidden={this.state.currentUser.role !== 'true'}
+        href="/manageSalon">
+            Manage My Salon
+        </a>
+
+    </div>        </div>
     )
     }
 
