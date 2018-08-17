@@ -1,0 +1,96 @@
+import React, {Component} from 'react'
+import UserService from "../services/UserService";
+
+class SignUpComponent extends Component {
+
+    constructor() {
+        super();
+        this.userService = UserService.instance;
+        this.state = {
+            currentUser: {}
+        };
+
+    }
+
+    componentDidMount() {
+        this.userService.findCurrentUser()
+            .then(user => {
+                this.setState({currentUser: user});
+            });
+    }
+
+    render() {
+        return (
+            <div>
+                <div>Sign Up For a new Profile</div>
+                <div className="form-group row">
+                    <label htmlFor="username" className="col-sm-2 col-form-label">Username</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control-plaintext"
+                               id="username"/>
+                    </div>
+                </div>
+
+                <div className="form-group row">
+                    <label htmlFor="password" className="col-sm-2 col-form-label">Password</label>
+                    <div className="col-sm-10">
+                        <input type="password" className="form-control" id="password"
+                               placeholder="Password"/>
+                    </div>
+                </div>
+
+                <div className="form-group row">
+                    <label htmlFor="firstName" className="col-sm-2 col-form-label"> First
+                        Name </label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="firstName"
+                               placeholder="First name"/>
+                    </div>
+                </div>
+
+                <div className="form-group row">
+                    <label htmlFor="lastName" className="col-sm-2 col-form-label">Last
+                        Name</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="lastName"
+                               placeholder="Last Name"/>
+                    </div>
+                </div>
+
+                <div className="form-group row">
+                    <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="email"/>
+                    </div>
+                </div>
+
+                <div className="form-group row">
+                    <label htmlFor="phone" className="col-sm-2 col-form-label">Phone</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="phone"/>
+                    </div>
+                </div>
+
+                <div className="form-group row">
+                    <label htmlFor="role" className="col-sm-2 col-form-label">Role</label>
+                    <div className="col-sm-10">
+                        <select className="custom-select mr-sm-2" id="role">
+                            <option value="Faculty">Owner</option>
+                            <option value="Student">Customer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="updateBtn" type="button" className="btn btn-success btn-block">Update</button>
+
+                <button id="logoutBtn" type="button" className="btn btn-danger btn-block">Logout</button>
+            </div>
+
+
+
+        )
+    }
+
+}
+
+export default SignUpComponent;
