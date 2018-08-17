@@ -1,7 +1,7 @@
 let _singleton = Symbol();
-const CUSTOMER_API_URL =
+const SALON_API_URL =
     'http://localhost:8080/api/user';
-    /*'https://hw1akriti.herokuapp.com/api/course';*/
+/*'https://hw1akriti.herokuapp.com/api/course';*/
 
 
 class UserService {
@@ -15,7 +15,7 @@ class UserService {
         return this[_singleton]
     }
     findAllUsers() {
-        return fetch(CUSTOMER_API_URL)
+        return fetch(SALON_API_URL)
             .then(function(response){
                 return response.json();
             });
@@ -44,7 +44,7 @@ class UserService {
         })}
 
     createUser(user) {
-        return fetch(CUSTOMER_API_URL, {
+        return fetch(SALON_API_URL, {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ class UserService {
         })}
 
     deleteUser(userId) {
-        return fetch(CUSTOMER_API_URL + '/' + userId, {
+        return fetch(SALON_API_URL + '/' + userId, {
             method: 'delete'
         })
             .then(function(response){
@@ -64,7 +64,7 @@ class UserService {
     }
 
     updateUser(userId,user) {
-        return fetch(CUSTOMER_API_URL + '/' + userId, {
+        return fetch(SALON_API_URL + '/' + userId, {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
