@@ -1,6 +1,7 @@
 let _singleton = Symbol();
 const SALON_API_URL =
-    'http://localhost:8080/api/salon';
+    'https://pizzazz-db-server.herokuapp.com/api/salon';
+   /* 'http://localhost:8080/api/salon';*/
 /*'https://hw1akriti.herokuapp.com/api/course';*/
 
 

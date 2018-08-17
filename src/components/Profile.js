@@ -150,7 +150,7 @@ class ProfileComponent extends Component {
 
         <button id="logoutBtn" type="button" className="btn btn-danger ">Cancel</button>
 
-        <a className="btn btn-primary" hidden={this.state.currentUser.role !== 'true'}
+        <a className="btn btn-primary" hidden={this.state.currentUser.role !== 'owner'}
         href="/manageSalon">
             Manage My Salon
         </a>
