@@ -10,6 +10,7 @@ import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import Login from '../components/Login'
 import Register from '../components/Register'
 import {Link} from 'react-router-dom';
+import $ from 'jquery';
 
 export default class Home extends React.Component{
     constructor(props) {
@@ -102,7 +103,8 @@ let options = [];
                             <i className="fa fa-search fa-2x"/> </Link>
                     </label>
                     <div className="search">
-                    <select style={{visibility: 'hidden'}} className="form-control" onFocusOff={() => this.refs.searchbar.size = 1} onChange={this.handleChange} value={this.state.value} ref="searchbar">
+                    <select style={{visibility: 'hidden'}} className="form-control" onFocusOff={() => this.refs.searchbar.size = 1}
+                            onChange={this.handleChange} value={this.state.value} ref="searchbar">
                            <option key='1' value=''>Categories ..</option>
                             {this.state.options.map(item => (
                                 <option key={item.name} value={item.name}>
@@ -112,7 +114,7 @@ let options = [];
                         </select>
                     </div>
                 </div>
-                    <div className="nav nav-pills ">
+                    <div className="nav nav-pills categories">
 
                         <div className="nav-item" onClick={(e) =>
                         {
@@ -121,8 +123,16 @@ let options = [];
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
+
                         }}>
-                            <Link className="" to='/category/Spas' >
+                            <Link onClick={(e) => {
+                                $('.nav-item').removeClass('active');
+
+                                //Add active class to the clicked item
+                                $(e.target).parent().parent().addClass('active');
+
+                            }}
+                                  className="category" to='/category/Spas' >
                              <label>Spas</label>
                             </Link>
                         </div>
@@ -134,7 +144,13 @@ let options = [];
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                         }}>
-                            <Link className="category"  to='/category/Haircuts' >
+                            <Link className="category" onClick={(e) => {
+                                $('.nav-item').removeClass('active');
+
+                                //Add active class to the clicked item
+                                $(e.target).parent().parent().addClass('active');
+
+                            }}  to='/category/Haircuts' >
                                <label>Haircuts</label>
                             </Link>
                         </div>
@@ -146,7 +162,13 @@ let options = [];
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                         }}>
-                        <Link className="category" to='/category/Skin'>
+                        <Link className="category" onClick={(e) => {
+                            $('.nav-item').removeClass('active');
+
+                            //Add active class to the clicked item
+                            $(e.target).parent().parent().addClass('active');
+
+                        }} to='/category/Skin'>
                             <label> Skin Treatment</label>
                         </Link>
                     </div><div className="nav-item" onClick={(e) =>
@@ -157,7 +179,13 @@ let options = [];
                         this.refs.logo.style.visibility = 'hidden';
                         this.refs.logo1.style.visibility = 'visible';
                     }}>
-                        <Link className="category" to='/category/Massage' >
+                        <Link className="category" onClick={(e) => {
+                            $('.nav-item').removeClass('active');
+
+                            //Add active class to the clicked item
+                            $(e.target).parent().parent().addClass('active');
+
+                        }} to='/category/Massage' >
                             <label>Massage</label>
                         </Link>
                     </div>
@@ -169,7 +197,13 @@ let options = [];
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                         }}>
-                        <Link className="category" to='/category/Facial' >
+                        <Link className="category" onClick={(e) => {
+                            $('.nav-item').removeClass('active');
+
+                            //Add active class to the clicked item
+                            $(e.target).parent().parent().addClass('active');
+
+                        }} to='/category/Facial' >
                             <label>Facial</label>
                         </Link>
                     </div><div className="nav-item"  onClick={(e) =>
@@ -180,12 +214,18 @@ let options = [];
                         this.refs.logo.style.visibility = 'hidden';
                         this.refs.logo1.style.visibility = 'visible';
                     }}>
-                        <Link className="category" to='/category/Styling'>
+                        <Link className="category" onClick={(e) => {
+                            $('.nav-item').removeClass('active');
+
+                            //Add active class to the clicked item
+                            $(e.target).parent().parent().addClass('active');
+
+                        }} to='/category/Styling'>
                            <label> Styling</label>
                         </Link>
                     </div>
                     </div>
-                    <div ref = 'sidebar' className="sidebar w3-sidebar w3-bar-block" >
+                    <div id = 'sidebar' className="sidebar w3-sidebar w3-bar-block" >
                         <h4 className="w3-bar-item"><b>Filters</b></h4>
                         <h5 className='w3-bar-item'>Sort by:</h5>
                         <Link to="?sort=ci" className="w3-bar-item w3-button">Cost Increasing</Link>

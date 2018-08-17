@@ -1,17 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import StarRatings from '../../node_modules/react-star-ratings';
-let cssLoaded = false;
-export default class Salon extends React.Component{
 
+export default class Salon extends React.Component{
     constructor(props)
     {
+
         super(props);
         this.state =
             {
                 salons: { },
                 showPopUp : false,
-                is_open_now: false
+                is_open_now: false,
+                cssLoaded: false
             }
     }
 
@@ -19,18 +20,19 @@ export default class Salon extends React.Component{
     {
         this.setState({salonId: this.props.salons.id});
         this.setState({is_open_now: !this.props.salons.is_closed});
-
+        this.setState({cssLoaded: false});
     }
+
     componentWillReceiveProps (newProps)
     {
         this.setState({salonId: newProps.salons.id});
         this.setState({is_open_now: !newProps.salons.is_closed});
-
-    }
+        this.setState({cssLoaded: false});
+        }
 
     render () {
-        if (cssLoaded === false) {
-            cssLoaded = true;
+        if (this.state.cssLoaded === false) {
+            this.state.cssLoaded = true;
             import('../css/Salons.css');
         }
 
@@ -41,7 +43,9 @@ export default class Salon extends React.Component{
                     <img className="img" src = {this.props.salons.image_url}/>
                 </div>
                     <div className="col-8 name list-group ">
-                        <Link to={`/salon/${this.props.salons.id}`} className="title list-group-item">
+                        <Link to={`/salon/${this.props.salons.id}`} onClick={() =>
+                                document.getElementById('sidebar').style.visibility = "hidden"
+                        } className="title list-group-item">
                             <h2 className="float-left"><span style={{color: 'darkred' }}>{this.props.salons.name}</span> <span style={{textDecorationColor: 'blue'}}>{this.props.salons.price}</span></h2>
                         </Link>
 

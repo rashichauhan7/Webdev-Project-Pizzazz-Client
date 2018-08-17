@@ -24,6 +24,14 @@
     border-style: solid;
 }
 
+.active  {
+    /*background-color: white;*/
+    border-radius: 5px;
+    border: white;
+    border-style: solid;
+}
+
+
 .search
 {
     width: 70%;
@@ -107,7 +115,8 @@
     color: black;
 }
 .nav {
-    margin-left: 12%;
+    margin-top: 0;
+    margin-left: 15%;
     /*margin-top: 2%;*/
 }
 
@@ -127,7 +136,8 @@ label
 .nav-item {
     font-size: large;
     padding: 1%;
-    margin: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 .nav-item label {

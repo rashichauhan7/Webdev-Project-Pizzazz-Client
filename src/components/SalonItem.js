@@ -5,6 +5,7 @@ import StarRatings from '../../node_modules/react-star-ratings';
 import {Link} from 'react-router-dom';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/scss/bootstrap.scss'
+
 export default class SalonItem extends React.Component{
     constructor(props)
     {
@@ -13,7 +14,8 @@ export default class SalonItem extends React.Component{
             salonId: '',
             salon: {photos: [], categories: [], location: {display_address: [], cross_streets: ''}, hours: []},
             is_open_now: false,
-            reviews: []
+            reviews: [],
+            cssLoaded: false
         }
 
         this.yelp = YelpApiService.instance;
@@ -88,7 +90,7 @@ export default class SalonItem extends React.Component{
     {
         let categorie = this.state.salon.categories.map((categories) =>
         {
-            return <Link className="category1" to={`/category/${categories.title}`}>{categories.title}</Link>
+            return <Link onClick ={() => this.setState({cssLoaded: true})} className="category1" to={`/category/${categories.title}`}>{categories.title}</Link>
         });
         return categorie;
     }
@@ -121,6 +123,11 @@ export default class SalonItem extends React.Component{
     }
 
     render () {
+        if (this.state.cssLoaded === false) {
+            this.state.cssLoaded = true;
+            import('../css/SalonItem.css');
+        }
+
         return (
            <div className="item container-fluid">
                <div className="row">
