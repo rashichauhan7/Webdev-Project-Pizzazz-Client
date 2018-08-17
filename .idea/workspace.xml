@@ -42,19 +42,29 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-      <file leaf-file-name="Profile.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Profile.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="30" column="26" selection-end-line="95" selection-end-column="32" />
-=======
       <file leaf-file-name="YelpServices.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="57">
               <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
->>>>>>> a4d04650a14f8901ab2715b12d32d327abc29f1c
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Profile.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Profile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="30" column="26" selection-end-line="95" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="YelpServices.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -73,13 +83,17 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-<<<<<<< HEAD
-      <file leaf-file-name="UserService.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
-=======
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/Home.js">
->>>>>>> a4d04650a14f8901ab2715b12d32d327abc29f1c
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
               <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
@@ -116,14 +130,13 @@
         <option value="$PROJECT_DIR$/src/components/Salons.js" />
         <option value="$PROJECT_DIR$/src/css/SalonItem.css" />
         <option value="$PROJECT_DIR$/src/components/SalonItem.js" />
-        <option value="$PROJECT_DIR$/src/containers/Home.js" />
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/services/UserService.js" />
         <option value="$PROJECT_DIR$/src/components/Profile.js" />
         <option value="$PROJECT_DIR$/src/components/SignUp" />
-=======
         <option value="$PROJECT_DIR$/src/services/YelpServices.js" />
->>>>>>> a4d04650a14f8901ab2715b12d32d327abc29f1c
+        <option value="$PROJECT_DIR$/src/services/UserService.js" />
+        <option value="$PROJECT_DIR$/src/components/Profile.js" />
+        <option value="$PROJECT_DIR$/src/components/SignUp" />
       </list>
     </option>
   </component>
@@ -222,21 +235,17 @@
       <workItem from="1533245623062" duration="242000" />
       <workItem from="1533851099100" duration="19012000" />
       <workItem from="1534282168568" duration="16299000" />
-<<<<<<< HEAD
       <workItem from="1534301260980" duration="2871000" />
       <workItem from="1534359952760" duration="2204000" />
-=======
       <workItem from="1534301260980" duration="3159000" />
->>>>>>> a4d04650a14f8901ab2715b12d32d327abc29f1c
+      <workItem from="1534301260980" duration="2871000" />
+      <workItem from="1534359952760" duration="2204000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
-    <option name="totallyTimeSpent" value="63649000" />
-=======
     <option name="totallyTimeSpent" value="61733000" />
->>>>>>> a4d04650a14f8901ab2715b12d32d327abc29f1c
+    <option name="totallyTimeSpent" value="63649000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -602,7 +611,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/css/Home.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -620,17 +628,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/Manager.js">
-=======
-    <entry file="file://$PROJECT_DIR$/src/css/SalonItem.css">
->>>>>>> a4d04650a14f8901ab2715b12d32d327abc29f1c
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
@@ -651,7 +649,14 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 14c9f8fb827af8743aefe4dd9d560b4174455e2d
     <entry file="file://$PROJECT_DIR$/src/components/SignUp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -662,7 +667,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/SalonRegistration">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-=======
     <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -670,6 +674,5 @@
         </state>
       </provider>
     </entry>
->>>>>>> a4d04650a14f8901ab2715b12d32d327abc29f1c
   </component>
 </project>

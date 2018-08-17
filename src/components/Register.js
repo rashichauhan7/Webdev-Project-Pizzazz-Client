@@ -1,7 +1,9 @@
-import React from'react';import{Link}from'react-router-dom';
+import React from'react';
+import{Link}from'react-router-dom';
 import UserService from"../services/UserService";
 import '../css/Login.css'
 export default class Register extends React.Component {
+
     constructor(props) {
         super(props);
         this.userService = UserService.instance;
@@ -73,10 +75,15 @@ export default class Register extends React.Component {
 
 
     render(){ return(
+<<<<<<< HEAD
         <div className="popup_inner">
+=======
+    <div className="popup_inner">
+        <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/> </button>
+>>>>>>> 14c9f8fb827af8743aefe4dd9d560b4174455e2d
         <div className="container-fluid">
         <h1>Sign Up</h1>
-    <div>
+        <div>
     <label htmlFor="firstname"> First Name </label> <input type="text"
         className="form-control wbdv" placeholder="firstname" id="firstname"
         onChange={this.formChangedFirstName} />
@@ -115,6 +122,5 @@ export default class Register extends React.Component {
         <div className="btn btn-success input" onClick={this.saveUser}>Register</div>
         </div>
 </div>
-
     ) }
 }

@@ -12,7 +12,7 @@ export default class SalonItem extends React.Component{
         this.state = {
             salonId: '',
             salon: {photos: [], categories: [], location: {display_address: [], cross_streets: ''}, hours: []},
-            is_open_now: true,
+            is_open_now: false,
             reviews: []
         }
 
@@ -29,15 +29,16 @@ export default class SalonItem extends React.Component{
     componentDidMount()
     {
         this.setState({salonId: this.props.salonId});
-
-
-    }
+        }
     componentWillReceiveProps (newProps)
     {
         this.setState({salonId: newProps.salonId});
         this.getSalon(newProps.salonId);
         this.getReviews(newProps.salonId);
+
     }
+
+
 
     getSalon(salonId)
     {
@@ -49,7 +50,8 @@ export default class SalonItem extends React.Component{
     getReviews(salonId)
     {
         this.yelp.getReviews(salonId)
-            .then(reviews => this.setState({reviews: reviews.reviews}));
+            .then(reviews =>{ this.setState({reviews: reviews.reviews});}
+        );
     }
 
     renderReviews()
@@ -93,15 +95,23 @@ export default class SalonItem extends React.Component{
 
     getTime()
     {
-        if(this.state.salon.hours.length > 0) {
+        var today = new Date().getDay();
+        this.state.is_open_now = !this.state.salon.closed_now;
+        if(this.state.salon.hours.length > today) {
             let hours = this.state.salon.hours[0].open;
-            var today = new Date().getDay();
-            this.state.is_open_now = this.state.salon.hours[0].is_open_now;
             let start = hours[today].start;
             let end = hours[today].end;
-            start = start.substr(0,2) > 10 ? start.substr(0,2)- 12 + ':' + start.substr(2,2) + 'pm' : start.substr(0,2) + ':' + start.substr(2,2) + 'am';
-            end = end.substr(0,2) > 10 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
-            return <span> Today <b>{start} - {end}</b></span>;
+            start = start.substr(0,2) > 12 ? start.substr(0,2)- 12 + ':' + start.substr(2,2) + 'pm' : start.substr(0,2) + ':' + start.substr(2,2) + 'am';
+            end = end.substr(0,2) > 12 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
+            return <span> Today:  <b>{start} - {end}</b></span>;
+        }
+        else if(this.state.salon.hours.length >0 && this.state.is_open_now) {
+            let hours = this.state.salon.hours[0].open;
+            let start = hours[0].start;
+            let end = hours[0].end;
+            start = start.substr(0,2) > 12 ? start.substr(0,2)- 12 + ':' + start.substr(2,2) + 'pm' : start.substr(0,2) + ':' + start.substr(2,2) + 'am';
+            end = end.substr(0,2) > 12 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
+            return <span> Today:  <b>{start} - {end}</b></span>;
         }
     }
 
@@ -136,8 +146,8 @@ export default class SalonItem extends React.Component{
                         <div style={{width: '100%' ,padding: '0%'}}>
                         <img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center='+
                         this.state.salon.location.display_address[0] + ','
-                        + this.state.salon.location.display_address[0] +
-                        '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBp8gPpJ1UADCI1B4jc9JWkC4378KYtdTc'}/>
+                        + this.state.salon.location.display_address[1] +
+                        '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBscU1D1hPtGZ0rQK-3ajLJBJEZC3ua1j8'}/>
                         </div>
                         <h5 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h5>
                         <span className="card-text">{this.state.salon.location.cross_streets}</span>

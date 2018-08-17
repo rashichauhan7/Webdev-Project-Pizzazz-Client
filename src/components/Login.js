@@ -3,12 +3,13 @@ import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import config from '../config.json';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
-import UserService from "../services/UserService";
+import '../css/Login.css'
+import UserService from'../services/UserService';
 
 class App extends Component {
 
-    constructor() {
-        super();
+     constructor(props) {
+        super(props);
         this.state = { isAuthenticated: false, user: null, token: '' , username : '' , password : '' , loginUser : ''};
         this.userService = UserService.instance;
     }
@@ -151,7 +152,6 @@ class App extends Component {
                                id="password"
                     onChange={this.formChanged2}/>
                     </div>
-
                     <button className="btn btn-primary" onClick={this.loginUser}
                             id="loginBtn">
                         Login

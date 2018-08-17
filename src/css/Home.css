@@ -8,20 +8,27 @@
 }
 .topBanner {
     /*background-color: rgba(255, 0, 0, 0.2);*/
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqcI2fZeHkaFSX29aTU4CGflMO1xboLU8hgIm6nuz23yzKIhG3");
-    /*background-image:url(img/home.jpg);*/
+    /*background-image: url("http://bsnscb.com/data/out/168/27282522-salon-wallpapers.jpg");*/
+    background-image:url(img/wallpaper.jpg);
     background-size: cover;
-    /*background-repeat: no-repeat;*/
+    background-repeat: no-repeat;
     align-content: center;
     padding-top: 20%;
-    padding-bottom: 25%;
+    padding-bottom: 20%;
+}
+
+.nav-item:hover
+{
+    border-radius: 5px;
+    border: white;
+    border-style: solid;
 }
 
 .search
 {
     width: 70%;
     margin-right: 5px;
-border-style: none;
+    border-style: none;
 
 }
  .search input
@@ -58,6 +65,7 @@ border-style: none;
     left: 90%;
     background: none;
     font-size: large;
+    color: #fff;
 }
 .register
 {
@@ -73,7 +81,7 @@ border-style: none;
 {
     text-decoration:underline;
     display:inline-block;
-    text-decoration-color: black;
+    text-decoration-color: white;
 
 }
 .register:hover
@@ -98,9 +106,9 @@ border-style: none;
 .card-title:hover {
     color: black;
 }
-.row {
-    margin-left: 10%;
-    margin-top: 2%;
+.nav {
+    margin-left: 12%;
+    /*margin-top: 2%;*/
 }
 
 label
@@ -116,31 +124,19 @@ label
 
 
 
-.category{
-
-    color: white;
-
-    text-decoration: none;
+.nav-item {
     font-size: large;
+    padding: 1%;
+    margin: 3%;
 }
 
-
-
-.category:hover {
-
-    text-decoration: none;
-
-    color: darkblue;
-
+.nav-item label {
+    color: white;
 }
-
-
-
-.category:active, .category:focus {
-
-    text-decoration: none;
-    color: black;
-
+.sidebar {
+    width:20%;
+    border: 1px solid lightgray;
+    visibility: hidden;
 }
 
 

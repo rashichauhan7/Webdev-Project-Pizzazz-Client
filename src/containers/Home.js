@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import YelpApiService from '../services/YelpServices'
 import '../css/Home.css'
+import app from '../css/Home.css'
 import logo from '../css/img/logo3.png'
 import logo1 from '../css/img/logo3.png'
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
@@ -20,14 +21,14 @@ export default class Home extends React.Component{
             options:[],
             value:'Select option',
             showLogin: false,
-            showSignUp: false
+            showSignUp: false,
+            mainPage: true
         };
         this.titleChanged = this.titleChanged.bind(this);
         this.yelp = YelpApiService.instance;
         this.getOptions = this.getOptions.bind(this);
         this.handleChange=  this.handleChange.bind(this);
         this.searchBtn = React.createRef();
-        this.maincontent = React.createRef();
         this.toggleSignUpPopup = this.toggleSignUpPopup.bind(this);
         this.toggleLoginPopup = this.toggleLoginPopup.bind(this);
     }
@@ -102,46 +103,42 @@ let options = [];
                     </label>
                     <div className="search">
                     <select style={{visibility: 'hidden'}} className="form-control" onFocusOff={() => this.refs.searchbar.size = 1} onChange={this.handleChange} value={this.state.value} ref="searchbar">
-                           <option key='1' value='1'>Categories ..</option>
+                           <option key='1' value=''>Categories ..</option>
                             {this.state.options.map(item => (
                                 <option key={item.name} value={item.name}>
                                     {item}
                                 </option>
                             ))}
                         </select>
-                        </div>
-
-
-
+                    </div>
                 </div>
-                    <div className="row">
+                    <div className="nav nav-pills ">
 
-                        <div className="col-2">
-                            <Link className="category" to='/category/Spas' onClick={(e) =>
-                            {
-                                this.state.keyword = "Spas";
-                                this.refs.topBanner.style.paddingBottom = "0%";
-                                this.refs.topBanner.style.paddingTop = "4%";
-                                this.refs.logo.style.visibility = 'hidden';
-                                this.refs.logo1.style.visibility = 'visible';
-                            }}>
-                                <i className="fa fa-chevron-circle-right float-left"><label>Spas</label></i>
+                        <div className="nav-item" onClick={(e) =>
+                        {
+                            this.state.keyword = "Spas";
+                            this.refs.topBanner.style.paddingBottom = "0%";
+                            this.refs.topBanner.style.paddingTop = "4%";
+                            this.refs.logo.style.visibility = 'hidden';
+                            this.refs.logo1.style.visibility = 'visible';
+                        }}>
+                            <Link className="" to='/category/Spas' >
+                             <label>Spas</label>
                             </Link>
                         </div>
-                        <div className="col-2">
-                            <Link className="category"  to='/category/Haircuts' onClick={(e) =>
-                            {
-                                this.state.keyword = "Haircuts";
-                                this.refs.topBanner.style.paddingBottom = "0%";
-                                this.refs.topBanner.style.paddingTop = "4%";
-                                this.refs.logo.style.visibility = 'hidden';
-                                this.refs.logo1.style.visibility = 'visible';
-                            }}>
-                                <i className="fa fa-chevron-circle-right float-left"><label>Haircuts</label></i>
+                        <div className="nav-item" onClick={(e) =>
+                        {
+                            this.state.keyword = "Haircuts";
+                            this.refs.topBanner.style.paddingBottom = "0%";
+                            this.refs.topBanner.style.paddingTop = "4%";
+                            this.refs.logo.style.visibility = 'hidden';
+                            this.refs.logo1.style.visibility = 'visible';
+                        }}>
+                            <Link className="category"  to='/category/Haircuts' >
+                               <label>Haircuts</label>
                             </Link>
                         </div>
-                        <div className="col-2">
-                        <Link className="category" to='/category/Skin' onClick={(e) =>
+                        <div className="nav-item"onClick={(e) =>
                         {
                             this.state.keyword = "Skin Treatment";
                             this.refs.topBanner.style.paddingBottom = "0%";
@@ -149,22 +146,22 @@ let options = [];
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                         }}>
-                            <i className="fa fa-chevron-circle-right float-left"><label> Skin Treatment</label></i>
+                        <Link className="category" to='/category/Skin'>
+                            <label> Skin Treatment</label>
                         </Link>
-                    </div><div className="col-2">
-                        <Link className="category" to='/category/Massage' onClick={(e) =>
-                        {
-                            this.state.keyword = "Massage";
-                            this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
-                            this.refs.logo.style.visibility = 'hidden';
-                            this.refs.logo1.style.visibility = 'visible';
-                        }}>
-                            <i className="fa fa-chevron-circle-right float-left"><label>Massage</label></i>
+                    </div><div className="nav-item" onClick={(e) =>
+                    {
+                        this.state.keyword = "Massage";
+                        this.refs.topBanner.style.paddingBottom = "0%";
+                        this.refs.topBanner.style.paddingTop = "4%";
+                        this.refs.logo.style.visibility = 'hidden';
+                        this.refs.logo1.style.visibility = 'visible';
+                    }}>
+                        <Link className="category" to='/category/Massage' >
+                            <label>Massage</label>
                         </Link>
                     </div>
-                        <div className="col-2">
-                        <Link className="category" to='/category/Facial' onClick={(e) =>
+                        <div className="nav-item" onClick={(e) =>
                         {
                             this.state.keyword = "Facial";
                             this.refs.topBanner.style.paddingBottom = "0%";
@@ -172,23 +169,33 @@ let options = [];
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                         }}>
-                            <i className="fa fa-chevron-circle-right float-left"><label>Facial</label></i>
+                        <Link className="category" to='/category/Facial' >
+                            <label>Facial</label>
                         </Link>
-                    </div><div className="col-2">
-                        <Link className="category" to='/category/Styling' onClick={(e) =>
-                        {
-                            this.state.keyword = "Styling";
-                            this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
-                            this.refs.logo.style.visibility = 'hidden';
-                            this.refs.logo1.style.visibility = 'visible';
-                        }}>
-                            <i className="fa fa-chevron-circle-right float-left"><label> Styling</label></i>
+                    </div><div className="nav-item"  onClick={(e) =>
+                    {
+                        this.state.keyword = "Styling";
+                        this.refs.topBanner.style.paddingBottom = "0%";
+                        this.refs.topBanner.style.paddingTop = "4%";
+                        this.refs.logo.style.visibility = 'hidden';
+                        this.refs.logo1.style.visibility = 'visible';
+                    }}>
+                        <Link className="category" to='/category/Styling'>
+                           <label> Styling</label>
                         </Link>
                     </div>
                     </div>
+                    <div ref = 'sidebar' className="sidebar w3-sidebar w3-bar-block" >
+                        <h4 className="w3-bar-item"><b>Filters</b></h4>
+                        <h5 className='w3-bar-item'>Sort by:</h5>
+                        <Link to="?sort=ci" className="w3-bar-item w3-button">Cost Increasing</Link>
+                        <Link to="?sort=cd" className="w3-bar-item w3-button">Cost Decreasing</Link>
+                        <Link to="?sort=ra" className="w3-bar-item w3-button">Rating</Link>
+                        <Link to="?sort=op" className="w3-bar-item w3-button">Open Now</Link>
+                    </div>
                 </div>
                 </div>
+
               </div>
         );
     }
