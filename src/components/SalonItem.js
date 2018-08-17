@@ -35,7 +35,10 @@ export default class SalonItem extends React.Component{
         this.setState({salonId: newProps.salonId});
         this.getSalon(newProps.salonId);
         this.getReviews(newProps.salonId);
+
     }
+
+
 
     getSalon(salonId)
     {
@@ -47,7 +50,8 @@ export default class SalonItem extends React.Component{
     getReviews(salonId)
     {
         this.yelp.getReviews(salonId)
-            .then(reviews => this.setState({reviews: reviews.reviews}));
+            .then(reviews =>{ this.setState({reviews: reviews.reviews});}
+        );
     }
 
     renderReviews()

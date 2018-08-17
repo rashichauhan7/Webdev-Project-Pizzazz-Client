@@ -9,18 +9,23 @@ export default class Salon extends React.Component{
         super(props);
         this.state =
             {
-                salons: {},
-                showPopUp : false
+                salons: { },
+                showPopUp : false,
+                is_open_now: false
             }
     }
 
     componentDidMount()
     {
         this.setState({salonId: this.props.salons.id});
+        this.setState({is_open_now: !this.props.salons.is_closed});
+
     }
     componentWillReceiveProps (newProps)
     {
         this.setState({salonId: newProps.salons.id});
+        this.setState({is_open_now: !newProps.salons.is_closed});
+
     }
     render () {
         return (
@@ -30,13 +35,17 @@ export default class Salon extends React.Component{
                 </div>
                     <div className="col-8 name list-group ">
                         <Link to={`/salon/${this.props.salons.id}`} className="title list-group-item">
-                            <h2 className="float-left" style={{color: 'darkred' }}>{this.props.salons.name}</h2>
+                            <h2 className="float-left"><span style={{color: 'darkred' }}>{this.props.salons.name}</span> <span style={{textDecorationColor: 'blue'}}>{this.props.salons.price}</span></h2>
                         </Link>
+
                         <div className="list-group-item">
                             <h4 className="float-left ">{this.props.salons.location.display_address[0]}</h4>
                         </div>
-                        <label className="call" onClick={() => {this.setState({showPopUp:true});
-                        console.log(this.state.showPopUp)}}>
+                        <div className="list-group-item">
+                            {this.state.is_open_now && <p className="float-left"><b>Open now</b></p>}
+                            {!this.state.is_open_now && <p className="float-left"><b>Closed now</b></p>}
+                        </div>
+                        <label className="call" onClick={() => this.setState({showPopUp:true})}>
                             Call
                         </label>
                     </div>

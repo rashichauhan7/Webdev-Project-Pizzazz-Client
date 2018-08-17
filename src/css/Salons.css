@@ -24,6 +24,8 @@
     border: none;
     align-self: left;
     margin-bottom: 0%;
+    margin-top: 0%;
+    padding: 1%;
 }
 
 .popup_inner .list-group-item
@@ -45,7 +47,9 @@
 .call
 {
     border: 1px solid lightgray;
-    padding: 2%;
+    border-radius: 4px;
+    padding: 1%;
+    margin-top: 0%;
 }
 .call:hover
 {
