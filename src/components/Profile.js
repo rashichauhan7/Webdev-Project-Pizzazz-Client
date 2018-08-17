@@ -15,7 +15,8 @@ class ProfileComponent extends Component {
             firstname:'',
             lastname:'',
             email:'',
-            phone:''
+            phone:'',
+            cssLoaded: false
         };
 
     }
@@ -85,6 +86,11 @@ class ProfileComponent extends Component {
 
 
     render() {
+        if (this.state.cssLoaded === false) {
+            this.state.cssLoaded = true;
+            import('../css/Profile.css');
+        }
+
         return (
             <div>
             <div>Welcome to your profile</div>
@@ -154,8 +160,8 @@ class ProfileComponent extends Component {
         href="/manageSalon">
             Manage My Salon
         </a>
-
-    </div>        </div>
+    </div>
+            </div>
     )
     }
 

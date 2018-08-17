@@ -68,7 +68,7 @@ export default class Salon extends React.Component{
 
 
                 {this.state.showPopUp ?
-                <div className="popup_inner list-group">
+                <div className=" phone popup_inner list-group">
                         <div className="float-right">
                         <button className="float-right btn btn-danger" style={{width: '8%'}}
                                 onClick={() => this.setState({showPopUp:false})}><i className="fa fa-close"></i> </button>

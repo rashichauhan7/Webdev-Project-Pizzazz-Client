@@ -11,6 +11,7 @@ import Login from '../components/Login'
 import Register from '../components/Register'
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
+import UserService from "../services/UserService";
 
 export default class Home extends React.Component{
     constructor(props) {
@@ -23,15 +24,39 @@ export default class Home extends React.Component{
             value:'Select option',
             showLogin: false,
             showSignUp: false,
-            mainPage: true
+            mainPage: true,
+            user: { username: ''}
         };
         this.titleChanged = this.titleChanged.bind(this);
         this.yelp = YelpApiService.instance;
+        this.userService = UserService.instance;
         this.getOptions = this.getOptions.bind(this);
         this.handleChange=  this.handleChange.bind(this);
         this.searchBtn = React.createRef();
         this.toggleSignUpPopup = this.toggleSignUpPopup.bind(this);
         this.toggleLoginPopup = this.toggleLoginPopup.bind(this);
+    }
+
+    componentDidMount()
+    {
+        this.userService.findCurrentUser()
+            .then((user) => {this.setState({user: user});
+                if(user !== ''){
+                    $('.login').css('visibility', 'hidden');
+                    $('.register').css('visibility', 'hidden');
+                    $('.loggedIn').css('visibility', 'visible');
+                }});
+    }
+
+    componentWillReceiveProps(newProps)
+    {
+        window.location.reload();
+        this.userService.findCurrentUser()
+            .then((user) => {this.setState({user: user});
+            if(user !== ''){
+                $('.login').css('visibility', 'hidden');
+                $('.loggedIn').css('visibility', 'visible');
+            }});
     }
     toggleSignUpPopup() {
         this.setState({
@@ -84,6 +109,7 @@ let options = [];
                     <img width="150px" className="logo1" src={logo1} ref="logo1" />
                 <div className="topBanner" ref="topBanner">
                     <button className="btn login" onClick={this.toggleLoginPopup}>Login</button>
+                    <button className="btn loggedIn"><Link to='/profile'>{this.state.user.username}</Link></button>
                     <button className="btn register" onClick={this.toggleSignUpPopup}>Sign Up</button>
                     {this.state.showLogin ? <Login close={this.toggleLoginPopup} maincontent={this.maincontent}/>: null }
                     {this.state.showSignUp ? <Register close={this.toggleSignUpPopup}/>: null}
@@ -92,7 +118,7 @@ let options = [];
                 <input onChange={this.titleChanged} onFocus={this.titleChanged}  className="form-control" align="center" placeholder="Find Salons, Spas and more.." value={this.state.keyword}/>
                     </label>
                     <label align = "center">
-                        <Link className=" searchbtn btn btn-danger" ref="searchBtn" to={`/search/${this.state.keyword}`} onClick={() =>
+                        <Link className="searchbtn btn btn-danger" ref="searchBtn" to={`/search/${this.state.keyword}`} onClick={() =>
                         { this.refs.topBanner.style.paddingBottom = "0%";
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';

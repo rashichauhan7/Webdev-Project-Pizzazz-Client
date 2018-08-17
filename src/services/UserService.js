@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 const CUSTOMER_API_URL =
-    'http://localhost:8080/api/user';
-    /*'https://hw1akriti.herokuapp.com/api/course';*/
+    // 'http://localhost:8080/api/user';
+    'https://pizzazz-db-server.herokuapp.com';
 
 
 class UserService {
@@ -21,7 +21,7 @@ class UserService {
             });
     }
     findUserByUsernameAndPassword(user){
-        return fetch('http://localhost:8080/api/username', {
+        return fetch(CUSTOMER_API_URL+ '/api/username', {
             method: 'post',
             credentials : 'include',
             headers: {
@@ -33,7 +33,7 @@ class UserService {
         })}
 
     findCurrentUser(){
-        return fetch('http://localhost:8080/api/checkLogin', {
+        return fetch(CUSTOMER_API_URL + '/api/checkLogin', {
             method: 'get',
             credentials : 'include',
             headers: {

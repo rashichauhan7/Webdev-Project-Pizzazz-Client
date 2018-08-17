@@ -1,0 +1,25 @@
+.topBanner
+{
+    padding-top: 4%;
+    padding-bottom: 0%;
+}
+
+.logo
+{
+    visibility: hidden;
+}
+.logo1
+{
+    visibility: hidden;
+}
+
+.sidebar
+{
+    visibility: hidden;
+}
+
+.mainbody
+{
+    height: 0;
+    visibility: hidden;
+}
