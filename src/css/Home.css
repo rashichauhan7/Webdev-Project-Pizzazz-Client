@@ -133,5 +133,11 @@ label
 .nav-item label {
     color: white;
 }
+.sidebar {
+    width:20%;
+    border: 1px solid lightgray;
+    visibility: hidden;
+}
+
 
 

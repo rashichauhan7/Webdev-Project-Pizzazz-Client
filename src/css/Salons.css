@@ -7,6 +7,26 @@
     width: 20%;
     height: 200px;
 }
+
+.topBanner
+{
+    padding-top: 4%;
+    padding-bottom: 0%;
+}
+
+.logo
+{
+    visibility: hidden;
+}
+.logo1
+{
+    visibility: visible;
+}
+
+.sidebar
+{
+    visibility: visible;
+}
 .img
 {
     width: 100%;

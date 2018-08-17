@@ -28,7 +28,6 @@ export default class Home extends React.Component{
         this.getOptions = this.getOptions.bind(this);
         this.handleChange=  this.handleChange.bind(this);
         this.searchBtn = React.createRef();
-        this.maincontent = React.createRef();
         this.toggleSignUpPopup = this.toggleSignUpPopup.bind(this);
         this.toggleLoginPopup = this.toggleLoginPopup.bind(this);
     }
@@ -96,7 +95,6 @@ let options = [];
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
-                            this.setState({mainPage: false});
                             var homeLink = ReactDOM.findDOMNode(this.refs.searchBtn);
                             // homeLink.focus(false);
                         }}>
@@ -122,7 +120,6 @@ let options = [];
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
-                            this.setState({mainPage: false});
                         }}>
                             <Link className="" to='/category/Spas' >
                              <label>Spas</label>
@@ -135,7 +132,6 @@ let options = [];
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
-                            this.setState({mainPage: false});
                         }}>
                             <Link className="category"  to='/category/Haircuts' >
                                <label>Haircuts</label>
@@ -148,7 +144,6 @@ let options = [];
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
-                            this.setState({mainPage: false});
                         }}>
                         <Link className="category" to='/category/Skin'>
                             <label> Skin Treatment</label>
@@ -160,7 +155,6 @@ let options = [];
                         this.refs.topBanner.style.paddingTop = "4%";
                         this.refs.logo.style.visibility = 'hidden';
                         this.refs.logo1.style.visibility = 'visible';
-                        this.setState({mainPage: false});
                     }}>
                         <Link className="category" to='/category/Massage' >
                             <label>Massage</label>
@@ -173,7 +167,6 @@ let options = [];
                             this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
-                            this.setState({mainPage: false});
                         }}>
                         <Link className="category" to='/category/Facial' >
                             <label>Facial</label>
@@ -185,21 +178,20 @@ let options = [];
                         this.refs.topBanner.style.paddingTop = "4%";
                         this.refs.logo.style.visibility = 'hidden';
                         this.refs.logo1.style.visibility = 'visible';
-                        this.setState({mainPage: false});
                     }}>
                         <Link className="category" to='/category/Styling'>
                            <label> Styling</label>
                         </Link>
                     </div>
                     </div>
-                    {!this.state.mainPage ? <div  ref = 'sidebar' className="w3-sidebar w3-bar-block" style={{width:"20%",border: "1px solid lightgray" , visibility: this.state.mainPage === true? 'hidden':'visible'}}>
+                    <div ref = 'sidebar' className="sidebar w3-sidebar w3-bar-block" >
                         <h4 className="w3-bar-item"><b>Filters</b></h4>
                         <h5 className='w3-bar-item'>Sort by:</h5>
                         <Link to="?sort=ci" className="w3-bar-item w3-button">Cost Increasing</Link>
                         <Link to="?sort=cd" className="w3-bar-item w3-button">Cost Decreasing</Link>
                         <Link to="?sort=ra" className="w3-bar-item w3-button">Rating</Link>
                         <Link to="?sort=op" className="w3-bar-item w3-button">Open Now</Link>
-                    </div> : null}
+                    </div>
                 </div>
                 </div>
 
