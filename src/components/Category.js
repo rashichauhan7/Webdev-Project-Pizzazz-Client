@@ -1,12 +1,12 @@
 import React from 'react'
 import YelpApiService from "../services/YelpServices";
 import Salon from "../components/Salons"
+import $ from 'jquery';
+import  { BrowserRouter as Router } from 'react-router-dom';
 export default class Category extends React.Component {
 
     constructor(props)
-
     {
-
         super(props);
 
         this.selectCategory = this.selectCategory.bind(this);
@@ -20,7 +20,8 @@ export default class Category extends React.Component {
         this.sort = this.sort.bind(this);
         this.state = {category: '',
             location: 'boston , ma',
-            salons:[]
+            salons:[],
+            cssLoaded: false
         };
 
     }
@@ -42,8 +43,14 @@ export default class Category extends React.Component {
 
         this.getSalons(newProps.match.params.category);
         this.sort(newProps.location.search);
+        this.setState({cssLoaded: false});
     }
 
+    componentWillUnmount() {
+            if(this.props.history !== undefined && this.props.history.action === 'POP') {
+                window.location.reload();
+            }
+    }
 
     sort(sortId)
     {
@@ -132,9 +139,14 @@ export default class Category extends React.Component {
     }
 
     render() {
+        if (this.state.cssLoaded === false) {
+            this.state.cssLoaded = true;
+            import('../css/Profile.css');
+        }
+
         return (
 
-            <div className="list-group">
+            <div className="list-group" style={{marginRight: '10%'}}>
 
                 {this.renderSalons()}
 

@@ -8,11 +8,10 @@ h1
 {
     margin-right: 10%;
     margin-left: 10%;
-    z-index: 100;
+    z-index: 60;
     position: relative;
     background: white;
 }
-
 .card
 {
     padding: 0%;
@@ -24,6 +23,22 @@ h1
 {
     padding: 2%;
 
+}
+
+.topBanner
+{
+    padding-top: 2%;
+    padding-bottom: 0%;
+}
+
+.like
+{
+    margin-right: 30%;
+    margin-bottom: 10%;
+    margin-top: 5%;
+    width: 10%;
+    padding: 2%;
+    font-size: large;
 }
 .image
 {
@@ -38,6 +53,10 @@ h1
     transform:scale(1.5);
 }
 
+.col-8 .list-group-item
+{
+    border: none;
+}
 
 .category1{
 
@@ -122,4 +141,11 @@ h1
 
 .reviews p {
     height: max-content;
+}
+
+.submit
+{
+    margin-left: 25%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }

@@ -1,18 +1,13 @@
 .popup_inner {
     border-radius: 5px;
-    z-index: 10;
+    z-index: 100;
     position: fixed;
     left: 35%;
     right: 35%;
     top: 20%;
-    bottom: 20%;
+    bottom: 10%;
     margin: auto;
     background: white;
     align-self: center;
     border-style: groove;
-}
-.mainbody
-{
-    background-color: rgba(0, 0 , 0, 0.1);
-    background: rgba(0, 0 , 0 , 0.1);
 }

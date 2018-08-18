@@ -1,15 +1,5 @@
 let _singleton = Symbol();
-const CUSTOMER_API_URL =
-    'https://pizzazz-db-server.herokuapp.com/api/user';
-
-const CUSTOMER_API_Local =
-    'http://localhost:8080/api/user';
-
-const CUSTOMER_API_CONST =
-    'https://pizzazz-db-server.herokuapp.com/api/';
-    /*'http://localhost:8080/api/user';*/
-    /*'https://hw1akriti.herokuapp.com/api/course';*/
-
+const CUSTOMER_API_URL = 'https://pizzazz-db-server.herokuapp.com';
 
 class UserService {
     constructor(singletonToken) {
@@ -38,7 +28,7 @@ class UserService {
 
 
     findUserByUsernameAndPassword(user){
-        return fetch('https://pizzazz-db-server.herokuapp.com/api/username', {
+        return fetch(CUSTOMER_API_URL+ '/api/username', {
             method: 'post',
             credentials : 'include',
             headers: {
@@ -50,7 +40,7 @@ class UserService {
         })}
 
     findCurrentUser(){
-        return fetch('https://pizzazz-db-server.herokuapp.com/api/checkLogin', {
+        return fetch(CUSTOMER_API_URL + '/api/checkLogin', {
             method: 'get',
             credentials : 'include',
             headers: {

@@ -5,15 +5,27 @@ import StarRatings from '../../node_modules/react-star-ratings';
 import {Link} from 'react-router-dom';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/scss/bootstrap.scss'
+import SalonService from '../services/SalonService';
+import $ from 'jquery';
+import Review from './Review';
 export default class SalonItem extends React.Component{
     constructor(props)
     {
         super(props);
         this.state = {
+            showReview: false,
             salonId: '',
-            salon: {photos: [], categories: [], location: {display_address: [], cross_streets: ''}, hours: []},
+            salon: {photos: [],
+                categories: [],
+                location:
+                    {display_address: [], cross_streets: '', address2: ""},
+                hours: [],
+                appointments: []},
             is_open_now: false,
-            reviews: []
+            reviews: [],
+            dateValue: new Date().toJSON().slice(0,10),
+            timeValue: '',
+            cssLoaded: false
         }
 
         this.yelp = YelpApiService.instance;
@@ -21,15 +33,22 @@ export default class SalonItem extends React.Component{
         this.photos = this.photos.bind(this);
         this.categories = this.categories.bind(this);
         this.getTime = this.getTime.bind(this);
+        this.getTimes = this.getTimes.bind(this);
         this.getReviews = this.getReviews.bind(this);
+        this.convertTime = this.convertTime.bind(this);
+        this.getValue = this.getValue.bind(this);
         this.sendReview = this.sendReview.bind(this);
-    }
+        this.toggleReview = this.toggleReview.bind(this);
 
+        this.SalonService = SalonService.instance;
+
+    }
 
     componentDidMount()
     {
         this.setState({salonId: this.props.salonId});
-        }
+        console.log(this.state.dateValue);
+    }
     componentWillReceiveProps (newProps)
     {
         this.setState({salonId: newProps.salonId});
@@ -38,7 +57,18 @@ export default class SalonItem extends React.Component{
 
     }
 
+    componentWillUnmount()
+    {
+        if(this.props.history !== undefined && this.props.history.action === 'POP') {
+            window.location.reload();
+        }
+    }
 
+    toggleReview() {
+        this.setState({
+            showReview: !this.state.showReview
+        });
+    }
 
     getSalon(salonId)
     {
@@ -51,7 +81,7 @@ export default class SalonItem extends React.Component{
     {
         this.yelp.getReviews(salonId)
             .then(reviews =>{ this.setState({reviews: reviews.reviews});}
-        );
+            );
     }
 
     renderReviews()
@@ -88,7 +118,7 @@ export default class SalonItem extends React.Component{
     {
         let categorie = this.state.salon.categories.map((categories) =>
         {
-            return <Link className="category1" to={`/category/${categories.title}`}>{categories.title}</Link>
+            return <Link onClick ={() => this.setState({cssLoaded: true})} className="category1" to={`/category/${categories.title}`}>{categories.title}</Link>
         });
         return categorie;
     }
@@ -97,7 +127,7 @@ export default class SalonItem extends React.Component{
     {
         var today = new Date().getDay();
         this.state.is_open_now = !this.state.salon.closed_now;
-        if(this.state.salon.hours.length > today) {
+        if(this.state.salon.hours !== undefined && this.state.salon.hours.length > today) {
             let hours = this.state.salon.hours[0].open;
             let start = hours[today].start;
             let end = hours[today].end;
@@ -105,7 +135,7 @@ export default class SalonItem extends React.Component{
             end = end.substr(0,2) > 12 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
             return <span> Today:  <b>{start} - {end}</b></span>;
         }
-        else if(this.state.salon.hours.length >0 && this.state.is_open_now) {
+        else if(this.state.salon.hours !== undefined && this.state.salon.hours.length >0 && this.state.is_open_now) {
             let hours = this.state.salon.hours[0].open;
             let start = hours[0].start;
             let end = hours[0].end;
@@ -115,84 +145,244 @@ export default class SalonItem extends React.Component{
         }
     }
 
-    sendReview()
+    sendReview(rating, comment)
     {
+        let review;
+        this.SalonService.findSalonByYelpId(this.state.salonId)
+            .then(salon => {
+                if (salon.id === 0){
+                    this.SalonService.createApiSalon(this.state.salonId)
+                        .then(salon => {
+                            review = {
+                                rating: rating,
+                                comment: comment,
+                                salon: salon
+                            }
+                            this.SalonService.createReview(review)
+                                .then(review => {
+                                    console.log(review);
+                                })
+                        })
+                }
+                else {
+                    this.SalonService.getSalonReviews(salon.id)
+                        .then(reviews =>{
+                            review = {
+                                rating: rating,
+                                comment: comment,
+                                salon: salon
+                            }
+                            reviews = [...reviews, review];
+                            this.SalonService.updateReviews(reviews)
+                                .then(response => {
+                                    console.log(response);
+                                })
+                    })
+                }
+            });
+        setTimeout(() => $('.post').html('Posted') , 2000);
+        setTimeout(this.toggleReview, 3000);
+    }
 
+    convertTime(time){
+        if(time.length === 3)
+            time = '0'+ time;
+        return time.substr(0,2) > 12 ? time.substr(0,2)- 12 + ':' + time.substr(2,2) + 'pm' : time.substr(0,2) + ':' + time.substr(2,2) + 'am';
+    }
+
+    getTimes() {
+        var today = new Date().getDay();
+        this.state.is_open_now = !this.state.salon.closed_now;
+        var hours;
+        var start;
+        var end;
+        if(this.state.salon.hours.length > today) {
+           hours = this.state.salon.hours[0].open;
+           start = parseInt(hours[today].start);
+           end = parseInt(hours[today].end);
+        }
+        else if(this.state.salon.hours.length >0 && this.state.is_open_now) {
+            hours = this.state.salon.hours[0].open;
+            start = parseInt(hours[0].start);
+            end = parseInt(hours[0].end);
+        }
+        let start1 = [];
+        let end1 = [];
+        let options;
+        for (let i = start; i <= end; i = i + 100) {
+            start1 = [...start1, i];
+            end1 = [...end1, i + 100];
+        }
+        options = start1.map((start,index)=> {
+        if(index === 0)
+        {
+            return <option selected value={start}>{this.convertTime(String(start))} - {this.convertTime(String(start + 100))}</option>
+        }
+        else {
+            return <option value={start}>{this.convertTime(String(start))} - {this.convertTime(String(start + 100))}</option>
+        }
+        })
+        return options;
+    }
+
+    getValue(date, time) {
+        let appoint;
+        this.SalonService.findSalonByYelpId(this.state.salonId)
+            .then(salon => {
+               if (salon.id === 0){
+                   this.SalonService.createApiSalon(this.state.salonId)
+                       .then(salon => {
+                           appoint = {
+                               time: time,
+                               date: date,
+                               salon: salon
+                           };
+                           this.SalonService.createAppointment(appoint)
+                               .then(appt => {
+                                   console.log(appt);
+                               })
+                       })
+               }
+               else {
+                    this.SalonService.getSalonApp(salon.id)
+                        .then(appts =>{
+                            console.log(appts)
+                            for(let appt in appts){
+                                if (appts[appt].time === time && appts[appt].date === date){
+                                    alert('appointment not available select different date and time');
+                                    return;
+                                }
+                            }
+                            console.log(appts);
+                            appoint = {
+                                time: time,
+                                date: date,
+                                salon: salon
+                            }
+                            appts = [...appts, appoint];
+                            this.SalonService.updateAppointments(appts)
+                                .then(appts => {
+                                    console.log(appts);
+                                })
+
+
+                    })
+               }
+            });
+    }
+
+    handleTimeChange = (event) => {
+        this.setState({ timeValue: event.target.value });
+    }
+
+    handleDateChange = (event) => {
+        this.setState({ dateValue: event.target.value });
     }
 
     render () {
+        if (this.state.cssLoaded === false) {
+            this.state.cssLoaded = true;
+            import('../css/SalonItem.css');
+        }
+
         return (
-           <div className="item container-fluid">
-               <div className="row">
-                   <div className="col-4">
-               <h1>{this.state.salon.name}</h1>
-               <span> <StarRatings
-                   rating={this.state.salon.rating}
-                   starDimension="30px"
-                   starSpacing="2px"
-                   starRatedColor="gold"
-               />
-               </span>
-               <span><h4>Reviews {this.state.salon.review_count}</h4></span>
-               <span><button className="btn btn-danger" onClick={this.sendReview}>
-                   <StarRatings rating= {1.0} starDimension="25px"
-                                starRatedColor="white" numberOfStars="5"/>Write a Review</button></span>
+            <div className="item container-fluid">
+                <div className="row">
+                    <div className="col-4">
+                        <h1>{this.state.salon.name}</h1>
+                        <span> <StarRatings
+                            rating={this.state.salon.rating}
+                            starDimension="30px"
+                            starSpacing="2px"
+                            starRatedColor="gold"/>
+                        </span>
+                        <span><h4>Reviews {this.state.salon.review_count}</h4></span>
+                        <span>
+                            <button className="btn btn-danger" onClick={this.toggleReview}>
+                        <StarRatings rating= {1.0} starDimension="25px"
+                                     starRatedColor="white" numberOfStars="5"/>Write a Review</button>
+                            {this.state.showReview ? <Review sendReview={this.sendReview} salon={this.state.salon} close={this.toggleReview}/>: null }</span>
 
-                      <div style={{marginTop: '10px'}}>
-                          <span className="float-left" style={{marginRight: "10px"}}>{this.state.salon.price}</span>
-                          <span>{this.categories()}</span>
-                      </div>
-                    <div className="card col-lg-10">
-                        <div style={{width: '100%' ,padding: '0%'}}>
-                        <img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center='+
-                        this.state.salon.location.display_address[0] + ','
-                        + this.state.salon.location.display_address[1] +
-                        '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBscU1D1hPtGZ0rQK-3ajLJBJEZC3ua1j8'}/>
+                        <div style={{marginTop: '10px'}}>
+                            <span className="float-left" style={{marginRight: "10px"}}>{this.state.salon.price}</span>
+                            <span>{this.categories()}</span>
                         </div>
-                        <h5 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h5>
-                        <span className="card-text">{this.state.salon.location.cross_streets}</span>
+                        <div className="card col-lg-10">
+                            <div style={{width: '100%' ,padding: '0%'}}>
+                                <img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center='+
+                                this.state.salon.location.display_address[0] + ','
+                                + this.state.salon.location.display_address[1] +
+                                '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBscU1D1hPtGZ0rQK-3ajLJBJEZC3ua1j8'}/>
+                            </div>
 
-                        <span className="card-text" style={{fontSize: "large"}}><i className="fa fa-phone"></i>&nbsp;{this.state.salon.phone}</span>
+                        </div>
                     </div>
 
-                </div>
-               <div className="col-8">
-                  <div>
-                   {this.photos()}
-                  </div>
-                   <div className="side">
-                   <div className="row timing">
-                       <div className="clock"><i className="fa fa-clock-o fa-2x"></i>
-                       </div>
-                       <div className="time col-sm-9 ">
-                           <ul className="time list-group">
-                       <li className="list-group-item time-text">{this.getTime()}</li>
-                       <li className="list-group-item time-text" style={{color: "red", fontSize: "small", fontStyle: 'bold'}}>{this.state.is_open_now && <p>Open now</p>}
-                       {!this.state.is_open_now && <p>Closed now</p>}</li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div className="row timing">
-                       <div className="clock"><i className="fa fa-dollar fa-2x"></i>
-                       </div>
-                       <div className="time col-sm-9 ">
-                           <ul className="time list-group">
-                               <li className="list-group-item time-text">Price Range</li>
-                               {this.state.salon.price === '$$$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Ultra High-end</li>}
-                               {this.state.salon.price === '$$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Pricey</li>}
-                               {this.state.salon.price === '$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Moderate</li>}
-                               {this.state.salon.price === '$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Inexpensive</li>}
-                           </ul>
-                       </div>
-                   </div>
-                </div>
-               </div>
-                   <ul className="list-group">
-                       {this.renderReviews()}
-                   </ul>
 
-               </div>
-           </div>
+                        <div className="col-8 list-group">
+                            <div className="list-group-item">
+                                <button onClick={(e) => {
+                                    $('.like').html("<i class='fa fa-check'></i>Like");
+                                }
+                                } className="like btn btn-danger float-right"><i className='fa fa-question-circle'></i> Like</button>
+                            </div>
+                            <div className="list-group-item">
+                                {this.photos()}
+                            </div>
+                            <div className="side">
+                                <div className="row timing container-fluid">
+                                    <label><b>Make an Appointment</b></label>
+                                    <div style={{alignContent: "center" ,margin: '5%'}}>
+                                        <input type="date"
+                                               onChange={this.handleDateChange}
+                                               value={this.state.dateValue}/>
+                                        <div>
+                                            <select id = "dropdown"
+                                                    onChange={this.handleTimeChange}
+                                                    value={this.state.value}>
+                                                {this.getTimes()}
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div className="submit">
+                                        <button onClick={() => {this.getValue(this.state.dateValue, this.state.timeValue)}}
+                                                className="btn btn-success float-md-left">Reserve</button>
+                                    </div>
+                                </div>
+                                <div className="row timing">
+                                    <div className="clock"><i className="fa fa-clock-o fa-2x"></i>
+                                    </div>
+                                    <div className="time col-sm-9 ">
+                                        <ul className="time list-group">
+                                            <li className="list-group-item time-text">{this.getTime()}</li>
+                                            <li className="list-group-item time-text" style={{color: "red", fontSize: "small", fontStyle: 'bold'}}>{this.state.is_open_now && <p>Open now</p>}
+                                                {!this.state.is_open_now && <p>Closed now</p>}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="row timing">
+                                    <div className="clock"><i className="fa fa-dollar fa-2x"></i>
+                                    </div>
+                                    <div className="time col-sm-9 ">
+                                        <ul className="time list-group">
+                                            <li className="list-group-item time-text">Price Range</li>
+                                            {this.state.salon.price === '$$$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Ultra High-end</li>}
+                                            {this.state.salon.price === '$$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Pricey</li>}
+                                            {this.state.salon.price === '$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Moderate</li>}
+                                            {this.state.salon.price === '$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Inexpensive</li>}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul className="list-group">
+                            {this.renderReviews()}
+                        </ul>
+
+                    </div>
+                </div>
         )
     }
 }

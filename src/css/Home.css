@@ -16,12 +16,38 @@
     padding-top: 20%;
     padding-bottom: 20%;
 }
-
+.categories
+{
+    padding-bottom: 1%;
+}
 .nav-item:hover
 {
     border-radius: 5px;
     border: white;
     border-style: solid;
+}
+
+.nav-pills .active  {
+    /*background-color: white;*/
+    border-radius: 5px;
+    border: white;
+    border-style: solid;
+}
+
+.loggedIn
+{
+    visibility: hidden;
+    position: absolute;
+    top: 0%;
+    left: 90%;
+    background: none;
+    font-size: large;
+    color: #fff;
+}
+.loggedIn a
+{
+    font-size: large;
+    color: #fff;
 }
 
 .search
@@ -44,7 +70,7 @@
 {
     position: absolute;
     z-index: 10;
-    top: 10%;
+    top: 5%;
     margin-left:40% ;
     width: 20%;
 
@@ -61,8 +87,8 @@
 .login
 {
     position: absolute;
-    top: 0%;
-    left: 90%;
+    top: 2%;
+    left: 95%;
     background: none;
     font-size: large;
     color: #fff;
@@ -71,8 +97,8 @@
 {
     font-size: large;
     position: absolute;
-    top: 0%;
-    left: 84%;
+    top: 2%;
+    left: 89%;
     border-color: #fff;
     background: none;
     color: #fff;
@@ -107,7 +133,8 @@
     color: black;
 }
 .nav {
-    margin-left: 12%;
+    margin-top: 0;
+    margin-left: 15%;
     /*margin-top: 2%;*/
 }
 
@@ -122,12 +149,18 @@ label
     font-family: Arial;
 }
 
+.category {
 
+    color: white;
+
+    text-decoration: none;
+}
 
 .nav-item {
     font-size: large;
-    padding: 1%;
-    margin: 3%;
+    padding: 0.5%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 .nav-item label {
@@ -138,6 +171,12 @@ label
     border: 1px solid lightgray;
     visibility: hidden;
 }
-
-
+.w3-bar-block .active
+{
+    background-color: lightgray;
+}
+ .sidebar a:link
+{
+    text-decoration: none;
+}
 

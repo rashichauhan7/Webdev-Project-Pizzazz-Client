@@ -2,6 +2,7 @@ import React from'react';
 import{Link}from'react-router-dom';
 import UserService from"../services/UserService";
 import '../css/Register.css'
+import $ from "jquery";
 export default class Register extends React.Component {
 
     constructor(props) {
@@ -32,7 +33,16 @@ export default class Register extends React.Component {
             .then((loginUser)=>{alert('Saved Changes')})
     };
 
+    componentDidMount()
+    {
+        $('.topBanner').css('pointer-events','none');
+        $('.registercomponent').css('pointer-events','auto');
+    }
+    componentWillUnmount()
+    {
+        $('.topBanner').css('pointer-events','auto');
 
+    }
     formChangedpassword=(event)=> {
         console.log(event.target.value);
         console.log(this.state.password);
@@ -76,8 +86,8 @@ export default class Register extends React.Component {
 
     render(){ return(
 
-        <div className="popup_inner">
-            <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/>
+        <div className="popup_inner registercomponent">
+            <button onClick={this.props.close} className="btn btn-danger float-right closeBtn"><i className="fa fa-close"/>
             </button>
 
             <form className="text-center border border-light p-5">

@@ -1,11 +1,11 @@
-.popup_inner {
+.popup {
     border-radius: 5px;
     z-index: 100;
     position: fixed;
-    left: 35%;
-    right: 35%;
-    top: 10%;
-    bottom: 10%;
+    left: 15%;
+    right: 15%;
+    top: 15%;
+    bottom: 15%;
     margin: auto;
     background: white;
     align-self: center;
@@ -13,7 +13,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.closeBtn
+textarea:focus
 {
-    margin: 1%;
+    outline: none;
 }
