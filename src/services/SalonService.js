@@ -23,7 +23,7 @@ class SalonService {
     }
 
     findCurrentSalon(){
-        return fetch('http://localhost:8080/api/checkSalon', {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/checkSalon', {
             method: 'get',
             credentials : 'include',
             headers: {

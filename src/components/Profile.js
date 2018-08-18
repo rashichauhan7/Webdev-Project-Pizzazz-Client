@@ -20,6 +20,8 @@ class ProfileComponent extends Component {
 
     }
 
+
+
     componentDidMount() {
         this.userService.findCurrentUser()
             .then(user => {

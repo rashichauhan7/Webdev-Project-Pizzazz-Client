@@ -1,6 +1,12 @@
 let _singleton = Symbol();
 const CUSTOMER_API_URL =
-    'https://pizzazz-db-server.herokuapp.com/';
+    'https://pizzazz-db-server.herokuapp.com/api/user';
+
+const CUSTOMER_API_Local =
+    'http://localhost:8080/api/user';
+
+const CUSTOMER_API_CONST =
+    'https://pizzazz-db-server.herokuapp.com/api/';
     /*'http://localhost:8080/api/user';*/
     /*'https://hw1akriti.herokuapp.com/api/course';*/
 
@@ -21,6 +27,16 @@ class UserService {
                 return response.json();
             });
     }
+
+
+    findAllReviewers() {
+        return fetch(CUSTOMER_API_CONST+'reviewers')
+            .then(function(response){
+                return response.json();
+            });
+    }
+
+
     findUserByUsernameAndPassword(user){
         return fetch('https://pizzazz-db-server.herokuapp.com/api/username', {
             method: 'post',
@@ -56,7 +72,7 @@ class UserService {
         })}
 
     deleteUser(userId) {
-        return fetch(CUSTOMER_API_URL + '/' + userId, {
+        return fetch(CUSTOMER_API_Local + '/' + userId, {
             method: 'delete'
         })
             .then(function(response){
@@ -74,5 +90,28 @@ class UserService {
         }).then(function (response) {
             return response.json();
         })}
+
+    findProfileById(userId){
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/user/'+userId, {
+            method: 'get',
+            credentials : 'include',
+            headers: {
+                'content-type': 'application/json'
+            },
+        }).then(function (response) {
+            return response.json();
+        })}
+
+    createInvite(invitation) {
+        return fetch('http://localhost:8080/api/invite', {
+            body: JSON.stringify(invitation),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+            return response.json();
+        })}
+
 }
 export default UserService;

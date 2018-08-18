@@ -8,7 +8,9 @@ import SearchEditor from "../components/SearchEditor"
 import Register from '../components/Register'
 import App from '../components/Login'
 import ProfileComponent from "../components/Profile";
+import ProfileViewerComponent from "../components/ProfileViewer";
 import SalonManagerComponent from "../components/SalonManager";
+import AdminHomeComponent from "../components/AdminHome";
 export default class Manager extends React.Component {
 
     render() {
@@ -27,6 +29,9 @@ export default class Manager extends React.Component {
                     <Route path="/search/:keyword?sort=:sid" component={SearchEditor}></Route>
                     <Route path="/profile" component={ProfileComponent}></Route>
                     <Route path="/manageSalon" component={SalonManagerComponent}></Route>
+                    <Route path="/profiles/:profileId" component={ProfileViewerComponent}></Route>
+                    <Route path="/manage" component={AdminHomeComponent}></Route>
+
 
                 </div>
             </Router>
