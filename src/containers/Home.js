@@ -50,7 +50,7 @@ export default class Home extends React.Component{
 
     componentWillReceiveProps(newProps)
     {
-        window.location.reload();
+        // window.location.reload();
         this.userService.findCurrentUser()
             .then((user) => {this.setState({user: user});
             if(user !== ''){
