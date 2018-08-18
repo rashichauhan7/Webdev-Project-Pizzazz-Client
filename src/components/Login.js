@@ -11,8 +11,9 @@ class App extends Component {
 
      constructor(props) {
         super(props);
-        this.state = { isAuthenticated: false, user: null, token: '' , username : '' , password : '' , loginUser : ''};
+        this.state = { newUser:'', isAuthenticated: false, user: null, token: '' , username : '' , password : '' , loginUser : ''};
         this.userService = UserService.instance;
+
     }
 
     saveUser=()=> {
