@@ -2,6 +2,7 @@
 {
     overflow: auto;
     margin-top: 2%;
+    margin-left: 1%
 }
 .imgdiv {
     width: 20%;
@@ -10,10 +11,23 @@
 
 .topBanner
 {
-    padding-top: 4%;
+    padding-top: 2%;
     padding-bottom: 0%;
 }
+.loggedIn
+{
+    margin-top: 2%;
+}
 
+.login
+{
+    margin-top: 2%;
+}
+
+.register
+{
+    margin-top: 2%;
+}
 .logo
 {
     visibility: hidden;
@@ -21,8 +35,8 @@
 .logo1
 {
     visibility: visible;
+    margin-top: 1%;
 }
-
 .sidebar
 {
     visibility: visible;
@@ -32,7 +46,7 @@
     width: 100%;
     height: 100%;
     object-fit: fill;
-    margin-left: 5%;
+    margin-left: 10%;
 }
 .name
 {
@@ -70,6 +84,8 @@
     border-radius: 4px;
     padding: 1%;
     margin-top: 0%;
+    width: 100%;
+    margin-left: 2.7%;
 }
 .call:hover
 {

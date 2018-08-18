@@ -16,7 +16,10 @@
     padding-top: 20%;
     padding-bottom: 20%;
 }
-
+.categories
+{
+    padding-bottom: 1%;
+}
 .nav-item:hover
 {
     border-radius: 5px;
@@ -67,7 +70,7 @@
 {
     position: absolute;
     z-index: 10;
-    top: 10%;
+    top: 5%;
     margin-left:40% ;
     width: 20%;
 
@@ -84,8 +87,8 @@
 .login
 {
     position: absolute;
-    top: 0%;
-    left: 90%;
+    top: 2%;
+    left: 95%;
     background: none;
     font-size: large;
     color: #fff;
@@ -94,8 +97,8 @@
 {
     font-size: large;
     position: absolute;
-    top: 0%;
-    left: 84%;
+    top: 2%;
+    left: 89%;
     border-color: #fff;
     background: none;
     color: #fff;
@@ -150,7 +153,7 @@ label
 
 .nav-item {
     font-size: large;
-    padding: 1%;
+    padding: 0.5%;
     margin-left: 3%;
     margin-right: 3%;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import Salon from '../components/Salons'
 import YelpApiService from '../services/YelpServices'
+import $ from "jquery";
 export default class SearchEditor extends React.Component {
 
     constructor(props)
@@ -31,6 +32,16 @@ export default class SearchEditor extends React.Component {
         this.getSalons(newProps.match.params.keyword);
         this.sort(newProps.location.search);
     }
+
+    componentWillUnmount() {
+        if(this.props.history.action === 'POP')
+            $('.topBanner').css('padding-top','20%');
+        $('.topBanner').css('padding-bottom','20%');
+        $('.logo1').css('visiblility', 'hidden');
+        $('.logo').css('visiblility', 'visible');
+        $('.sidebar').css('visibility','hidden');
+    }
+
 
     sort(sortId)
     {
@@ -140,7 +151,7 @@ export default class SearchEditor extends React.Component {
 
         return (
 
-            <div className="row">
+            <div className="row container-fluid" style={{marginRight: '2%'}} >
 
                 {this.renderSalons()}
 

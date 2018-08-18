@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import YelpApiService from '../services/YelpServices'
-import '../css/Home.css'
-import app from '../css/Home.css'
 import logo from '../css/img/logo3.png'
 import logo1 from '../css/img/logo3.png'
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
@@ -25,7 +23,8 @@ export default class Home extends React.Component{
             showLogin: false,
             showSignUp: false,
             mainPage: true,
-            user: { username: ''}
+            user: { username: ''},
+            cssLoaded: false
         };
         this.titleChanged = this.titleChanged.bind(this);
         this.yelp = YelpApiService.instance;
@@ -39,18 +38,19 @@ export default class Home extends React.Component{
 
     componentDidMount()
     {
+
         this.userService.findCurrentUser()
             .then((user) => {this.setState({user: user});
-                if(user !== ''){
+                if(user.username !== undefined){
                     $('.login').css('visibility', 'hidden');
                     $('.register').css('visibility', 'hidden');
                     $('.loggedIn').css('visibility', 'visible');
                 }});
     }
 
+
     componentWillReceiveProps(newProps)
     {
-        // window.location.reload();
         this.userService.findCurrentUser()
             .then((user) => {this.setState({user: user});
             if(user !== ''){
@@ -102,11 +102,17 @@ let options = [];
 
 
     render() {
+        if (this.state.cssLoaded === false) {
+            this.state.cssLoaded = true;
+            import('../css/Home.css');
+        }
+
+
         return (
             <div className="align-content-center" ref="maincontent">
                 <div className="mainbody">
                     <img className="logo" src={logo} ref="logo"/>
-                    <img width="150px" className="logo1" src={logo1} ref="logo1" />
+                    <img width='10%' height="15%" className="logo1" src={logo1} ref="logo1" />
                 <div className="topBanner" ref="topBanner">
                     <button className="btn login" onClick={this.toggleLoginPopup}>Login</button>
                     <button className="btn loggedIn"><Link to='/profile'>{this.state.user.username}</Link></button>
@@ -119,8 +125,7 @@ let options = [];
                     </label>
                     <label align = "center">
                         <Link className="searchbtn btn btn-danger" ref="searchBtn" to={`/search/${this.state.keyword}`} onClick={() =>
-                        { this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
+                        {
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                             var homeLink = ReactDOM.findDOMNode(this.refs.searchBtn);
@@ -145,8 +150,6 @@ let options = [];
                         <div className="nav-item" onClick={(e) =>
                         {
                             this.state.keyword = "Spas";
-                            this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
 
@@ -165,8 +168,6 @@ let options = [];
                         <div className="nav-item" onClick={(e) =>
                         {
                             this.state.keyword = "Haircuts";
-                            this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                         }}>
@@ -183,8 +184,6 @@ let options = [];
                         <div className="nav-item"onClick={(e) =>
                         {
                             this.state.keyword = "Skin Treatment";
-                            this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                         }}>
@@ -200,8 +199,6 @@ let options = [];
                     </div><div className="nav-item" onClick={(e) =>
                     {
                         this.state.keyword = "Massage";
-                        this.refs.topBanner.style.paddingBottom = "0%";
-                        this.refs.topBanner.style.paddingTop = "4%";
                         this.refs.logo.style.visibility = 'hidden';
                         this.refs.logo1.style.visibility = 'visible';
                     }}>
@@ -218,8 +215,6 @@ let options = [];
                         <div className="nav-item" onClick={(e) =>
                         {
                             this.state.keyword = "Facial";
-                            this.refs.topBanner.style.paddingBottom = "0%";
-                            this.refs.topBanner.style.paddingTop = "4%";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
                         }}>
@@ -235,8 +230,6 @@ let options = [];
                     </div><div className="nav-item"  onClick={(e) =>
                     {
                         this.state.keyword = "Styling";
-                        this.refs.topBanner.style.paddingBottom = "0%";
-                        this.refs.topBanner.style.paddingTop = "4%";
                         this.refs.logo.style.visibility = 'hidden';
                         this.refs.logo1.style.visibility = 'visible';
                     }}>
@@ -251,7 +244,7 @@ let options = [];
                         </Link>
                     </div>
                     </div>
-                    <div id = 'sidebar' className="sidebar w3-sidebar w3-bar-block" >
+                    <div id = 'sidebar' className="sidebar w3-sidebar w3-bar-block"  >
                         <h4 className="w3-bar-item"><b>Filters</b></h4>
                         <h5 className='w3-bar-item'>Sort by:</h5>
                         <Link to="?sort=ci" className="w3-bar-item w3-button">Cost Increasing</Link>
@@ -266,3 +259,4 @@ let options = [];
         );
     }
 }
+

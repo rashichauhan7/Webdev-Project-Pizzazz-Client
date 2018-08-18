@@ -56,16 +56,16 @@ export default class Salon extends React.Component{
                             {this.state.is_open_now && <p className="float-left"><b>Open now</b></p>}
                             {!this.state.is_open_now && <p className="float-left"><b>Closed now</b></p>}
                         </div>
-                        <label className="call" onClick={() => this.setState({showPopUp:true})}>
-                            Call
-                        </label>
+
                     </div>
 
                 <div className="col-2"><label className="btn" style={{color: "white" , backgroundColor: "#cdd614"}}>
                     {this.props.salons.rating.toPrecision(2)}</label>&nbsp;
                     <label>{this.props.salons.review_count} reviews</label>
                 </div>
-
+                <label className="call" onClick={() => this.setState({showPopUp:true})}>
+                    Call
+                </label>
 
                 {this.state.showPopUp ?
                 <div className=" phone popup_inner list-group">

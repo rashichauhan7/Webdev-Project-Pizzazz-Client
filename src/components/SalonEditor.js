@@ -1,6 +1,7 @@
 import React from 'react'
 
 import SalonItem from './SalonItem'
+import $ from "jquery";
 
 export default class SalonEditor extends React.Component {
 
@@ -44,6 +45,14 @@ export default class SalonEditor extends React.Component {
 
     }
 
+    componentWillUnmount() {
+        if(this.props.history.action === 'POP')
+            $('.topBanner').css('padding-top','20%');
+        $('.topBanner').css('padding-bottom','20%');
+        $('.logo1').css('visiblility', 'hidden');
+        $('.logo').css('visiblility', 'visible');
+        $('.sidebar').css('visibility','hidden');
+    }
 
     render() {
 
