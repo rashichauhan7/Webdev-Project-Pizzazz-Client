@@ -3,12 +3,15 @@ import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import config from '../config.json';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
+import '../css/Login.css'
+import UserService from'../services/UserService';
 
 class App extends Component {
 
-    constructor() {
-        super();
-        this.state = { isAuthenticated: false, user: null, token: ''};
+     constructor(props) {
+        super(props);
+        this.state = { isAuthenticated: false, user: null, token: '' , username : '' , password : '' , loginUser : ''};
+        this.userService = UserService.instance;
     }
 
     logout = () => {
@@ -17,6 +20,35 @@ class App extends Component {
 
     onFailure = (error) => {
         alert(error);
+    };
+
+    loginUser = () => {
+
+            this.state.loginUser = {
+                username : this.state.username,
+                password : this.state.password
+            }
+
+        console.log(this.state.loginUser);
+        this.userService.findUserByUsernameAndPassword(this.state.loginUser)
+            .then((loginUser)=>{(window.location.replace(`/profile`))})
+
+    };
+
+    formChanged = (event) => {
+        console.log(event.target.value);
+        console.log(this.state.username);
+        this.setState({
+                username: event.target.value
+            })
+    };
+
+    formChanged2 = (event) => {
+        console.log(event.target.value);
+        console.log(this.state.password);
+        this.setState({
+                password: event.target.value
+            })
     };
 
 
@@ -73,63 +105,56 @@ class App extends Component {
             ) :
             (
                 <div className="container-fluid">
-                    <FacebookLogin
+                    {/*<FacebookLogin
                         appId={config.FACEBOOK_APP_ID}
                         autoLoad={false}
                         fields="name,email,picture"
                         callback={this.facebookResponse}
                         cssClass="my-facebook-button-class"
-                        icon="fa-facebook"/>
-                    <br/>
-                    <br/>
+                        icon="fa fa-facebook"/>
+
                     <GoogleLogin
                         clientId={config.GOOGLE_CLIENT_ID}
                         onSuccess={this.googleResponse}
-                        onFailure={this.onFailure}
-                    >
+                        onFailure={this.onFailure}>
                         <span>
                             <i className="fa fa-google"/>
                         </span>
                         <span> Login with Google</span>
-                    </GoogleLogin>
+                    </GoogleLogin>*/}
+
+                    <a className="btn btn-social-icon btn-google">
+                        <span className="fa fa-google"></span>
+                    </a>
+                    <a className="btn btn-social-icon btn-facebook">
+                        <span className="fa fa-facebook"></span>
+                    </a>
                 </div>
             );
         return (
-            <div>
-                <div className="container-fluid">
+
+
+            <div className="popup_inner">
+
+            <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/> </button>
+                <form className="text-center border border-light p-5">
                     <h1>Sign In</h1>
+                    <input type="text" className="form-control mb-4 wbdv" placeholder="username" onChange={this.formChanged}/>
+                        <input type="password" id="defaultLoginFormPassword" className="form-control mb-4"
+                               placeholder="Password"  onChange={this.formChanged2}/>
 
-                    <div>
-                        <label htmlFor="username">
-                            Username
-                        </label>
-                        <input type="text"
-                               className="form-control"
-                               placeholder="alice"
-                               id="username"/>
+                            <button className="btn btn-dark btn-block my-4" type="submit" onClick={this.loginUser}>Continue</button>
+
+                    <p>Not a member?
+                        <a href="">Register</a>
+                    </p>
+
+                    <p>or sign in with:</p>
+                    <div className="App">
+                        {content}
                     </div>
 
-                    <div>
-                        <label htmlFor="password">
-                            Password
-                        </label>
-                        <input type="password"
-                               className="form-control"
-                               placeholder="1234qwerasdf"
-                               id="password"/>
-                    </div>
-                    <br/>
-                    <button className="btn btn-primary form-control"
-                            id="loginBtn">
-                        Login
-                    </button>
-                </div>
-                <br/>
-                <div className="container-fluid"> or </div>
-                <br/>
-                <div className="App">
-                    {content}
-                </div>
+                </form>
             </div>
         );
     }

@@ -5,18 +5,26 @@ import StarRatings from '../../node_modules/react-star-ratings';
 import {Link} from 'react-router-dom';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/scss/bootstrap.scss'
+import SalonService from '../services/SalonService';
 import ReactDOM from "react-dom";
+
 export default class SalonItem extends React.Component{
     constructor(props)
     {
         super(props);
         this.state = {
             salonId: '',
-            salon: {photos: [], categories: [], location: {display_address: [], cross_streets: ''}, hours: [], Appointments: []},
-            is_open_now: true,
+            salon: {photos: [],
+                categories: [],
+                location:
+                    {display_address: [], cross_streets: ''},
+                hours: [],
+                appointments: []},
+            is_open_now: false,
             reviews: [],
             dateValue: '',
-            timeValue: ''
+            timeValue: '',
+            cssLoaded: false
         }
 
         this.yelp = YelpApiService.instance;
@@ -28,21 +36,25 @@ export default class SalonItem extends React.Component{
         this.getReviews = this.getReviews.bind(this);
         this.convertTime = this.convertTime.bind(this);
         this.getValue = this.getValue.bind(this);
+        this.sendReview = this.sendReview.bind(this);
+        this.SalonService = SalonService.instance;
+
     }
 
 
     componentDidMount()
     {
         this.setState({salonId: this.props.salonId});
-
-
     }
     componentWillReceiveProps (newProps)
     {
         this.setState({salonId: newProps.salonId});
         this.getSalon(newProps.salonId);
         this.getReviews(newProps.salonId);
+
     }
+
+
 
     getSalon(salonId)
     {
@@ -54,7 +66,8 @@ export default class SalonItem extends React.Component{
     getReviews(salonId)
     {
         this.yelp.getReviews(salonId)
-            .then(reviews => this.setState({reviews: reviews.reviews}));
+            .then(reviews =>{ this.setState({reviews: reviews.reviews});}
+            );
     }
 
     renderReviews()
@@ -91,23 +104,36 @@ export default class SalonItem extends React.Component{
     {
         let categorie = this.state.salon.categories.map((categories) =>
         {
-            return <Link className="category1" to={`/category/${categories.title}`}>{categories.title}</Link>
+            return <Link onClick ={() => this.setState({cssLoaded: true})} className="category1" to={`/category/${categories.title}`}>{categories.title}</Link>
         });
         return categorie;
     }
 
     getTime()
     {
-        if(this.state.salon.hours.length > 0) {
+        var today = new Date().getDay();
+        this.state.is_open_now = !this.state.salon.closed_now;
+        if(this.state.salon.hours.length > today) {
             let hours = this.state.salon.hours[0].open;
-            var today = new Date().getDay();
-            this.state.is_open_now = this.state.salon.hours[0].is_open_now;
             let start = hours[today].start;
             let end = hours[today].end;
-            start = start.substr(0,2) > 10 ? start.substr(0,2)- 12 + ':' + start.substr(2,2) + 'pm' : start.substr(0,2) + ':' + start.substr(2,2) + 'am';
-            end = end.substr(0,2) > 10 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
-            return <span> Today <b>{start} - {end}</b></span>;
+            start = start.substr(0,2) > 12 ? start.substr(0,2)- 12 + ':' + start.substr(2,2) + 'pm' : start.substr(0,2) + ':' + start.substr(2,2) + 'am';
+            end = end.substr(0,2) > 12 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
+            return <span> Today:  <b>{start} - {end}</b></span>;
         }
+        else if(this.state.salon.hours.length >0 && this.state.is_open_now) {
+            let hours = this.state.salon.hours[0].open;
+            let start = hours[0].start;
+            let end = hours[0].end;
+            start = start.substr(0,2) > 12 ? start.substr(0,2)- 12 + ':' + start.substr(2,2) + 'pm' : start.substr(0,2) + ':' + start.substr(2,2) + 'am';
+            end = end.substr(0,2) > 12 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
+            return <span> Today:  <b>{start} - {end}</b></span>;
+        }
+    }
+
+    sendReview()
+    {
+
     }
 
     convertTime(time){
@@ -115,28 +141,62 @@ export default class SalonItem extends React.Component{
     }
 
     getTimes() {
-        if(this.state.salon.hours.length > 0) {
-            let hours = this.state.salon.hours[0].open;
-            var today = new Date().getDay();
-            let start = parseInt(hours[today].start);
-            let end = parseInt(hours[today].end);
-            let start1 = [];
-            let end1 = [];
-            let options;
-
-            for (let i = start; i <= end; i = i + 100) {
-                start1 = [...start1, i];
-                end1 = [...end1, i + 100];
-            }
-            options = start1.map(start => {
-                return <option value={start}>{this.convertTime(String(start))} - {this.convertTime(String(start+100))}</option>
-            })
-            return options;
+        var today = new Date().getDay();
+        this.state.is_open_now = !this.state.salon.closed_now;
+        var hours;
+        var start;
+        var end;
+        if(this.state.salon.hours.length > today) {
+           hours = this.state.salon.hours[0].open;
+           start = parseInt(hours[today].start);
+           end = parseInt(hours[today].end);
         }
+        else if(this.state.salon.hours.length >0 && this.state.is_open_now) {
+            hours = this.state.salon.hours[0].open;
+            start = parseInt(hours[0].start);
+            end = parseInt(hours[0].end);
+        }
+        let start1 = [];
+        let end1 = [];
+        let options;
+        for (let i = start; i <= end; i = i + 100) {
+            start1 = [...start1, i];
+            end1 = [...end1, i + 100];
+        }
+        options = start1.map(start => {
+            return <option value={start}>{this.convertTime(String(start))} - {this.convertTime(String(start+100))}</option>
+        })
+        return options;
     }
 
     getValue(date, time) {
-        console.log(time);
+        let appoint;
+        this.SalonService.findSalonByYelpId(this.state.salonId)
+            .then(salon => {
+               if (salon.id === 0){
+                   this.SalonService.createApiSalon(this.state.salonId)
+                       .then(salon => {
+                           appoint = {
+                               time: time,
+                               date: date,
+                               salon: salon
+                           };
+                           console.log(salon);
+                           // salon.appointments = [];
+                           // salon.appointments.push(appoint);
+                           this.SalonService.createAppointment(appoint)
+                               .then(appoint => {
+                                   console.log(appoint);
+                               })
+                       })
+               }
+               else {
+                    this.SalonService.getSalonApp(salon.id)
+                        .then(appts =>{
+                            console.log(appts);
+                    })
+               }
+            });
     }
 
     handleTimeChange = (event) => {
@@ -148,6 +208,11 @@ export default class SalonItem extends React.Component{
     }
 
     render () {
+        if (this.state.cssLoaded === false) {
+            this.state.cssLoaded = true;
+            import('../css/SalonItem.css');
+        }
+
         return (
             <div className="item container-fluid">
                 <div className="row">
@@ -157,13 +222,12 @@ export default class SalonItem extends React.Component{
                             rating={this.state.salon.rating}
                             starDimension="30px"
                             starSpacing="2px"
-                            starRatedColor="gold"
-                        />
-               </span>
+                            starRatedColor="gold"/>
+                        </span>
                         <span><h4>Reviews {this.state.salon.review_count}</h4></span>
-                        <span><button className="btn btn-danger ">
-                   <StarRatings rating= {1.0} starDimension="25px"
-                                starRatedColor="white" numberOfStars="5"/>Write a Review</button></span>
+                        <span><button className="btn btn-danger" onClick={this.sendReview}>
+                        <StarRatings rating= {1.0} starDimension="25px"
+                                     starRatedColor="white" numberOfStars="5"/>Write a Review</button></span>
 
                         <div style={{marginTop: '10px'}}>
                             <span className="float-left" style={{marginRight: "10px"}}>{this.state.salon.price}</span>
@@ -173,74 +237,73 @@ export default class SalonItem extends React.Component{
                             <div style={{width: '100%' ,padding: '0%'}}>
                                 <img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center='+
                                 this.state.salon.location.display_address[0] + ','
-                                + this.state.salon.location.display_address[0] +
-                                '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBp8gPpJ1UADCI1B4jc9JWkC4378KYtdTc'}/>
+                                + this.state.salon.location.display_address[1] +
+                                '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBscU1D1hPtGZ0rQK-3ajLJBJEZC3ua1j8'}/>
                             </div>
-                            <h5 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h5>
-                            <span className="card-text">{this.state.salon.location.cross_streets}</span>
 
-                            <span className="card-text" style={{fontSize: "large"}}><i className="fa fa-phone"></i>&nbsp;{this.state.salon.phone}</span>
                         </div>
-
                     </div>
-                    <div className="col-8">
-                        <div>
-                            {this.photos()}
-                        </div>
-                        <div className="side">
-                            <div className="row timing container-fluid">
-                                <label><b>Make an Appointment</b></label>
-                                <div style={{alignContent: "center" ,margin: '5%'}}>
-                                    <input type="date"
-                                           onChange={this.handleDateChange}
-                                           value={this.state.dateValue}/>
-                                    <div>
-                                        <select id = "dropdown"
-                                                onChange={this.handleTimeChange}
-                                                value={this.state.value}>
-                                            <option value="select time">Select time</option>
-                                            {this.getTimes()}
+
+
+                        <div className="col-8">
+                            <div>
+                                {this.photos()}
+                            </div>
+                            <div className="side">
+                                <div className="row timing container-fluid">
+                                    <label><b>Make an Appointment</b></label>
+                                    <div style={{alignContent: "center" ,margin: '5%'}}>
+                                        <input type="date"
+                                               onChange={this.handleDateChange}
+                                               value={this.state.dateValue}/>
+                                        <div>
+                                            <select id = "dropdown"
+                                                    onChange={this.handleTimeChange}
+                                                    value={this.state.value}>
+                                                <option value="select time">Select time</option>
+                                                {this.getTimes()}
                                             </select>
-                                    </div>
+                                        </div>
 
+                                    </div>
+                                    <div className="submit">
+                                        <button onClick={() => {this.getValue(this.state.dateValue, this.state.timeValue)}}
+                                                className="btn btn-success float-md-left">Reserve</button>
+                                    </div>
                                 </div>
-                                <div className="submit">
-                                    <button onClick={() => {this.getValue(this.state.dateValue, this.state.timeValue)}}
-                                            className="btn btn-success float-md-left">Reserve</button>
+                                <div className="row timing">
+                                    <div className="clock"><i className="fa fa-clock-o fa-2x"></i>
+                                    </div>
+                                    <div className="time col-sm-9 ">
+                                        <ul className="time list-group">
+                                            <li className="list-group-item time-text">{this.getTime()}</li>
+                                            <li className="list-group-item time-text" style={{color: "red", fontSize: "small", fontStyle: 'bold'}}>{this.state.is_open_now && <p>Open now</p>}
+                                                {!this.state.is_open_now && <p>Closed now</p>}</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row timing">
-                                <div className="clock"><i className="fa fa-clock-o fa-2x"></i>
-                                </div>
-                                <div className="time col-sm-9 ">
-                                    <ul className="time list-group">
-                                        <li className="list-group-item time-text">{this.getTime()}</li>
-                                        <li className="list-group-item time-text" style={{color: "red", fontSize: "small", fontStyle: 'bold'}}>{this.state.is_open_now && <p>Open now</p>}
-                                            {!this.state.is_open_now && <p>Closed now</p>}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="row timing">
-                                <div className="clock"><i className="fa fa-dollar fa-2x"></i>
-                                </div>
-                                <div className="time col-sm-9 ">
-                                    <ul className="time list-group">
-                                        <li className="list-group-item time-text">Price Range</li>
-                                        {this.state.salon.price === '$$$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Ultra High-end</li>}
-                                        {this.state.salon.price === '$$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Pricey</li>}
-                                        {this.state.salon.price === '$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Moderate</li>}
-                                        {this.state.salon.price === '$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Inexpensive</li>}
-                                    </ul>
+                                <div className="row timing">
+                                    <div className="clock"><i className="fa fa-dollar fa-2x"></i>
+                                    </div>
+                                    <div className="time col-sm-9 ">
+                                        <ul className="time list-group">
+                                            <li className="list-group-item time-text">Price Range</li>
+                                            {this.state.salon.price === '$$$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Ultra High-end</li>}
+                                            {this.state.salon.price === '$$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Pricey</li>}
+                                            {this.state.salon.price === '$$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Moderate</li>}
+                                            {this.state.salon.price === '$' &&<li className="list-group-item time-text" style={{color: "red", fontSize: "small"}}>Inexpensive</li>}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <ul className="list-group">
-                        {this.renderReviews()}
-                    </ul>
 
+                        <ul className="list-group">
+                            {this.renderReviews()}
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
         )
     }
 }

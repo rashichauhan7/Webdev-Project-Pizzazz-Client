@@ -8,30 +8,54 @@
 }
 .topBanner {
     /*background-color: rgba(255, 0, 0, 0.2);*/
-    background-image: url("http://redsalonpa.com/wp-content/uploads/2014/04/p-background2.jpg");
+    /*background-image: url("http://bsnscb.com/data/out/168/27282522-salon-wallpapers.jpg");*/
+    background-image:url(img/wallpaper.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    opacity: 0.9;
     align-content: center;
-   padding-top: 20%;
-    padding-bottom: 25%;
+    padding-top: 20%;
+    padding-bottom: 20%;
 }
+
+.nav-item:hover
+{
+    border-radius: 5px;
+    border: white;
+    border-style: solid;
+}
+
+.active  {
+    /*background-color: white;*/
+    border-radius: 5px;
+    border: white;
+    border-style: solid;
+}
+
 
 .search
 {
-
     width: 70%;
     margin-right: 5px;
+    border-style: none;
 
 }
-
+ .search input
+ {
+     height: 50px;
+ }
+.searchbtn
+{
+    height: 48px;
+}
 
 .logo
 {
     position: absolute;
     z-index: 10;
-    top: 40px;
+    top: 10%;
     margin-left:40% ;
+    width: 20%;
+
 }
 .logo1
 {
@@ -39,11 +63,39 @@
     z-index: 10;
     size: B4;
     visibility: hidden;
-    /*margin-left:0% ;*/
+    margin-left:2% ;
+    margin-top: 1%;
 }
-.btn
+.login
 {
-    position: relative;
+    position: absolute;
+    top: 0%;
+    left: 90%;
+    background: none;
+    font-size: large;
+    color: #fff;
+}
+.register
+{
+    font-size: large;
+    position: absolute;
+    top: 0%;
+    left: 84%;
+    border-color: #fff;
+    background: none;
+    color: #fff;
+}
+.login:hover
+{
+    text-decoration:underline;
+    display:inline-block;
+    text-decoration-color: white;
+
+}
+.register:hover
+{
+    background-color: white;
+    color: gray;
 }
 .card
 {
@@ -62,9 +114,10 @@
 .card-title:hover {
     color: black;
 }
-.row {
-    margin-left: 10%;
-    margin-top: 2%;
+.nav {
+    margin-top: 0;
+    margin-left: 15%;
+    /*margin-top: 2%;*/
 }
 
 label
@@ -78,32 +131,27 @@ label
     font-family: Arial;
 }
 
-
-.category{
+.category {
 
     color: white;
 
     text-decoration: none;
-
 }
 
-
-
-.category:hover {
-
-    text-decoration: none;
-
-    color: darkblue;
-
+.nav-item {
+    font-size: large;
+    padding: 1%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
-
-
-.category:active, .category:focus {
-
-    text-decoration: none;
-    color: darkblue;
-
+.nav-item label {
+    color: white;
+}
+.sidebar {
+    width:20%;
+    border: 1px solid lightgray;
+    visibility: hidden;
 }
 
 
