@@ -102,9 +102,57 @@ class SalonService {
         })
     }
 
+    createReview(review) {
+        return fetch('http://localhost:8080/api/review',{
+            body: JSON.stringify(review),
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response){
+            return response.json();
+        })
+    }
+
     getSalonApp(salonId) {
-        return fetch('localhost:8080/api/salon/' + salonId + '/appointments', {
+        return fetch('http://localhost:8080/api/salon/' + salonId + '/appointments', {
             method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
+    getSalonReviews(salonId) {
+        return fetch('http://localhost:8080/api/salon/' + salonId + '/reviews', {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
+    updateAppointments(appts){
+        return fetch('http://localhost:8080/api/appointments',{
+            method: 'put',
+            body: JSON.stringify(appts),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
+    updateReviews(reviews){
+        return fetch('http://localhost:8080/api/reviews',{
+            method: 'put',
+            body: JSON.stringify(reviews),
             headers: {
                 'Content-Type': 'application/json'
             }

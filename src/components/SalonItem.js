@@ -142,13 +142,42 @@ export default class SalonItem extends React.Component{
         }
     }
 
-    sendReview(rating, comments)
+    sendReview(rating, comment)
     {
-        let reviews = {
-            rating: rating,
-            comments: comments
-        }
-        console.log(reviews);
+        let review;
+        this.SalonService.findSalonByYelpId(this.state.salonId)
+            .then(salon => {
+                if (salon.id === 0){
+                    this.SalonService.createApiSalon(this.state.salonId)
+                        .then(salon => {
+                            review = {
+                                rating: rating,
+                                comment: comment,
+                                salon: salon
+                            }
+                            this.SalonService.createReview(review)
+                                .then(review => {
+                                    console.log(review);
+                                })
+                        })
+                }
+                else {
+                    this.SalonService.getSalonReviews(salon.id)
+                        .then(reviews =>{
+                            review = {
+                                rating: rating,
+                                comment: comment,
+                                salon: salon
+                            }
+                            reviews = [...reviews, review];
+                            this.SalonService.updateReviews(reviews)
+                                .then(response => {
+                                    console.log(response);
+                                })
+                    })
+                }
+            });
+
     }
 
     convertTime(time){
@@ -200,15 +229,34 @@ export default class SalonItem extends React.Component{
                            // salon.appointments = [];
                            // salon.appointments.push(appoint);
                            this.SalonService.createAppointment(appoint)
-                               .then(appoint => {
-                                   console.log(appoint);
+                               .then(appt => {
+                                   console.log(appt);
                                })
                        })
                }
                else {
                     this.SalonService.getSalonApp(salon.id)
                         .then(appts =>{
+                            console.log(appts)
+                            for(let appt in appts){
+                                if (appts[appt].time === time && appts[appt].date === date){
+                                    alert('appointment not available select different date and time');
+                                    return;
+                                }
+                            }
                             console.log(appts);
+                            appoint = {
+                                time: time,
+                                date: date,
+                                salon: salon
+                            }
+                            appts = [...appts, appoint];
+                            this.SalonService.updateAppointments(appts)
+                                .then(appts => {
+                                    console.log(appts);
+                                })
+
+
                     })
                }
             });
