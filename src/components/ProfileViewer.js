@@ -32,7 +32,8 @@ class ProfileViewerComponent extends Component {
                 reviewer : {}
             },
             cannotBeInvited : true,
-            editMode : true
+            editMode : true,
+            cssLoaded: false
         };
 
     }
@@ -156,6 +157,10 @@ class ProfileViewerComponent extends Component {
 
 
     render() {
+            if (this.state.cssLoaded === false) {
+                this.state.cssLoaded = true;
+                import('../css/Profile.css');
+            }
         return (
 
             <Router>

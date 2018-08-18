@@ -115,7 +115,7 @@ let options = [];
                     <img width='10%' height="15%" className="logo1" src={logo1} ref="logo1" />
                 <div className="topBanner" ref="topBanner">
                     <button className="btn login" onClick={this.toggleLoginPopup}>Login</button>
-                    <button className="btn loggedIn"><Link to='/profile'>{this.state.user.username}</Link></button>
+                    <button className="btn loggedIn"><Link to={`/profiles/${this.state.user.id}`}>{this.state.user.username}</Link></button>
                     <button className="btn register" onClick={this.toggleSignUpPopup}>Sign Up</button>
                     {this.state.showLogin ? <Login close={this.toggleLoginPopup} maincontent={this.maincontent}/>: null }
                     {this.state.showSignUp ? <Register close={this.toggleSignUpPopup}/>: null}
