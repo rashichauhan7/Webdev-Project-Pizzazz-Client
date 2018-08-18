@@ -113,7 +113,7 @@ export default class SalonItem extends React.Component{
     {
         var today = new Date().getDay();
         this.state.is_open_now = !this.state.salon.closed_now;
-        if(this.state.salon.hours.length > today) {
+        if(this.state.salon.hours !== undefined && this.state.salon.hours.length > today) {
             let hours = this.state.salon.hours[0].open;
             let start = hours[today].start;
             let end = hours[today].end;
@@ -121,7 +121,7 @@ export default class SalonItem extends React.Component{
             end = end.substr(0,2) > 12 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
             return <span> Today:  <b>{start} - {end}</b></span>;
         }
-        else if(this.state.salon.hours.length >0 && this.state.is_open_now) {
+        else if(this.state.salon.hours !== undefined && this.state.salon.hours.length >0 && this.state.is_open_now) {
             let hours = this.state.salon.hours[0].open;
             let start = hours[0].start;
             let end = hours[0].end;

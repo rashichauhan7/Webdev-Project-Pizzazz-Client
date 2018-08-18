@@ -5,6 +5,7 @@ import config from '../config.json';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../css/Login.css'
 import UserService from'../services/UserService';
+import $ from 'jquery';
 
 class App extends Component {
 
@@ -31,7 +32,12 @@ class App extends Component {
 
         console.log(this.state.loginUser);
         this.userService.findUserByUsernameAndPassword(this.state.loginUser)
-            .then((loginUser)=>{(window.location.replace(`/profile`))})
+            .then((loginUser)=>{
+                $('.login').css('visibility', 'hidden');
+                $('.register').css('visibility', 'hidden');
+                $('.loggedIn').css('visibility', 'visible');
+                this.props.close();
+            })
 
     };
 
@@ -136,14 +142,14 @@ class App extends Component {
 
             <div className="popup_inner">
 
-            <button onClick={this.props.close} className="btn btn-danger float-right"><i className="fa fa-close"/> </button>
+            <button onClick={this.props.close} className="close btn btn-danger float-right"><i className="fa fa-close"/> </button>
                 <form className="text-center border border-light p-5">
                     <h1>Sign In</h1>
                     <input type="text" className="form-control mb-4 wbdv" placeholder="username" onChange={this.formChanged}/>
                         <input type="password" id="defaultLoginFormPassword" className="form-control mb-4"
                                placeholder="Password"  onChange={this.formChanged2}/>
 
-                            <button className="btn btn-dark btn-block my-4" type="submit" onClick={this.loginUser}>Continue</button>
+                            <button className="btn btn-dark btn-block my-4" type="button" onClick={this.loginUser}>Continue</button>
 
                     <p>Not a member?
                         <a href="">Register</a>

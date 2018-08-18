@@ -1,0 +1,33 @@
+.topBanner
+{
+    padding-top: 2%;
+    padding-bottom: 0%;
+}
+.loggedIn
+{
+    margin-top: 2%;
+}
+
+.login
+{
+    margin-top: 2%;
+}
+
+.register
+{
+    margin-top: 2%;
+}
+.logo
+{
+    visibility: hidden;
+}
+.logo1
+{
+    visibility: visible;
+    margin-top: 1%;
+}
+
+.sidebar
+{
+    visibility: hidden;
+}

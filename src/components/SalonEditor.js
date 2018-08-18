@@ -1,6 +1,7 @@
 import React from 'react'
 
 import SalonItem from './SalonItem'
+import $ from "jquery";
 
 export default class SalonEditor extends React.Component {
 
@@ -43,7 +44,6 @@ export default class SalonEditor extends React.Component {
         (newProps.match.params.salonId);
 
     }
-
 
     render() {
 

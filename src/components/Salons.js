@@ -14,6 +14,7 @@ export default class Salon extends React.Component{
                 is_open_now: false,
                 cssLoaded: false
             }
+            this.categories = this.categories.bind(this);
     }
 
     componentDidMount()
@@ -30,6 +31,14 @@ export default class Salon extends React.Component{
         this.setState({cssLoaded: false});
         }
 
+    categories()
+    {
+        let categorie = this.props.salons.categories.map((categories) =>
+        {
+            return <Link onClick ={() => this.setState({cssLoaded: true})} className="category2" to={`/category/${categories.title}`}>{categories.title} &nbsp;</Link>
+        });
+        return categorie;
+    }
     render () {
         if (this.state.cssLoaded === false) {
             this.state.cssLoaded = true;
@@ -38,8 +47,8 @@ export default class Salon extends React.Component{
 
 
         return (
-            <div className="row salonItem " align="center" style={{marginLeft:"20%"}}>
-                <div className=" col-2 imgdiv float-left ">
+            <div className="row salonItem " align="center" style={{marginLeft:"25%"}}>
+                <div className="imgdiv col-2 float-left ">
                     <img className="img" src = {this.props.salons.image_url}/>
                 </div>
                     <div className="col-8 name list-group ">
@@ -56,19 +65,22 @@ export default class Salon extends React.Component{
                             {this.state.is_open_now && <p className="float-left"><b>Open now</b></p>}
                             {!this.state.is_open_now && <p className="float-left"><b>Closed now</b></p>}
                         </div>
-                        <label className="call" onClick={() => this.setState({showPopUp:true})}>
-                            Call
-                        </label>
+
                     </div>
 
                 <div className="col-2"><label className="btn" style={{color: "white" , backgroundColor: "#cdd614"}}>
                     {this.props.salons.rating.toPrecision(2)}</label>&nbsp;
                     <label>{this.props.salons.review_count} reviews</label>
                 </div>
-
+                <label className='call'>
+                   Categories:  {this.categories()}
+                </label>
+                <label className="call" onClick={() => this.setState({showPopUp:true})}>
+                    Call
+                </label>
 
                 {this.state.showPopUp ?
-                <div className="popup_inner list-group">
+                <div className=" phone popup_inner list-group">
                         <div className="float-right">
                         <button className="float-right btn btn-danger" style={{width: '8%'}}
                                 onClick={() => this.setState({showPopUp:false})}><i className="fa fa-close"></i> </button>
