@@ -246,11 +246,35 @@ let options = [];
                     </div>
                     <div id = 'sidebar' className="sidebar w3-sidebar w3-bar-block"  >
                         <h4 className="w3-bar-item"><b>Filters</b></h4>
-                        <h5 className='w3-bar-item'>Sort by:</h5>
-                        <Link to="?sort=ci" className="w3-bar-item w3-button">Cost Increasing</Link>
-                        <Link to="?sort=cd" className="w3-bar-item w3-button">Cost Decreasing</Link>
-                        <Link to="?sort=ra" className="w3-bar-item w3-button">Rating</Link>
-                        <Link to="?sort=op" className="w3-bar-item w3-button">Open Now</Link>
+                        <h5 className='w3-bar-item active'>Sort by:</h5>
+                        <Link to="?sort=ci" className="w3-bar-item w3-button" onClick={(e) => {
+                            $('.w3-bar-item').removeClass('active');
+
+                            //Add active class to the clicked item
+                            $(e.target).addClass('active');
+
+                        }} >Cost Increasing</Link>
+                        <Link to="?sort=cd" className="w3-bar-item w3-button" onClick={(e) => {
+                            $('.w3-bar-item').removeClass('active');
+
+                            //Add active class to the clicked item
+                            $(e.target).addClass('active');
+
+                        }} >Cost Decreasing</Link>
+                        <Link to="?sort=ra" className="w3-bar-item w3-button" onClick={(e) => {
+                            $('.w3-bar-item').removeClass('active');
+
+                            //Add active class to the clicked item
+                            $(e.target).addClass('active');
+
+                        }} >Rating</Link>
+                        <Link to="?sort=op" className="w3-bar-item w3-button" onClick={(e) => {
+                            $('.w3-bar-item').removeClass('active');
+
+                            //Add active class to the clicked item
+                            $(e.target).addClass('active');
+
+                        }} >Open Now</Link>
                     </div>
                 </div>
                 </div>

@@ -27,7 +27,7 @@
     border-style: solid;
 }
 
-.active  {
+.nav-pills .active  {
     /*background-color: white;*/
     border-radius: 5px;
     border: white;
@@ -166,6 +166,8 @@ label
     border: 1px solid lightgray;
     visibility: hidden;
 }
-
-
+.w3-bar-block .active
+{
+    background-color: lightgray;
+}
 
