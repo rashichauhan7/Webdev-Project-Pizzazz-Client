@@ -175,4 +175,8 @@ label
 {
     background-color: lightgray;
 }
+ .sidebar a:link
+{
+    text-decoration: none;
+}
 

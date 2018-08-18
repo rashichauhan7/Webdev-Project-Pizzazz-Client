@@ -35,7 +35,8 @@ export default class Salon extends React.Component{
     {
         let categorie = this.props.salons.categories.map((categories) =>
         {
-            return <Link onClick ={() => this.setState({cssLoaded: true})} className="category2" to={`/category/${categories.title}`}>{categories.title} &nbsp;</Link>
+            return <Link onClick ={() => this.setState({cssLoaded: true})} className="category2"
+                         to={`/category/${categories.title}`}>{categories.title} &nbsp;</Link>
         });
         return categorie;
     }
@@ -68,9 +69,9 @@ export default class Salon extends React.Component{
 
                     </div>
 
-                <div className="col-2"><label className="btn" style={{color: "white" , backgroundColor: "#cdd614"}}>
-                    {this.props.salons.rating.toPrecision(2)}</label>&nbsp;
-                    <label>{this.props.salons.review_count} reviews</label>
+                <div className="col-2"><label className="btn" style={{color: "white" , backgroundColor: "#cdd614" , width: '50%', height: '25%' , fontSize: 'large', margin: '3%',padding: '8%'}}>
+                    {this.props.salons.rating.toPrecision(2)}</label><br/>
+                    <label style={{color: 'gray'}}>{this.props.salons.review_count} reviews</label>
                 </div>
                 <label className='call'>
                    Categories:  {this.categories()}

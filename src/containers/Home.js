@@ -53,7 +53,7 @@ export default class Home extends React.Component{
     {
         this.userService.findCurrentUser()
             .then((user) => {this.setState({user: user});
-            if(user !== ''){
+            if(user.username !== undefined){
                 $('.login').css('visibility', 'hidden');
                 $('.loggedIn').css('visibility', 'visible');
             }});

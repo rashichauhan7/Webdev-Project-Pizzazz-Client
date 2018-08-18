@@ -15,6 +15,16 @@ class App extends Component {
         this.userService = UserService.instance;
     }
 
+    componentDidMount()
+    {
+        $('.topBanner').css('pointer-events','none');
+         $('.logincomponent').css('pointer-events','auto');
+    }
+
+    componentWillUnmount()
+    {
+        $('.topBanner').css('pointer-events','auto');
+    }
     logout = () => {
         this.setState({isAuthenticated: false, token: '', user: null})
     };
@@ -111,7 +121,7 @@ class App extends Component {
             ) :
             (
                 <div className="container-fluid">
-                    {/*<FacebookLogin
+                    <FacebookLogin
                         appId={config.FACEBOOK_APP_ID}
                         autoLoad={false}
                         fields="name,email,picture"
@@ -127,29 +137,20 @@ class App extends Component {
                             <i className="fa fa-google"/>
                         </span>
                         <span> Login with Google</span>
-                    </GoogleLogin>*/}
-
-                    <a className="btn btn-social-icon btn-google">
-                        <span className="fa fa-google"></span>
-                    </a>
-                    <a className="btn btn-social-icon btn-facebook">
-                        <span className="fa fa-facebook"></span>
-                    </a>
+                    </GoogleLogin>
                 </div>
             );
         return (
 
 
-            <div className="popup_inner">
+            <div className="popup_inner logincomponent">
 
-            <button onClick={this.props.close} className="close btn btn-danger float-right"><i className="fa fa-close"/> </button>
+            <button onClick={this.props.close} className="close btn btn-danger float-right closeBtn"><i className="fa fa-close"/> </button>
                 <form className="text-center border border-light p-5">
                     <h1>Sign In</h1>
                     <input type="text" className="form-control mb-4 wbdv" placeholder="username" onChange={this.formChanged}/>
                         <input type="password" id="defaultLoginFormPassword" className="form-control mb-4"
                                placeholder="Password"  onChange={this.formChanged2}/>
-
-<<<<<<< Updated upstream
                             <button className="btn btn-dark btn-block my-4" type="button" onClick={this.loginUser}>Continue</button>
 
                     <p>Not a member?
@@ -162,39 +163,6 @@ class App extends Component {
                     </div>
 
                 </form>
-=======
-                    <div>
-                        <label htmlFor="username">
-                            Username
-                        </label>
-                        <input type="text"
-                               className="form-control"
-                               placeholder="alice"
-                               id="username"/>
-                    </div>
-
-                    <div>
-                        <label htmlFor="password">
-                            Password
-                        </label>
-                        <input type="password"
-                               className="form-control"
-                               placeholder="1234qwerasdf"
-                               id="password"/>
-                    </div>
-                    <br/>
-                    <button className="btn btn-primary form-control"
-                            id="loginBtn">
-                        Login
-                    </button>
-                </div>
-                <br/>
-                <div className="container-fluid"> or </div>
-                <br/>
-                <div className="App">
-                    {content}
-                </div>
->>>>>>> Stashed changes
             </div>
         );
     }

@@ -33,15 +33,6 @@ export default class SearchEditor extends React.Component {
         this.sort(newProps.location.search);
     }
 
-    componentWillUnmount() {
-        if(this.props.history.action === 'POP')
-            $('.topBanner').css('padding-top','20%');
-        $('.topBanner').css('padding-bottom','20%');
-        $('.logo1').css('visiblility', 'hidden');
-        $('.logo').css('visiblility', 'visible');
-        $('.sidebar').css('visibility','hidden');
-    }
-
 
     sort(sortId)
     {

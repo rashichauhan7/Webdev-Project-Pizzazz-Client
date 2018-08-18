@@ -6,13 +6,14 @@ import {Link} from 'react-router-dom';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/scss/bootstrap.scss'
 import SalonService from '../services/SalonService';
-import ReactDOM from "react-dom";
-
+import $ from 'jquery';
+import Review from './Review';
 export default class SalonItem extends React.Component{
     constructor(props)
     {
         super(props);
         this.state = {
+            showReview: false,
             salonId: '',
             salon: {photos: [],
                 categories: [],
@@ -37,6 +38,8 @@ export default class SalonItem extends React.Component{
         this.convertTime = this.convertTime.bind(this);
         this.getValue = this.getValue.bind(this);
         this.sendReview = this.sendReview.bind(this);
+        this.toggleReview = this.toggleReview.bind(this);
+
         this.SalonService = SalonService.instance;
 
     }
@@ -53,8 +56,16 @@ export default class SalonItem extends React.Component{
         this.getReviews(newProps.salonId);
 
     }
+    componentWillUnmount()
+    {
+        $('.sidebar').css('visisblity','visible');
+    }
 
-
+    toggleReview() {
+        this.setState({
+            showReview: !this.state.showReview
+        });
+    }
 
     getSalon(salonId)
     {
@@ -131,9 +142,13 @@ export default class SalonItem extends React.Component{
         }
     }
 
-    sendReview()
+    sendReview(rating, comments)
     {
-
+        let reviews = {
+            rating: rating,
+            comments: comments
+        }
+        console.log(reviews);
     }
 
     convertTime(time){
@@ -225,9 +240,11 @@ export default class SalonItem extends React.Component{
                             starRatedColor="gold"/>
                         </span>
                         <span><h4>Reviews {this.state.salon.review_count}</h4></span>
-                        <span><button className="btn btn-danger" onClick={this.sendReview}>
+                        <span>
+                            <button className="btn btn-danger" onClick={this.toggleReview}>
                         <StarRatings rating= {1.0} starDimension="25px"
-                                     starRatedColor="white" numberOfStars="5"/>Write a Review</button></span>
+                                     starRatedColor="white" numberOfStars="5"/>Write a Review</button>
+                            {this.state.showReview ? <Review sendReview={this.sendReview} salon={this.state.salon} close={this.toggleReview}/>: null }</span>
 
                         <div style={{marginTop: '10px'}}>
                             <span className="float-left" style={{marginRight: "10px"}}>{this.state.salon.price}</span>
