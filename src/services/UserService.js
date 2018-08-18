@@ -1,5 +1,15 @@
 let _singleton = Symbol();
-const CUSTOMER_API_URL = 'https://pizzazz-db-server.herokuapp.com';
+const CUSTOMER_API_URL ='https://pizzazz-db-server.herokuapp.com';
+
+// 'https://pizzazz-db-server.herokuapp.com/api/user';
+//
+// const CUSTOMER_API_Local =
+//     'http://localhost:8080/api/user';
+//
+// const CUSTOMER_API_CONST =
+//     'https://pizzazz-db-server.herokuapp.com/api/';
+/*'http://localhost:8080/api/user';*/
+// 'http://localhost:8080/api/user';
 
 class UserService {
     constructor(singletonToken) {
@@ -20,7 +30,7 @@ class UserService {
 
 
     findAllReviewers() {
-        return fetch(CUSTOMER_API_CONST+'reviewers')
+        return fetch(CUSTOMER_API_URL+'/api/reviewers')
             .then(function(response){
                 return response.json();
             });
@@ -62,7 +72,7 @@ class UserService {
         })}
 
     deleteUser(userId) {
-        return fetch(CUSTOMER_API_Local + '/' + userId, {
+        return fetch(CUSTOMER_API_URL + '/api/user/' + userId, {
             method: 'delete'
         })
             .then(function(response){
@@ -71,7 +81,7 @@ class UserService {
     }
 
     updateUser(userId,user) {
-        return fetch(CUSTOMER_API_URL + '/' + userId, {
+        return fetch(CUSTOMER_API_URL + '/user/' + userId, {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
