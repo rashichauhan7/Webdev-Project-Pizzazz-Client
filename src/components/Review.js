@@ -51,8 +51,9 @@ render() {
                     }} placeholder="Your review helps others learn about great local businesses.
                     Please don't review this business if you received a freebie for writing this review,
                      or if you're connected in any way to the owner or employees."></textarea>
-                    <button onClick={() => this.props.sendReview(this.state.rating, this.state.comment)} style={{ marginTop: '1%'}} className="btn btn-danger float-left">Post Comment</button>
-                </div>
+                    <button onClick={() => {this.props.sendReview(this.state.rating, this.state.comment)}}
+                            style={{ marginTop: '1%'}} className="btn btn-danger float-left post">Post Comment</button>
+                                   </div>
             </div>
         )
 }

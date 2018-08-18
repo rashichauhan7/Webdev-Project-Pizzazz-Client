@@ -18,12 +18,12 @@ export default class SalonItem extends React.Component{
             salon: {photos: [],
                 categories: [],
                 location:
-                    {display_address: [], cross_streets: ''},
+                    {display_address: [], cross_streets: '', address2: ""},
                 hours: [],
                 appointments: []},
             is_open_now: false,
             reviews: [],
-            dateValue: '',
+            dateValue: new Date().toJSON().slice(0,10),
             timeValue: '',
             cssLoaded: false
         }
@@ -44,10 +44,10 @@ export default class SalonItem extends React.Component{
 
     }
 
-
     componentDidMount()
     {
         this.setState({salonId: this.props.salonId});
+        console.log(this.state.dateValue);
     }
     componentWillReceiveProps (newProps)
     {
@@ -56,9 +56,12 @@ export default class SalonItem extends React.Component{
         this.getReviews(newProps.salonId);
 
     }
+
     componentWillUnmount()
     {
-        $('.sidebar').css('visisblity','visible');
+        if(this.props.history !== undefined && this.props.history.action === 'POP') {
+            window.location.reload();
+        }
     }
 
     toggleReview() {
@@ -177,10 +180,13 @@ export default class SalonItem extends React.Component{
                     })
                 }
             });
-
+        setTimeout(() => $('.post').html('Posted') , 2000);
+        setTimeout(this.toggleReview, 3000);
     }
 
     convertTime(time){
+        if(time.length === 3)
+            time = '0'+ time;
         return time.substr(0,2) > 12 ? time.substr(0,2)- 12 + ':' + time.substr(2,2) + 'pm' : time.substr(0,2) + ':' + time.substr(2,2) + 'am';
     }
 
@@ -207,8 +213,14 @@ export default class SalonItem extends React.Component{
             start1 = [...start1, i];
             end1 = [...end1, i + 100];
         }
-        options = start1.map(start => {
-            return <option value={start}>{this.convertTime(String(start))} - {this.convertTime(String(start+100))}</option>
+        options = start1.map((start,index)=> {
+        if(index === 0)
+        {
+            return <option selected value={start}>{this.convertTime(String(start))} - {this.convertTime(String(start + 100))}</option>
+        }
+        else {
+            return <option value={start}>{this.convertTime(String(start))} - {this.convertTime(String(start + 100))}</option>
+        }
         })
         return options;
     }
@@ -225,9 +237,6 @@ export default class SalonItem extends React.Component{
                                date: date,
                                salon: salon
                            };
-                           console.log(salon);
-                           // salon.appointments = [];
-                           // salon.appointments.push(appoint);
                            this.SalonService.createAppointment(appoint)
                                .then(appt => {
                                    console.log(appt);
@@ -310,8 +319,14 @@ export default class SalonItem extends React.Component{
                     </div>
 
 
-                        <div className="col-8">
-                            <div>
+                        <div className="col-8 list-group">
+                            <div className="list-group-item">
+                                <button onClick={(e) => {
+                                    $('.like').html("<i class='fa fa-check'></i>Like");
+                                }
+                                } className="like btn btn-danger float-right"><i className='fa fa-question-circle'></i> Like</button>
+                            </div>
+                            <div className="list-group-item">
                                 {this.photos()}
                             </div>
                             <div className="side">
@@ -325,7 +340,6 @@ export default class SalonItem extends React.Component{
                                             <select id = "dropdown"
                                                     onChange={this.handleTimeChange}
                                                     value={this.state.value}>
-                                                <option value="select time">Select time</option>
                                                 {this.getTimes()}
                                             </select>
                                         </div>

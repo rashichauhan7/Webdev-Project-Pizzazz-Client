@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64b69281-f3f9-4012-97c6-aeb38162fad1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Category.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Review.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Review.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SalonItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SalonItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/SalonService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/SalonService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Salons.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Salons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchEditor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/SalonItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/SalonItem.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,23 +23,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SalonItem.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="166" column="38" lean-forward="true" selection-start-line="166" selection-start-column="38" selection-end-line="166" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SalonService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/SalonService.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="312">
               <caret line="131" column="22" lean-forward="true" selection-start-line="131" selection-start-column="22" selection-end-line="131" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SalonItem.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="87" column="5" lean-forward="true" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -147,12 +153,12 @@
       <updated>1534524025866</updated>
       <workItem from="1534524030518" duration="32863000" />
       <workItem from="1534580717170" duration="425000" />
-      <workItem from="1534610046875" duration="10944000" />
+      <workItem from="1534610046875" duration="11758000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44232000" />
+    <option name="totallyTimeSpent" value="45046000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="7" />
@@ -309,8 +315,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="166" column="38" lean-forward="true" selection-start-line="166" selection-start-column="38" selection-end-line="166" selection-end-column="38" />
+        <state relative-caret-position="198">
+          <caret line="87" column="5" lean-forward="true" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

@@ -47,7 +47,7 @@ export default class Category extends React.Component {
     }
 
     componentWillUnmount() {
-            if(this.props.history.action === 'POP') {
+            if(this.props.history !== undefined && this.props.history.action === 'POP') {
                 window.location.reload();
             }
     }

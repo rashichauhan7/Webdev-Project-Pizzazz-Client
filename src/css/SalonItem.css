@@ -24,6 +24,22 @@ h1
     padding: 2%;
 
 }
+
+.topBanner
+{
+    padding-top: 2%;
+    padding-bottom: 0%;
+}
+
+.like
+{
+    margin-right: 30%;
+    margin-bottom: 10%;
+    margin-top: 5%;
+    width: 10%;
+    padding: 2%;
+    font-size: large;
+}
 .image
 {
     margin: 10px;
@@ -37,6 +53,10 @@ h1
     transform:scale(1.5);
 }
 
+.col-8 .list-group-item
+{
+    border: none;
+}
 
 .category1{
 
