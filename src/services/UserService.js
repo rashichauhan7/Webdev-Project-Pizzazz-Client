@@ -103,7 +103,7 @@ class UserService {
         })}
 
     createInvite(invitation) {
-        return fetch('http://localhost:8080/api/invite', {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/invite', {
             body: JSON.stringify(invitation),
             headers: {
                 'Content-Type': 'application/json'
@@ -113,5 +113,14 @@ class UserService {
             return response.json();
         })}
 
+        logout()
+        {
+            return fetch('https://pizzazz-db-server.herokuapp.com/api/logout', {
+                credentials: 'include',
+                method: 'post'
+            }).then(function (response) {
+                return response;
+            })
+        }
 }
 export default UserService;

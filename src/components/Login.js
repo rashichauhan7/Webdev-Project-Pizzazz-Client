@@ -46,6 +46,8 @@ class App extends Component {
                 $('.login').css('visibility', 'hidden');
                 $('.register').css('visibility', 'hidden');
                 $('.loggedIn').css('visibility', 'visible');
+                $('.logout').css('visibility', 'visible');
+                $('.loggedIn').html(loginUser.username);
                 this.props.close();
             })
 
