@@ -149,6 +149,7 @@ class App extends Component {
                         <input type="password" id="defaultLoginFormPassword" className="form-control mb-4"
                                placeholder="Password"  onChange={this.formChanged2}/>
 
+<<<<<<< Updated upstream
                             <button className="btn btn-dark btn-block my-4" type="button" onClick={this.loginUser}>Continue</button>
 
                     <p>Not a member?
@@ -161,6 +162,39 @@ class App extends Component {
                     </div>
 
                 </form>
+=======
+                    <div>
+                        <label htmlFor="username">
+                            Username
+                        </label>
+                        <input type="text"
+                               className="form-control"
+                               placeholder="alice"
+                               id="username"/>
+                    </div>
+
+                    <div>
+                        <label htmlFor="password">
+                            Password
+                        </label>
+                        <input type="password"
+                               className="form-control"
+                               placeholder="1234qwerasdf"
+                               id="password"/>
+                    </div>
+                    <br/>
+                    <button className="btn btn-primary form-control"
+                            id="loginBtn">
+                        Login
+                    </button>
+                </div>
+                <br/>
+                <div className="container-fluid"> or </div>
+                <br/>
+                <div className="App">
+                    {content}
+                </div>
+>>>>>>> Stashed changes
             </div>
         );
     }
