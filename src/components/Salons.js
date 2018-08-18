@@ -60,6 +60,9 @@ export default class Salon extends React.Component{
                         </Link>
 
                         <div className="list-group-item">
+                            <h3 className="float-left">{this.props.salons.location.address2}</h3>
+                        </div>
+                        <div className="list-group-item">
                             <h4 className="float-left ">{this.props.salons.location.display_address[0]}</h4>
                         </div>
                         <div className="list-group-item">
@@ -83,7 +86,7 @@ export default class Salon extends React.Component{
                 {this.state.showPopUp ?
                 <div className=" phone popup_inner list-group">
                         <div className="float-right">
-                        <button className="float-right btn btn-danger" style={{width: '8%'}}
+                        <button className="float-right btn btn-danger closeBtn" style={{width: '8%'}}
                                 onClick={() => this.setState({showPopUp:false})}><i className="fa fa-close"></i> </button>
                         </div>
                     <div className="list-group-item float-left">

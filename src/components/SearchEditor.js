@@ -32,6 +32,11 @@ export default class SearchEditor extends React.Component {
         this.getSalons(newProps.match.params.keyword);
         this.sort(newProps.location.search);
     }
+    componentWillUnmount() {
+        if(this.props.history !== undefined && this.props.history.action === 'POP') {
+            window.location.reload();
+        }
+    }
 
 
     sort(sortId)

@@ -147,102 +147,79 @@ let options = [];
                 </div>
                     <div className="nav nav-pills categories">
 
-                        <div className="nav-item" onClick={(e) =>
+                        <Link className="nav-item category" onClick={(e) =>
                         {
                             this.state.keyword = "Spas";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
+                            $('.nav-item').removeClass('active');
 
-                        }}>
-                            <Link onClick={(e) => {
-                                $('.nav-item').removeClass('active');
-
-                                //Add active class to the clicked item
-                                $(e.target).parent().parent().addClass('active');
-
-                            }}
-                                  className="category" to='/category/Spas' >
+                            //Add active class to the clicked item
+                            $(e.target).parent().parent().addClass('active');
+                        }} to='/category/Spas' >
                              <label>Spas</label>
-                            </Link>
-                        </div>
-                        <div className="nav-item" onClick={(e) =>
+                        </Link>
+                        <Link className="nav-item category" onClick={(e) =>
                         {
                             this.state.keyword = "Haircuts";
                             this.refs.logo.style.visibility = 'hidden';
                             this.refs.logo1.style.visibility = 'visible';
-                        }}>
-                            <Link className="category" onClick={(e) => {
-                                $('.nav-item').removeClass('active');
-
-                                //Add active class to the clicked item
-                                $(e.target).parent().parent().addClass('active');
-
-                            }}  to='/category/Haircuts' >
-                               <label>Haircuts</label>
-                            </Link>
-                        </div>
-                        <div className="nav-item"onClick={(e) =>
-                        {
-                            this.state.keyword = "Skin Treatment";
-                            this.refs.logo.style.visibility = 'hidden';
-                            this.refs.logo1.style.visibility = 'visible';
-                        }}>
-                        <Link className="category" onClick={(e) => {
                             $('.nav-item').removeClass('active');
 
                             //Add active class to the clicked item
                             $(e.target).parent().parent().addClass('active');
-
-                        }} to='/category/Skin'>
-                            <label> Skin Treatment</label>
+                        }} to='/category/Haircuts' >
+                            <label>Haircuts</label>
                         </Link>
-                    </div><div className="nav-item" onClick={(e) =>
+                        <Link className="nav-item category" onClick={(e) =>
+                    {
+                        this.state.keyword = "Skin Treatment";
+                        this.refs.logo.style.visibility = 'hidden';
+                        this.refs.logo1.style.visibility = 'visible';
+                        $('.nav-item').removeClass('active');
+
+                        //Add active class to the clicked item
+                        $(e.target).parent().parent().addClass('active');
+                    }} to='/category/Skin' >
+                        <label>Skin Treatment</label>
+                    </Link>
+                        <Link className="nav-item category" onClick={(e) =>
                     {
                         this.state.keyword = "Massage";
                         this.refs.logo.style.visibility = 'hidden';
                         this.refs.logo1.style.visibility = 'visible';
-                    }}>
-                        <Link className="category" onClick={(e) => {
-                            $('.nav-item').removeClass('active');
+                        $('.nav-item').removeClass('active');
 
-                            //Add active class to the clicked item
-                            $(e.target).parent().parent().addClass('active');
+                        //Add active class to the clicked item
+                        $(e.target).parent().parent().addClass('active');
+                    }} to='/category/Massage' >
+                        <label>Massage</label>
+                    </Link>
+                        <Link className="nav-item category" onClick={(e) =>
+                    {
+                        this.state.keyword = "Facial";
+                        this.refs.logo.style.visibility = 'hidden';
+                        this.refs.logo1.style.visibility = 'visible';
+                        $('.nav-item').removeClass('active');
 
-                        }} to='/category/Massage' >
-                            <label>Massage</label>
-                        </Link>
-                    </div>
-                        <div className="nav-item" onClick={(e) =>
-                        {
-                            this.state.keyword = "Facial";
-                            this.refs.logo.style.visibility = 'hidden';
-                            this.refs.logo1.style.visibility = 'visible';
-                        }}>
-                        <Link className="category" onClick={(e) => {
-                            $('.nav-item').removeClass('active');
-
-                            //Add active class to the clicked item
-                            $(e.target).parent().parent().addClass('active');
-
-                        }} to='/category/Facial' >
-                            <label>Facial</label>
-                        </Link>
-                    </div><div className="nav-item"  onClick={(e) =>
+                        //Add active class to the clicked item
+                        $(e.target).parent().parent().addClass('active');
+                    }} to='/category/Facial' >
+                        <label>Facial</label>
+                    </Link>
+                        <Link className="nav-item category" onClick={(e) =>
                     {
                         this.state.keyword = "Styling";
                         this.refs.logo.style.visibility = 'hidden';
                         this.refs.logo1.style.visibility = 'visible';
-                    }}>
-                        <Link className="category" onClick={(e) => {
-                            $('.nav-item').removeClass('active');
+                        $('.nav-item').removeClass('active');
 
-                            //Add active class to the clicked item
-                            $(e.target).parent().parent().addClass('active');
+                        //Add active class to the clicked item
+                        $(e.target).parent().parent().addClass('active');
+                    }} to='/category/Styling' >
+                        <label>Styling</label>
+                    </Link>
 
-                        }} to='/category/Styling'>
-                           <label> Styling</label>
-                        </Link>
-                    </div>
                     </div>
                     <div id = 'sidebar' className="sidebar w3-sidebar w3-bar-block"  >
                         <h4 className="w3-bar-item"><b>Filters</b></h4>
