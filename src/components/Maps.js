@@ -10,20 +10,28 @@ class Maps extends React.Component {
         this.state =
             {
                 lat: 0,
-                lng: 0
-            };
+                lng: 0,
+                markers: [{
+                    position: {
+                        lat: this.props.lat,
+                        lng: this.props.lng,
+                    }
+                }]
+            }
+
     }
 
     componentDidMount()
     {
         this.setState({lat: this.props.lat});
-        this.setState({lng: this.props.lng});
+        this.setState({lat: this.props.lat});
     }
  componentWillReceiveProps(newprops)
     {
         this.setState({lat: newprops.lat});
         this.setState({lng: newprops.lng});
     }
+
 
     render() {
         return (
@@ -34,12 +42,12 @@ class Maps extends React.Component {
                     lat: this.props.lat,
                     lng: this.props.lng,
                 }}
-
+                markers = {this.state.markers}
             />
         );
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyAYjWTBdRuRKeuW_21h3NIeDiws977Yqi0",
+    apiKey: "AIzaSyD4t-3ulkWQCyz23aAbXpSUgoeCGPghtrs",
 })(Maps);
