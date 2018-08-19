@@ -63,8 +63,8 @@ class App extends Component {
                 $('.register').css('visibility', 'hidden');
                 $('.loggedIn').css('visibility', 'visible');
                 $('.logout').css('visibility', 'visible');
-                $('.loggedIn a:first-child').html(loginUser.username);
                 this.props.close();
+                window.location.reload();
             })
 
     };
@@ -99,8 +99,8 @@ class App extends Component {
                     $('.register').css('visibility', 'hidden');
                     $('.loggedIn').css('visibility', 'visible');
                     $('.logout').css('visibility', 'visible');
-                    $('.loggedIn a:first-child').html(user.username);
                     this.props.close();
+                    window.location.reload();
                 }
                 else {
                     this.state.newUser = {
@@ -118,8 +118,8 @@ class App extends Component {
                             $('.register').css('visibility', 'hidden');
                             $('.loggedIn').css('visibility', 'visible');
                             $('.logout').css('visibility', 'visible');
-                            $('.loggedIn a:first-child').html(loginUser.username);
                             this.props.close();
+                            window.location.reload();
                         })
                 }
 

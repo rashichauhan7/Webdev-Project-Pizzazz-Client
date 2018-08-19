@@ -157,7 +157,7 @@ let options = [];
                         </select>
                     </div>
                 </div>
-                    <div className="nav nav-pills categories">
+                    <nav className="navbar navbar-expand-sm nav nav-pills categories">
 
                         <Link className="nav-item category" onClick={(e) =>
                         {
@@ -231,8 +231,7 @@ let options = [];
                     }} to='/category/Styling' >
                         <label>Styling</label>
                     </Link>
-
-                    </div>
+                    </nav>
                     <div id = 'sidebar' className="sidebar w3-sidebar w3-bar-block"  >
                         <h4 className="w3-bar-item"><b>Filters</b></h4>
                         <h5 className='w3-bar-item active'>Sort by:</h5>

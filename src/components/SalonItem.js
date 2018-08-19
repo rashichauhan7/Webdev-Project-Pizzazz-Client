@@ -77,12 +77,6 @@ export default class SalonItem extends React.Component{
 
     }
 
-    getReviews(salonId)
-    {
-        this.yelp.getReviews(salonId)
-            .then(reviews =>{ this.setState({reviews: reviews.reviews});}
-            );
-    }
 
     renderReviews()
     {
@@ -182,6 +176,19 @@ export default class SalonItem extends React.Component{
             });
         setTimeout(() => $('.post').html('Posted') , 2000);
         setTimeout(this.toggleReview, 3000);
+    }
+    getReviews(salonId)
+    {
+        let review;
+        this.SalonService.findSalonByYelpId(salonId)
+            .then(salon => {
+                if (salon.id !== 0){
+                    this.SalonService.getSalonReviews(salon.id)
+                        .then(reviews =>{
+                            this.setState({reviews: reviews});
+                    })
+                }
+            });
     }
 
     convertTime(time){

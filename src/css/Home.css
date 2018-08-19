@@ -38,7 +38,7 @@
     visibility: hidden;
     position: absolute;
     top: 2%;
-    left: 95%;
+    left: 90%;
     background: none;
     font-size: large;
     color: #fff;
@@ -52,7 +52,7 @@
 
 .search
 {
-    width: 70%;
+    width: 58%;
     margin-right: 5px;
     border-style: none;
 
@@ -88,7 +88,7 @@
 {
     position: absolute;
     top: 2%;
-    left: 95%;
+    left: 90%;
     background: none;
     font-size: large;
     color: #fff;
@@ -98,7 +98,7 @@
     font-size: large;
     position: absolute;
     top: 2%;
-    left: 89%;
+    left: 82%;
     border-color: #fff;
     background: none;
     color: #fff;
@@ -109,7 +109,7 @@
     font-size: large;
     position: absolute;
     top: 2%;
-    left: 89%;
+    left: 82%;
     border-color: #fff;
     background: none;
     color: #fff;
@@ -151,8 +151,9 @@
 }
 .nav {
     margin-top: 0;
-    margin-left: 15%;
+    /*margin-left: 15%;*/
     /*margin-top: 2%;*/
+    padding-left: 15%;
 }
 
 label
