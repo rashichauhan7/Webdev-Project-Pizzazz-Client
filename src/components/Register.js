@@ -29,15 +29,23 @@ export default class Register extends React.Component {
         }
 
         console.log(this.state.newUser);
-        this.userService.createUser(this.state.newUser)
-            .then((loginUser)=>{
-                console.log(loginUser);
-                $('.login').css('visibility', 'hidden');
-                $('.register').css('visibility', 'hidden');
-                $('.loggedIn').css('visibility', 'visible');
-                $('.logout').css('visibility', 'visible');
-                $('.loggedIn').html(loginUser.username);
-                this.props.close();
+        this.userService.findUserByUsername(this.state.newUser.username)
+            .then(response => {
+               if (response.length === 0){
+                   this.userService.createUser(this.state.newUser)
+                       .then((loginUser)=>{
+                           console.log(loginUser);
+                           $('.login').css('visibility', 'hidden');
+                           $('.register').css('visibility', 'hidden');
+                           $('.loggedIn').css('visibility', 'visible');
+                           $('.logout').css('visibility', 'visible');
+                           $('.loggedIn').html(loginUser.username);
+                           this.props.close();
+                       })
+               }
+               else {
+                   alert('username already exists');
+               }
             })
     };
 
@@ -105,23 +113,23 @@ export default class Register extends React.Component {
                 <div className="form-row mb-4">
                     <div className="col">
 
-                        <input type="text" id="defaultRegisterFormFirstName" className="form-control"
+                        <input type="text" id="defaultRegisterFormFirstName" required className="form-control"
                                placeholder="First name" onChange={this.formChangedFirstName}/>
                     </div>
                     <div className="col">
 
-                        <input type="text" id="defaultRegisterFormLastName" className="form-control"
+                        <input type="text" id="defaultRegisterFormLastName" required className="form-control"
                                placeholder="Last name" onChange={this.formChangedLastName}/>
                     </div>
                 </div>
 
-                <input type="email" id="defaultRegisterFormEmail" className="form-control mb-4" placeholder="E-mail"
+                <input type="email" id="defaultRegisterFormEmail" required className="form-control mb-4" placeholder="E-mail"
                        onChange={this.formChangedEmail}/>
 
 
 
 
-                <input type="username" id="defaultRegisterForm" className="form-control" placeholder="Username"
+                <input type="username" id="defaultRegisterForm" required className="form-control" placeholder="Username"
                        aria-describedby="defaultRegisterFormPasswordHelpBlock" onChange={this.formChangedusername}/>
                     <small id="defaultRegisterFormPasswordHelpBlock" className="form-text text-muted mb-4">
                         Use this to Login
@@ -129,7 +137,7 @@ export default class Register extends React.Component {
 
 
 
-                <input type="password" id="defaultRegisterFormPassword" className="form-control" placeholder="Password"
+                <input type="password" id="defaultRegisterFormPassword" required className="form-control" placeholder="Password"
 
                        onChange={this.formChangedpassword}/>
 
@@ -141,7 +149,7 @@ export default class Register extends React.Component {
                     </div>
 
 
-                    <button className="btn btn-dark my-4 btn-block" type="submit" onClick={this.saveUser}>Register
+                    <button className="btn btn-dark my-4 btn-block" type="button" onClick={this.saveUser}>Register
                     </button>
 
                         <p>By clicking

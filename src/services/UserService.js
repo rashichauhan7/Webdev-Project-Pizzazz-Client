@@ -3,8 +3,7 @@ const CUSTOMER_API_URL ='https://pizzazz-db-server.herokuapp.com';
 
 // 'https://pizzazz-db-server.herokuapp.com/api/user';
 //
- const CUSTOMER_API_Local =
-     'http://localhost:8080/api/user/';
+ const CUSTOMER_API_Local = 'http://localhost:8080/api/user/';
 
 const CUSTOMER_API_URL2 ='https://pizzazz-db-server.herokuapp.com/api/user/';
 //
@@ -38,6 +37,18 @@ class UserService {
             });
     }
 
+    findUserByUsername(username) {
+        return fetch(CUSTOMER_API_URL2 + username + '/username', {
+            method: 'get',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(function (response){
+                return response.json();
+            })
+    }
+
 
     findUserByUsernameAndPassword(user){
         return fetch(CUSTOMER_API_URL+ '/api/username', {
@@ -63,7 +74,7 @@ class UserService {
         })}
 
     createUser(user) {
-        return fetch(CUSTOMER_API_Local, {
+        return fetch(CUSTOMER_API_URL2, {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
