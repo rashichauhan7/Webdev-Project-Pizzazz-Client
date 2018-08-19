@@ -44,7 +44,8 @@ export default class SalonItem extends React.Component{
         this.getValue = this.getValue.bind(this);
         this.sendReview = this.sendReview.bind(this);
         this.toggleReview = this.toggleReview.bind(this);
-
+        this.renderReviews = this.renderReviews.bind(this);
+        this.renderReview = this.renderReview.bind(this);
         this.SalonService = SalonService.instance;
         this.UService = UserService.instance;
 
@@ -84,23 +85,35 @@ export default class SalonItem extends React.Component{
     }
 
 
-    renderReviews()
-    {
-        let reviews = this.state.reviews.map((review) => {
-            return <li className="list-group-item reviews">
-                {review.user.image_url!== null && <img className="image" height="60px" width="60px" src={review.user.image_url}/>}
-                {review.user.image_url === null && <img className="image" height="60px" width="60px" src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
+    renderReviews() {
+        this.state.reviews.map((review) => {
+            this.UService.findProfileById(review.reviewerId)
+                .then((user) => {
+                    review.user = user;
+                    $('.reviewz').html("jj");
+                });
+        });
+    }
 
-                <b style={{fontStyle: "Verdana"}}>{review.user.name}</b>
-                <StarRatings
-                    rating={review.rating}
-                    starDimension="30px"
-                    starSpacing="2px"
-                    starRatedColor="red"
-                />
-                <p>{review.text}</p></li>
-        })
-        return reviews;
+     renderReview() {
+                    let rev = this.state.reviews.map((review) => {
+                      return <li className="list-group-item reviews">
+                            {review.user.image !== null &&
+                            <img className="image" height="60px" width="60px" src={review.user.image}/>}
+                            {review.user.image === null && <img className="image" height="60px" width="60px"
+                                                                src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
+
+                            <b style={{fontStyle: "Verdana"}}>{review.user.username}</b>
+                            <StarRatings
+                                rating={review.rating}
+                                starDimension="30px"
+                                starSpacing="2px"
+                                starRatedColor="red"/>
+                            <p>{review.comment}</p></li>
+
+                    });
+
+        return rev;
     }
 
     photos()
@@ -399,8 +412,7 @@ export default class SalonItem extends React.Component{
                             </div>
                         </div>
 
-                        <ul className="list-group">
-                            {this.renderReviews()}
+                        <ul className="list-group reviewz">
                         </ul>
 
                     </div>

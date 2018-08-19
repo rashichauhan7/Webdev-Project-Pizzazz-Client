@@ -59,12 +59,18 @@ class App extends Component {
         console.log(this.state.loginUser);
         this.userService.findUserByUsernameAndPassword(this.state.loginUser)
             .then((loginUser)=>{
-                $('.login').css('visibility', 'hidden');
-                $('.register').css('visibility', 'hidden');
-                $('.loggedIn').css('visibility', 'visible');
-                $('.logout').css('visibility', 'visible');
-                this.props.close();
-                window.location.reload();
+                if(loginUser.id === 0)
+                {
+                    alert('Invalid Credentials')
+                }
+                else {
+                    $('.login').css('visibility', 'hidden');
+                    $('.register').css('visibility', 'hidden');
+                    $('.loggedIn').css('visibility', 'visible');
+                    $('.logout').css('visibility', 'visible');
+                    this.props.close();
+                    window.location.reload();
+                }
             })
 
     };
