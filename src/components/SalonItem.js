@@ -30,7 +30,7 @@ export default class SalonItem extends React.Component{
             timeValue: '',
             cssLoaded: false,
             currentUser : {},
-
+            like: false
         }
 
         this.yelp = YelpApiService.instance;
@@ -72,9 +72,18 @@ export default class SalonItem extends React.Component{
     }
 
     toggleReview() {
-        this.setState({
-            showReview: !this.state.showReview
-        });
+        this.UService.findCurrentUser()
+            .then(user => {
+                if(user.username !== undefined ) {
+                    this.setState({
+                        showReview: !this.state.showReview
+                    });
+                }
+                else {
+                    alert("Please log in to post a review");
+                }
+            })
+
     }
 
     getSalon(salonId)
@@ -109,7 +118,7 @@ export default class SalonItem extends React.Component{
                                 {review.user.image === null && <img className="image" height="60px" width="60px"
                                                                     src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
 
-                                <b style={{fontStyle: "Verdana"}}>{review.user.username}</b>
+                                <Link to={`/profiles/${review.user.id}`}><b style={{fontStyle: "Verdana"}}>{review.user.username}</b></Link>
                                 <StarRatings
                                     rating={review.rating}
                                     starDimension="30px"
@@ -175,6 +184,7 @@ export default class SalonItem extends React.Component{
                             review = {
                                 rating: rating,
                                 comment: comment,
+                                isLike: this.state.like,
                                 salon: salon
                             }
                             this.SalonService.createReview(review)
@@ -208,6 +218,7 @@ export default class SalonItem extends React.Component{
                     })
                 }
             });
+        window.location.reload();
         setTimeout(() => $('.post').html('Posted') , 2000);
         setTimeout(this.toggleReview, 3000);
     }
@@ -365,6 +376,7 @@ export default class SalonItem extends React.Component{
                             <div className="list-group-item">
                                 <button onClick={(e) => {
                                     $('.like').html("<i class='fa fa-check'></i>Like");
+                                    this.setState({like: true});
                                 }
                                 } className="like btn btn-danger float-right"><i className='fa fa-question-circle'></i> Like</button>
                             </div>

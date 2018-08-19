@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import UserService from "../services/UserService";
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import SalonManagerComponent from "./SalonManager";
 import '../css/ProfileViewer.css'
 import SalonService from "../services/SalonService";
@@ -335,8 +335,6 @@ class ProfileViewerComponent extends Component {
             import('../css/Profile.css');
         }
         return (
-
-            <Router>
                 <div className="container">
                     <div className="form-row">
                         <div className="col-sm-4 form-control-plaintext text-center">
@@ -590,7 +588,6 @@ class ProfileViewerComponent extends Component {
                         </div>
                     </div>
                 </div>
-            </Router>
         )
     }
 
