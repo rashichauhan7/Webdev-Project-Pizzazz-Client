@@ -72,7 +72,7 @@ class SalonService {
 
 
     createApiSalon(salonId, name) {
-        return fetch('https://pizzazz-db-server.herokuapp.com/api/salonforApi/' + salonId, + '/' + name, {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/salonforApi/' + salonId + '/' + name, {
             headers: {
                 'Content-Type': 'application/json'
             },

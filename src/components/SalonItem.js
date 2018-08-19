@@ -86,31 +86,37 @@ export default class SalonItem extends React.Component{
 
 
     renderReviews() {
+        let rev = [];
         this.state.reviews.map((review) => {
             this.UService.findProfileById(review.reviewerId)
                 .then((user) => {
                     review.user = user;
-                    $('.reviewz').html("jj");
+                    rev= [...rev,  review];
+                    this.setState({reviews: rev});
                 });
+            console.log(rev);
         });
+
     }
 
      renderReview() {
+
                     let rev = this.state.reviews.map((review) => {
-                      return <li className="list-group-item reviews">
-                            {review.user.image !== null &&
-                            <img className="image" height="60px" width="60px" src={review.user.image}/>}
-                            {review.user.image === null && <img className="image" height="60px" width="60px"
-                                                                src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
+                        if(review!= undefined && review.user!== undefined) {
+                            return <li className="list-group-item reviews">
+                                {review.user.image !== null &&
+                                <img className="image" height="60px" width="60px" src={review.user.image}/>}
+                                {review.user.image === null && <img className="image" height="60px" width="60px"
+                                                                    src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
 
-                            <b style={{fontStyle: "Verdana"}}>{review.user.username}</b>
-                            <StarRatings
-                                rating={review.rating}
-                                starDimension="30px"
-                                starSpacing="2px"
-                                starRatedColor="red"/>
-                            <p>{review.comment}</p></li>
-
+                                <b style={{fontStyle: "Verdana"}}>{review.user.username}</b>
+                                <StarRatings
+                                    rating={review.rating}
+                                    starDimension="30px"
+                                    starSpacing="2px"
+                                    starRatedColor="red"/>
+                                <p>{review.comment}</p></li>
+                        }
                     });
 
         return rev;
@@ -214,6 +220,7 @@ export default class SalonItem extends React.Component{
                     this.SalonService.getSalonReviews(salon.id)
                         .then(reviews =>{
                             this.setState({reviews: reviews});
+                            this.renderReviews();
                     })
                 }
             });
@@ -413,6 +420,7 @@ export default class SalonItem extends React.Component{
                         </div>
 
                         <ul className="list-group reviewz">
+                            {this.renderReview()}
                         </ul>
 
                     </div>
