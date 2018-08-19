@@ -1,21 +1,45 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Map, { GoogleApiWrapper } from 'google-maps-react';
 
+
 class Maps extends React.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state =
+            {
+                lat: 0,
+                lng: 0
+            };
+    }
+
+    componentDidMount()
+    {
+        this.setState({lat: this.props.lat});
+        this.setState({lng: this.props.lng});
+    }
+ componentWillReceiveProps(newprops)
+    {
+        this.setState({lat: newprops.lat});
+        this.setState({lng: newprops.lng});
+    }
+
     render() {
         return (
             <Map
                 google={this.props.google}
                 zoom={14}
                 center={{
-                    lat: 37.774929,
-                    lng: -122.419416,
+                    lat: this.state.lat,
+                    lng: this.state.lng,
                 }}
+
             />
         );
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyBf0ykIZXdK2sju-tm9HpyUNGyfiIB73hA",
+    apiKey: "AIzaSyAYjWTBdRuRKeuW_21h3NIeDiws977Yqi0",
 })(Maps);

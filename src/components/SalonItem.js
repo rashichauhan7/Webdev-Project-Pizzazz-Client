@@ -9,6 +9,7 @@ import SalonService from '../services/SalonService';
 import UserService from '../services/UserService';
 import $ from 'jquery';
 import Review from './Review';
+import Maps from './Maps';
 
 export default class SalonItem extends React.Component{
     constructor(props)
@@ -398,13 +399,8 @@ export default class SalonItem extends React.Component{
                             <span>{this.categories()}</span>
                         </div>
                         <div className="card col-lg-10">
-                            <div style={{width: '100%' ,padding: '0%'}}>
-
-                                <img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center='+
-                                this.state.salon.location.display_address[0] + ','
-                                + this.state.salon.location.display_address[1] +
-                                '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C'+this.state.salon.coordinates.latitude+','+this.state.salon.coordinates.longitude+'&sensor=false&key=AIzaSyBf0ykIZXdK2sju-tm9HpyUNGyfiIB73hA'}/>
-                             {/*<img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&sensor=false'}/>*/}
+                            <div style={{width: '300px' , height: '300px',padding: '0%'}}>
+                                    <Maps lat = {this.state.salon.coordinates.latitude} lng={this.state.salon.coordinates.longitude}/>
                             </div>
                             <h5 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h5>
                             <span className="card-text">{this.state.salon.location.cross_streets}</span>
