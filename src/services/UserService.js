@@ -63,7 +63,7 @@ class UserService {
         })}
 
     createUser(user) {
-        return fetch(CUSTOMER_API_Local, {
+        return fetch(CUSTOMER_API_URL2, {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
@@ -95,6 +95,17 @@ class UserService {
 
     findReviewsById(userId){
         return fetch(CUSTOMER_API_URL+'/api/reviews/'+userId+'/user', {
+            method: 'get',
+            credentials : 'include',
+            headers: {
+                'content-type': 'application/json'
+            },
+        }).then(function (response) {
+            return response.json();
+        })}
+
+    findLikesById(userId){
+        return fetch(CUSTOMER_API_URL+'/api/likes/'+userId+'/user', {
             method: 'get',
             credentials : 'include',
             headers: {
