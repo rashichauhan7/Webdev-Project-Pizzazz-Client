@@ -2,7 +2,7 @@ let _singleton = Symbol();
 
 const SALON_API_CONST ='https://pizzazz-db-server.herokuapp.com/';
 const SALON_API_URL =
-    'https://pizzazz-db-server.herokuapp.com/api/salon';
+    'https://pizzazz-db-server.herokuapp.com/api/salon/';
    /* 'http://localhost:8080/api/salon';*/
 /*'https://hw1akriti.herokuapp.com/api/course';*/
 
