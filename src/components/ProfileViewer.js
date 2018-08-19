@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import SalonManagerComponent from "./SalonManager";
 import '../css/ProfileViewer.css'
 import SalonService from "../services/SalonService";
+import SalonEditor from "./SalonEditor";
 
 class ProfileViewerComponent extends Component {
 
@@ -24,6 +25,9 @@ class ProfileViewerComponent extends Component {
             image : '',
             selectedUser: {},
             reviews: [
+
+            ],
+            likes: [
 
             ],
             isReviewer : false,
@@ -81,6 +85,10 @@ class ProfileViewerComponent extends Component {
         this.setState({reviews: reviews})
     }
 
+    setLikes(likes) {
+        this.setState({likes: likes})
+    }
+
     selectProfile(profileId) {
         this.setState({profileId: profileId});
     }
@@ -103,6 +111,11 @@ class ProfileViewerComponent extends Component {
             this.userService.findReviewsById(this.state.selectedUser.id)
                 .then(reviews => {
                     this.setReviews(reviews)})
+                .then(()=>{
+                    this.userService.findLikesById(this.state.selectedUser.id)
+                        .then(likes =>
+                        this.setLikes(likes))
+                })
         })
             .then(()=>{
                 if(this.state.currentUser.id === this.state.selectedUser.id){
@@ -346,11 +359,10 @@ class ProfileViewerComponent extends Component {
 
                                     <div className="col-md-6">
                                         <h5>Likes</h5>
-                                        <ul className="list-group">
-                                            {this.state.reviews.map((review)=>
-                                                <a ></a>
+                                            {this.state.likes.map((review)=>
+                                                <a className="text-danger">'{review.salonName}' </a>
                                             )}
-                                        </ul>
+
                                         <div className="container-fluid"><button className="btn btn-info"
                                                                                  hidden={this.state.cannotBeInvited}
                                                                                  onClick={this.inviteToReview}>
@@ -376,12 +388,16 @@ class ProfileViewerComponent extends Component {
                                                 <td>
                                                     <ul className="list-group">
                                                         {this.state.reviews.map((review)=>
-                                                            <div><strong>{review.comment}</strong>
+                                                            <div><h6>{this.state.selectedUser.firstName} commented
+                                                                <strong> "{review.comment}" </strong> on
+                                                                <Link to= {`/salon/${review.salonYelpId}`}>
+                                                                    <strong> {review.salonName} </strong>
+                                                                </Link>
+                                                                and rated {review.rating} stars!! </h6>
                                                             </div>
                                                         )}
                                                     </ul>
-                                                    <strong>Abby</strong> liked
-                                                    in <strong>`Collaboration`</strong>
+
                                                 </td>
                                             </tr>
                                             </tbody>
