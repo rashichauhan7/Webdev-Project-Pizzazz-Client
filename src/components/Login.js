@@ -63,7 +63,7 @@ class App extends Component {
                 $('.register').css('visibility', 'hidden');
                 $('.loggedIn').css('visibility', 'visible');
                 $('.logout').css('visibility', 'visible');
-                $('.loggedIn').html(loginUser.username);
+                $('.loggedIn a:first-child').html(loginUser.username);
                 this.props.close();
             })
 
@@ -93,26 +93,38 @@ class App extends Component {
         }
         this.userService.findUserByUsernameAndPassword(this.state.loginUser)
             .then((user) => {
-            this.state.newUser = {
-                username : response.email,
-                password : response.id,
-                firstName: response.name.split(' ')[0],
-                lastName:  response.name.split(' ')[1],
-                email: response.email,
-                role: ''
-            }
-
-            console.log(this.state.newUser);
-            this.userService.createUser(this.state.newUser)
-                .then((loginUser)=>{
+                if(user.username != undefined)
+                {
                     $('.login').css('visibility', 'hidden');
                     $('.register').css('visibility', 'hidden');
                     $('.loggedIn').css('visibility', 'visible');
                     $('.logout').css('visibility', 'visible');
-                    $('.loggedIn').html(loginUser.username);
+                    $('.loggedIn a:first-child').html(user.username);
                     this.props.close();
-                })
-    });
+                }
+                else {
+                    this.state.newUser = {
+                        username: response.email,
+                        password: response.id,
+                        firstName: response.name.split(' ')[0],
+                        lastName: response.name.split(' ')[1],
+                        email: response.email,
+                        role: ''
+                    }
+                    console.log(this.state.newUser);
+                    this.userService.createUser(this.state.newUser)
+                        .then((loginUser)=>{
+                            $('.login').css('visibility', 'hidden');
+                            $('.register').css('visibility', 'hidden');
+                            $('.loggedIn').css('visibility', 'visible');
+                            $('.logout').css('visibility', 'visible');
+                            $('.loggedIn').firstChild.html(loginUser.username);
+                            this.props.close();
+                        })
+                }
+
+
+            });
 
     };
 

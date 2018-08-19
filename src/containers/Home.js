@@ -57,6 +57,7 @@ export default class Home extends React.Component{
             .then((user) => {this.setState({user: user});
             if(user.username !== undefined){
                 $('.login').css('visibility', 'hidden');
+                $('.register').css('visibility', 'hidden');
                 $('.loggedIn').css('visibility', 'visible');
                 $('.logout').css('visibility', 'visible');
 
