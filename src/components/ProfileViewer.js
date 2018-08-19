@@ -8,8 +8,8 @@ import SalonEditor from "./SalonEditor";
 
 class ProfileViewerComponent extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.userService = UserService.instance;
         this.salonService = SalonService.instance;
         this.state = {
@@ -335,7 +335,9 @@ class ProfileViewerComponent extends Component {
             import('../css/Profile.css');
         }
         return (
+
                 <div className="container" style={{width:'100%'}}>
+
                     <div className="form-row">
                         <div className="col-sm-4 form-control-plaintext text-center">
                             <div className="card ">
@@ -376,7 +378,7 @@ class ProfileViewerComponent extends Component {
 
                                         <div  className="form-row col-md-6 float-right" hidden={this.state.isDifferentUser}>
                                             <button className="btn  btn-dark"
-                                                    hidden={this.state.selectedUser.role !== 'admin' && this.state.isDifferentUser}
+                                                    hidden={this.state.selectedUser.role !== 'admin'}
                                                     onClick={(e) => window.location.replace(`/manage`)}>
                                                 <i className="fa fa-home"></i>  <h6>Admin Home</h6>
                                             </button>
@@ -534,7 +536,7 @@ class ProfileViewerComponent extends Component {
                                         <div className="form-group row">
                                             <label htmlFor="email" className="col-sm-2 col-form-label">Website</label>
                                             <div className="col-sm-10">
-                                                <input type="text" className="form-control" id="email"
+                                                <input type="url" className="form-control" id="email"
                                                        value = {this.state.website} onChange={this.formChangedWebsiteSalon}/>
                                             </div>
                                         </div>
