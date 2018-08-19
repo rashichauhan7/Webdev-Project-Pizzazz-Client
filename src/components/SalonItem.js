@@ -17,6 +17,7 @@ export default class SalonItem extends React.Component{
         this.state = {
             showReview: false,
             salonId: '',
+            yelpreviews: [],
             salon: {photos: [],
                 name:[],
                 categories: [],
@@ -29,8 +30,7 @@ export default class SalonItem extends React.Component{
             dateValue: new Date().toJSON().slice(0,10),
             timeValue: '',
             cssLoaded: false,
-            currentUser : {},
-
+            currentUser : {}
         }
 
         this.yelp = YelpApiService.instance;
@@ -40,11 +40,13 @@ export default class SalonItem extends React.Component{
         this.getTime = this.getTime.bind(this);
         this.getTimes = this.getTimes.bind(this);
         this.getReviews = this.getReviews.bind(this);
+        this.getYelpReviews = this.getYelpReviews.bind(this);
         this.convertTime = this.convertTime.bind(this);
         this.getValue = this.getValue.bind(this);
         this.sendReview = this.sendReview.bind(this);
         this.toggleReview = this.toggleReview.bind(this);
         this.renderReviews = this.renderReviews.bind(this);
+        this.renderYelpReviews = this.renderYelpReviews.bind(this);
         this.renderReview = this.renderReview.bind(this);
         this.SalonService = SalonService.instance;
         this.UService = UserService.instance;
@@ -55,12 +57,18 @@ export default class SalonItem extends React.Component{
     {
         this.setState({salonId: this.props.salonId});
         console.log(this.state.dateValue);
+        import('../css/SalonItem.css');
+        $('.topBanner').css('padding-top','2%');
+        $('.topBanner').css('padding-bottom','0%');
+        $('.logo').css('visibility','hidden');
+        $('.logo1').css('visibility','visible');
     }
     componentWillReceiveProps (newProps)
     {
         this.setState({salonId: newProps.salonId});
         this.getSalon(newProps.salonId);
         this.getReviews(newProps.salonId);
+        this.getYelpReviews(newProps.salonId);
 
     }
 
@@ -71,10 +79,47 @@ export default class SalonItem extends React.Component{
         }
     }
 
+    getYelpReviews(salonId)
+    {
+        this.yelp.getReviews(salonId)
+            .then(reviews => this.setState({yelpreviews: reviews.reviews}));
+    }
+
+    renderYelpReviews()
+    {
+        let reviews = this.state.yelpreviews.map((review) => {
+            return <li className="list-group-item yelpreviewz">
+                {review.user.image_url!== null && <img className="image" height="60px" width="60px" src={review.user.image_url}/>}
+                {review.user.image_url === null && <img className="image" height="60px" width="60px" src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
+
+                <b style={{fontStyle: "Verdana"}}>{review.user.name}</b>
+                <StarRatings
+                    rating={review.rating}
+                    starDimension="30px"
+                    starSpacing="2px"
+                    starRatedColor="red"
+                />
+                <p>{review.text}</p></li>
+        })
+        return reviews;
+    }
+
+
+
+
     toggleReview() {
-        this.setState({
-            showReview: !this.state.showReview
-        });
+        this.UService.findCurrentUser()
+            .then(user => {
+                if(user.username !== undefined ) {
+                    this.setState({
+                        showReview: !this.state.showReview
+                    });
+                }
+                else {
+                    alert("Please log in to post a review");
+                }
+            })
+
     }
 
     getSalon(salonId)
@@ -86,31 +131,37 @@ export default class SalonItem extends React.Component{
 
 
     renderReviews() {
+        let rev = [];
         this.state.reviews.map((review) => {
             this.UService.findProfileById(review.reviewerId)
                 .then((user) => {
                     review.user = user;
-                    $('.reviewz').html("jj");
+                    rev= [...rev,  review];
+                    this.setState({reviews: rev});
                 });
+            console.log(rev);
         });
+
     }
 
      renderReview() {
+
                     let rev = this.state.reviews.map((review) => {
-                      return <li className="list-group-item reviews">
-                            {review.user.image !== null &&
-                            <img className="image" height="60px" width="60px" src={review.user.image}/>}
-                            {review.user.image === null && <img className="image" height="60px" width="60px"
-                                                                src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
+                        if(review!= undefined && review.user!== undefined) {
+                            return <li className="list-group-item reviewz">
+                                {review.user.image !== null &&
+                                <img className="image" height="60px" width="60px" src={review.user.image}/>}
+                                {review.user.image === null && <img className="image" height="60px" width="60px"
+                                                                    src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
 
-                            <b style={{fontStyle: "Verdana"}}>{review.user.username}</b>
-                            <StarRatings
-                                rating={review.rating}
-                                starDimension="30px"
-                                starSpacing="2px"
-                                starRatedColor="red"/>
-                            <p>{review.comment}</p></li>
-
+                                <Link to={`/profiles/${review.user.id}`}><b style={{fontStyle: "Verdana"}}>{review.user.username}</b></Link>
+                                <StarRatings
+                                    rating={review.rating}
+                                    starDimension="30px"
+                                    starSpacing="2px"
+                                    starRatedColor="red"/>
+                                <p>{review.comment}</p></li>
+                        }
                     });
 
         return rev;
@@ -187,6 +238,7 @@ export default class SalonItem extends React.Component{
 
                     this.SalonService.getSalonReviews(salon.id)
                         .then(reviews =>{
+                            console.log(this.state.like);
                             review = {
                                 rating: rating,
                                 comment: comment,
@@ -202,6 +254,7 @@ export default class SalonItem extends React.Component{
                     })
                 }
             });
+        window.location.reload();
         setTimeout(() => $('.post').html('Posted') , 2000);
         setTimeout(this.toggleReview, 3000);
     }
@@ -214,6 +267,7 @@ export default class SalonItem extends React.Component{
                     this.SalonService.getSalonReviews(salon.id)
                         .then(reviews =>{
                             this.setState({reviews: reviews});
+                            this.renderReviews();
                     })
                 }
             });
@@ -349,18 +403,20 @@ export default class SalonItem extends React.Component{
                                 + this.state.salon.location.display_address[1] +
                                 '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBscU1D1hPtGZ0rQK-3ajLJBJEZC3ua1j8'}/>
                             </div>
+                            <h5 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h5>
+                            <span className="card-text">{this.state.salon.location.cross_streets}</span>
+
+                            <span className="card-text" style={{fontSize: "large"}}><i className="fa fa-phone"></i>&nbsp;{this.state.salon.phone}</span>
 
                         </div>
+                        <ul className="list-group">
+                            <h1>Reviews</h1>
+                            {this.renderReview()}
+                        </ul>
                     </div>
 
 
                         <div className="col-8 list-group">
-                            <div className="list-group-item">
-                                <button onClick={(e) => {
-                                    $('.like').html("<i class='fa fa-check'></i>Like");
-                                }
-                                } className="like btn btn-danger float-right"><i className='fa fa-question-circle'></i> Like</button>
-                            </div>
                             <div className="list-group-item">
                                 {this.photos()}
                             </div>
@@ -411,10 +467,10 @@ export default class SalonItem extends React.Component{
                                 </div>
                             </div>
                         </div>
-
-                        <ul className="list-group reviewz">
-                        </ul>
-
+                    <ul className="list-group">
+                    <h1>Comments</h1>
+                    {this.renderYelpReviews()}
+                    </ul>
                     </div>
                 </div>
         )

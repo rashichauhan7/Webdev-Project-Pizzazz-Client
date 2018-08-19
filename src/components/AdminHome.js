@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserService from "../services/UserService";
+import $ from "jquery";
 
 export default class AdminHomeComponent extends Component{
 
@@ -25,6 +26,10 @@ export default class AdminHomeComponent extends Component{
     }
 
     componentDidMount() {
+        $('.topBanner').css('padding-top','2%');
+        $('.topBanner').css('padding-bottom','0%');
+        $('.logo').css('visibility','hidden');
+        $('.logo1').css('visibility','visible');
         this.userService.findAllReviewers()
             .then(users=>this.setReviewers(users))
     }
@@ -48,7 +53,7 @@ export default class AdminHomeComponent extends Component{
 
     deleteReviewer=(userId)=> {
         this.userService.deleteUser(userId)
-            .then( ()=>{
+            .then( (response)=>{
                 this.userService.findAllReviewers()
                     .then(users=>this.setReviewers(users))
             })
@@ -123,7 +128,7 @@ export default class AdminHomeComponent extends Component{
                         <div className="col">
                     <button className="btn btn-block btn-dark" type="submit" value="Submit">Add Reviewer</button>
                         </div> <div className="col">
-                    <button className="btn btn-block btn-dark">Cancel</button>
+                    <button className="btn btn-block btn-dark" type="reset" value="Reset">Clear Fields</button>
                     </div>
                     </div>
                 </div>
