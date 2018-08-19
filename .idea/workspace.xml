@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64b69281-f3f9-4012-97c6-aeb38162fad1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/SalonService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/SalonService.js" afterDir="false" />
-    </list>
+    <list default="true" id="64b69281-f3f9-4012-97c6-aeb38162fad1" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -174,12 +171,12 @@
       <updated>1534524025866</updated>
       <workItem from="1534524030518" duration="32863000" />
       <workItem from="1534580717170" duration="425000" />
-      <workItem from="1534610046875" duration="18107000" />
+      <workItem from="1534610046875" duration="18432000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51395000" />
+    <option name="totallyTimeSpent" value="51720000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
