@@ -99,7 +99,11 @@ class ProfileViewerComponent extends Component {
             }).then(()=>this.userService.findProfileById(this.state.profileId)
             .then(user => {
                 this.setState({selectedUser: user});
-            })).then(()=>{ this.setReviews(this.state.selectedUser.reviews)})
+            })).then(()=>{
+            this.userService.findReviewsById(this.state.selectedUser.id)
+                .then(reviews => {
+                    this.setReviews(reviews)})
+        })
             .then(()=>{
                 if(this.state.currentUser.id === this.state.selectedUser.id){
                     this.setState({isDifferentUser : false})
@@ -147,8 +151,8 @@ class ProfileViewerComponent extends Component {
             });
         this.salonService.findCurrentSalon()
             .then(salon =>{
-            this.setSalonState(salon);
-        }).then(()=>{if(this.state.currentSalon.id === 0){
+                this.setSalonState(salon);
+            }).then(()=>{if(this.state.currentSalon.id === 0){
             this.setState({isPresent: "false"});
             console.log(this.state.isPresent)
         }}).then(()=>this.setState({
@@ -310,268 +314,267 @@ class ProfileViewerComponent extends Component {
     };
 
     render() {
-            if (this.state.cssLoaded === false) {
-                this.state.cssLoaded = true;
-                import('../css/Profile.css');
-            }
+        if (this.state.cssLoaded === false) {
+            this.state.cssLoaded = true;
+            import('../css/Profile.css');
+        }
         return (
 
             <Router>
                 <div className="container">
                     <div className="form-row">
-                    <div className="col-sm-4 form-control-plaintext text-center">
-                        <div className="card ">
-                            <img src={this.state.selectedUser.image}  className="card-header crop" alt="avatar"/>
+                        <div className="col-sm-4 form-control-plaintext text-center">
+                            <div className="card ">
+                                <img src={this.state.selectedUser.image}  className="card-header crop" alt="avatar"/>
 
-                            <h1 className="card-body">{this.state.selectedUser.firstName} {this.state.selectedUser.lastName}</h1>
-                        </div>
-                    </div>
-
-
-                    <div  className="col-sm-8 form-control-plaintext">
-
-                        <div id="viewerProfile" hidden={!this.state.editMode} >
-
-                        <div className="row border card-body" >
-                        <div className="col-md-6">
-                            <h6>About</h6>
-                            <h3>
-                                {this.state.selectedUser.status}
-                            </h3>
-                        </div>
-
-                        <div className="col-md-6">
-                            <h5>Likes</h5>
-                            <ul className="list-group">
-                                {this.state.reviews.map((review)=>
-                                    <a href={review.salon.id} className="tag tag-default tag-pill">{review.salon.name}</a>
-                                )}
-                            </ul>
-                            <div className="container-fluid"><button className="btn btn-info"
-                                         hidden={this.state.cannotBeInvited}
-                                         onClick={this.inviteToReview}>
-                                <i className="fa fa-envelope"></i> Invite to Review Salon
-                            </button></div>
-                            <div className="form-row">
-                            <button hidden={this.state.isDifferentUser}
-                                    onClick={this.changeEditState}
-                                    className="btn btn-danger">
-                                <i className="fa fa-pencil"></i>  Edit Profile</button>
-                            </div>
-
-                        </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-md-12 ">
-                                <h4 className="m-t-2"><span
-                                    className="fa fa-star ion-clock pull-xs-right"></span> Reviews Posted</h4>
-                                <table className="table table-danger">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <ul className="list-group">
-                                                {this.state.reviews.map((review)=>
-                                                    <div><strong>{review.comment}</strong>
-                                                        <h6>{review.salon.name}</h6></div>
-
-                                                )}
-                                            </ul>
-                                            <strong>Abby</strong> liked
-                                            in <strong>`Collaboration`</strong>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <h1 className="card-body">{this.state.selectedUser.firstName} {this.state.selectedUser.lastName}</h1>
                             </div>
                         </div>
-                        </div>
-
-                        <div id="editorProfile" hidden={this.state.editMode}>
-                        <div className="row">
-                            <h5>Profile Editor</h5>
-                        </div>
-                            <form  onSubmit={this.saveUser}>
-
-                            <div className="form-group row">
-                                <label htmlFor="username" className="col-sm-2 col-form-label">Username</label>
-                                <div className="col-sm-10">
-                                    <input type="text" disabled className="form-control-plaintext" value=  {this.state.currentUser.username}
-                                           id="username"/>
-
-                                </div>
-                            </div>
-
-                            <div className="form-group row">
-                                <label htmlFor="password" className="col-sm-2 col-form-label">Password</label>
-                                <div className="col-sm-10">
-                                    <input type="password" required className="form-control" id="password" value=  {this.state.password}
-                                           placeholder="New Password" onChange={this.formChangedPassword}/>
-                                </div>
-                            </div>
-
-                            <div className="form-group row">
-                                <label htmlFor="firstName" className="col-sm-2 col-form-label"> First
-                                    Name </label>
-                                <div className="col-sm-10">
-                                    <input type="text" required className="form-control" id="firstName"
-                                           value= {this.state.firstname}
-                                           placeholder="First name" onChange={this.formChangedFirstName}/>
-                                </div>
-                            </div>
-
-                            <div className="form-group row">
-                                <label htmlFor="lastName" className="col-sm-2 col-form-label">Last
-                                    Name</label>
-                                <div className="col-sm-10">
-                                    <input type="text" className="form-control" id="lastName"
-
-                                           value= {this.state.lastname}
-                                           placeholder="Last Name" onChange={this.formChangedLastName}/>
-                                </div>
-                            </div>
 
 
-                            <div className="form-group row">
-                                <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
-                                <div className="col-sm-10">
-                                    <input type="email" required className="form-control" id="email"
-                                           value= {this.state.email} onChange={this.formChangedEmail}/>
-                                </div>
-                            </div>
+                        <div  className="col-sm-8 form-control-plaintext">
 
-                                <div className="form-group row">
-                                <label htmlFor="phone" className="col-sm-2 col-form-label">Phone</label>
-                                <div className="col-sm-10">
-                                    <input type="tel" required className="form-control" id="phone"
-                                           value= {this.state.phone} onChange={this.formChangedPhone}/>
-                                </div>
-                            </div>
+                            <div id="viewerProfile" hidden={!this.state.editMode} >
 
-                                <div className="form-group row">
-                                    <label htmlFor="img" className="col-sm-2 col-form-label">Image URL</label>
-                                    <div className="col-sm-10">
-                                        <input type="link" required className="form-control" id="img"
-                                               value= {this.state.image} onChange={this.formChangedImage}/>
+                                <div className="row border card-body" >
+                                    <div className="col-md-6">
+                                        <h6>About</h6>
+                                        <h3>
+                                            {this.state.selectedUser.status}
+                                        </h3>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <h5>Likes</h5>
+                                        <ul className="list-group">
+                                            {this.state.reviews.map((review)=>
+                                                <a ></a>
+                                            )}
+                                        </ul>
+                                        <div className="container-fluid"><button className="btn btn-info"
+                                                                                 hidden={this.state.cannotBeInvited}
+                                                                                 onClick={this.inviteToReview}>
+                                            <i className="fa fa-envelope"></i> Invite to Review Salon
+                                        </button></div>
+                                        <div className="form-row">
+                                            <button hidden={this.state.isDifferentUser}
+                                                    onClick={this.changeEditState}
+                                                    className="btn btn-danger">
+                                                <i className="fa fa-pencil"></i>  Edit Profile</button>
+                                        </div>
+
                                     </div>
                                 </div>
 
-                                <div className="form-group row">
-                                    <label htmlFor="status" className="col-sm-2 col-form-label">Status</label>
-                                    <div className="col-sm-10">
-                                        <input  className="form-control" id="status"
-                                               value= {this.state.status} onChange={this.formChangedStatus}/>
+                                <div className="row">
+                                    <div className="col-md-12 ">
+                                        <h4 className="m-t-2"><span
+                                            className="fa fa-star ion-clock pull-xs-right"></span> Reviews Posted</h4>
+                                        <table className="table table-danger">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <ul className="list-group">
+                                                        {this.state.reviews.map((review)=>
+                                                            <div><strong>{review.comment}</strong>
+                                                            </div>
+                                                        )}
+                                                    </ul>
+                                                    <strong>Abby</strong> liked
+                                                    in <strong>`Collaboration`</strong>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-
-
-                                <div className="form-group row">
-
-                                    <div className="col">
-                                        <button className="btn btn-block btn-danger" type="submit" value="Submit">
-                                            <i className="fa fa-check"></i> Save Changes</button>
-                                    </div>
-
-                                </div>
-
-
-                            </form>
-
-                            <div className="form-group row float-lg-right ">
-
-                                <div>
-                                    <button className="btn btn-danger" onClick={this.changeEditState}>
-                                        <i className="fa fa-times"></i> Cancel Without Saving</button>
-
-                                </div>
-                                <div  className="col">
-                                    <button className="btn btn-danger" hidden={this.state.currentUser.role !== 'owner'}
-                                            onClick={this.changeEditSalonState}> <i className="fa fa-scissors">
-
-                                    </i> Manage My Salon
-                                    </button>
-                                </div>
-
                             </div>
 
-
-
-                            <div id="salonEditor" hidden={this.state.editModeSalon} className="float-lg-left">
-
-                                <div>
-                                    <div className="text-center"><h3>{this.state.currentUser.firstName}'s Salon</h3></div>
-                                    <div className="form-group row">
-                                        <label htmlFor="username" className="col-sm-2 col-form-label">Name</label>
-                                        <div className="col-sm-10">
-                                            <input type="text"  className="form-control" value= {this.state.nameSalon} onChange={this.formChangedNameSalon}/>
-                                        </div> </div>
+                            <div id="editorProfile" hidden={this.state.editMode}>
+                                <div className="row">
+                                    <h5>Profile Editor</h5>
+                                </div>
+                                <form  onSubmit={this.saveUser}>
 
                                     <div className="form-group row">
-                                        <label htmlFor="email" className="col-sm-2 col-form-label">Website</label>
+                                        <label htmlFor="username" className="col-sm-2 col-form-label">Username</label>
                                         <div className="col-sm-10">
-                                            <input type="text" className="form-control" id="email"
-                                                   value = {this.state.website} onChange={this.formChangedWebsiteSalon}/>
+                                            <input type="text" disabled className="form-control-plaintext" value=  {this.state.currentUser.username}
+                                                   id="username"/>
+
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
-                                        <label htmlFor="email" className="col-sm-2 col-form-label">Address</label>
+                                        <label htmlFor="password" className="col-sm-2 col-form-label">Password</label>
                                         <div className="col-sm-10">
-                                            <input type="text" className="form-control" id="email"
-                                                   value = {this.state.address} onChange={this.formChangedAddressSalon}/>
+                                            <input type="password" required className="form-control" id="password" value=  {this.state.password}
+                                                   placeholder="New Password" onChange={this.formChangedPassword}/>
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
-                                        <label htmlFor="email" className="col-sm-2 col-form-label">City</label>
+                                        <label htmlFor="firstName" className="col-sm-2 col-form-label"> First
+                                            Name </label>
                                         <div className="col-sm-10">
-                                            <input type="text" className="form-control" id="email"
-                                                   value = {this.state.city} onChange={this.formChangedCitySalon}/>
+                                            <input type="text" required className="form-control" id="firstName"
+                                                   value= {this.state.firstname}
+                                                   placeholder="First name" onChange={this.formChangedFirstName}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row">
+                                        <label htmlFor="lastName" className="col-sm-2 col-form-label">Last
+                                            Name</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="lastName"
+
+                                                   value= {this.state.lastname}
+                                                   placeholder="Last Name" onChange={this.formChangedLastName}/>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="form-group row">
+                                        <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
+                                        <div className="col-sm-10">
+                                            <input type="email" required className="form-control" id="email"
+                                                   value= {this.state.email} onChange={this.formChangedEmail}/>
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
                                         <label htmlFor="phone" className="col-sm-2 col-form-label">Phone</label>
                                         <div className="col-sm-10">
-                                            <input type="text" className="form-control" id="phone"
-                                                   value = {this.state.phoneSalon} onChange={this.formChangedPhoneSalon}/>
+                                            <input type="tel" required className="form-control" id="phone"
+                                                   value= {this.state.phone} onChange={this.formChangedPhone}/>
                                         </div>
                                     </div>
 
-                                    <div className="row">
-                                        <div className="col">
-                                            <button id="saveBtn" type="button" onClick={this.saveSalon}
-                                                    hidden={this.state.currentSalon.id !== 0}
-                                                    className="btn btn-success btn-block">Create New Salon</button>
+                                    <div className="form-group row">
+                                        <label htmlFor="img" className="col-sm-2 col-form-label">Image URL</label>
+                                        <div className="col-sm-10">
+                                            <input type="link"  className="form-control" id="img"
+                                                   value= {this.state.image} onChange={this.formChangedImage}/>
                                         </div>
+                                    </div>
+
+                                    <div className="form-group row">
+                                        <label htmlFor="status" className="col-sm-2 col-form-label">Status</label>
+                                        <div className="col-sm-10">
+                                            <input  className="form-control" id="status"
+                                                    value= {this.state.status} onChange={this.formChangedStatus}/>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="form-group row">
 
                                         <div className="col">
-                                            <button id="updateBtn" type="button" onClick={this.updateSalon}
-                                                    hidden={this.state.currentSalon.id === 0}
-                                                    className="btn btn-success btn-block">Update Salon Changes</button>
+                                            <button className="btn btn-block btn-danger" type="submit" value="Submit">
+                                                <i className="fa fa-check"></i> Save Changes</button>
                                         </div>
-
-                                        <div className="col">
-                                            <button className="btn btn-danger" onClick={this.changeEditSalonState}>
-                                                <i className="fa fa-reply"></i> Cancel Without Saving</button>
-                                        </div>
-
 
                                     </div>
 
 
+                                </form>
+
+                                <div className="form-group row float-lg-right ">
+
+                                    <div>
+                                        <button className="btn btn-danger" onClick={this.changeEditState}>
+                                            <i className="fa fa-times"></i> Cancel Without Saving</button>
+
+                                    </div>
+                                    <div  className="col">
+                                        <button className="btn btn-danger" hidden={this.state.currentUser.role !== 'owner'}
+                                                onClick={this.changeEditSalonState}> <i className="fa fa-scissors">
+
+                                        </i> Manage My Salon
+                                        </button>
+                                    </div>
 
                                 </div>
-                            </div>
 
+
+
+                                <div id="salonEditor" hidden={this.state.editModeSalon} className="float-lg-left">
+
+                                    <div>
+                                        <div className="text-center"><h3>{this.state.currentUser.firstName}'s Salon</h3></div>
+                                        <div className="form-group row">
+                                            <label htmlFor="username" className="col-sm-2 col-form-label">Name</label>
+                                            <div className="col-sm-10">
+                                                <input type="text"  className="form-control" value= {this.state.nameSalon} onChange={this.formChangedNameSalon}/>
+                                            </div> </div>
+
+                                        <div className="form-group row">
+                                            <label htmlFor="email" className="col-sm-2 col-form-label">Website</label>
+                                            <div className="col-sm-10">
+                                                <input type="text" className="form-control" id="email"
+                                                       value = {this.state.website} onChange={this.formChangedWebsiteSalon}/>
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group row">
+                                            <label htmlFor="email" className="col-sm-2 col-form-label">Address</label>
+                                            <div className="col-sm-10">
+                                                <input type="text" className="form-control" id="email"
+                                                       value = {this.state.address} onChange={this.formChangedAddressSalon}/>
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group row">
+                                            <label htmlFor="email" className="col-sm-2 col-form-label">City</label>
+                                            <div className="col-sm-10">
+                                                <input type="text" className="form-control" id="email"
+                                                       value = {this.state.city} onChange={this.formChangedCitySalon}/>
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group row">
+                                            <label htmlFor="phone" className="col-sm-2 col-form-label">Phone</label>
+                                            <div className="col-sm-10">
+                                                <input type="text" className="form-control" id="phone"
+                                                       value = {this.state.phoneSalon} onChange={this.formChangedPhoneSalon}/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                <button id="saveBtn" type="button" onClick={this.saveSalon}
+                                                        hidden={this.state.currentSalon.id !== 0}
+                                                        className="btn btn-success btn-block">Create New Salon</button>
+                                            </div>
+
+                                            <div className="col">
+                                                <button id="updateBtn" type="button" onClick={this.updateSalon}
+                                                        hidden={this.state.currentSalon.id === 0}
+                                                        className="btn btn-success btn-block">Update Salon Changes</button>
+                                            </div>
+
+                                            <div className="col">
+                                                <button className="btn btn-danger" onClick={this.changeEditSalonState}>
+                                                    <i className="fa fa-reply"></i> Cancel Without Saving</button>
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </Router>
-    )
+        )
     }
 
-    }
+}
 
-    export default ProfileViewerComponent;
+export default ProfileViewerComponent;

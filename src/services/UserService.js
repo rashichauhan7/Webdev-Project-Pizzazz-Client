@@ -93,6 +93,18 @@ class UserService {
             return response.json();
         })}
 
+    findReviewsById(userId){
+        return fetch(CUSTOMER_API_URL+'/api/reviews/'+userId+'/user', {
+            method: 'get',
+            credentials : 'include',
+            headers: {
+                'content-type': 'application/json'
+            },
+        }).then(function (response) {
+            return response.json();
+        })}
+
+
     findProfileById(userId){
         return fetch('https://pizzazz-db-server.herokuapp.com/api/user/'+userId, {
             method: 'get',
