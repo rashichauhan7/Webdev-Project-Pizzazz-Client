@@ -4,7 +4,7 @@ const SALON_API_CONST ='http://localhost:8080/';
 const SALON_API_URL =
    /* 'https://pizzazz-db-server.herokuapp.com/api/salon/';*/
    'http://localhost:8080/api/salon/';
-/*'https://hw1akriti.herokuapp.com/api/course';*/
+
 
 
 class SalonService {

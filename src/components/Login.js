@@ -11,9 +11,25 @@ class App extends Component {
 
      constructor(props) {
         super(props);
-        this.state = { isAuthenticated: false, user: null, token: '' , username : '' , password : '' , loginUser : ''};
+        this.state = { newUser:'', isAuthenticated: false, user: null, token: '' , username : '' , password : '' , loginUser : ''};
         this.userService = UserService.instance;
+
     }
+
+    saveUser=()=> {
+        this.state.newUser = {
+            username : this.state.username,
+            password : this.state.password,
+            firstName: this.state.firstname,
+            lastName: this.state.lastname,
+            email: this.state.email,
+            role: (this.state.role).toString()
+        }
+
+        console.log(this.state.newUser);
+        this.userService.createUser(this.state.newUser)
+            .then((loginUser)=>{alert('Saved Changes')})
+    };
 
     componentDidMount()
     {
@@ -46,6 +62,8 @@ class App extends Component {
                 $('.login').css('visibility', 'hidden');
                 $('.register').css('visibility', 'hidden');
                 $('.loggedIn').css('visibility', 'visible');
+                $('.logout').css('visibility', 'visible');
+                $('.loggedIn a:first-child').html(loginUser.username);
                 this.props.close();
             })
 
@@ -69,21 +87,45 @@ class App extends Component {
 
 
     facebookResponse = (response) => {
-        const tokenBlob = new Blob([JSON.stringify({access_token: response.accessToken}, null, 2)], {type : 'application/json'});
-        const options = {
-            method: 'POST',
-            body: tokenBlob,
-            mode: 'cors',
-            cache: 'default'
-        };
-        fetch('http://localhost:4000/api/v1/auth/facebook', options).then(r => {
-            const token = r.headers.get('x-auth-token');
-            r.json().then(user => {
-                if (token) {
-                    this.setState({isAuthenticated: true, user, token})
+        this.state.loginUser = {
+            username : response.email,
+            password : response.id,
+        }
+        this.userService.findUserByUsernameAndPassword(this.state.loginUser)
+            .then((user) => {
+                if(user.username != undefined)
+                {
+                    $('.login').css('visibility', 'hidden');
+                    $('.register').css('visibility', 'hidden');
+                    $('.loggedIn').css('visibility', 'visible');
+                    $('.logout').css('visibility', 'visible');
+                    $('.loggedIn a:first-child').html(user.username);
+                    this.props.close();
                 }
+                else {
+                    this.state.newUser = {
+                        username: response.email,
+                        password: response.id,
+                        firstName: response.name.split(' ')[0],
+                        lastName: response.name.split(' ')[1],
+                        email: response.email,
+                        role: ''
+                    }
+                    console.log(this.state.newUser);
+                    this.userService.createUser(this.state.newUser)
+                        .then((loginUser)=>{
+                            $('.login').css('visibility', 'hidden');
+                            $('.register').css('visibility', 'hidden');
+                            $('.loggedIn').css('visibility', 'visible');
+                            $('.logout').css('visibility', 'visible');
+                            $('.loggedIn a:first-child').html(loginUser.username);
+                            this.props.close();
+                        })
+                }
+
+
             });
-        })
+
     };
 
     googleResponse = (response) => {

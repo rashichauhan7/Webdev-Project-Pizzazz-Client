@@ -34,16 +34,16 @@
     border-style: solid;
 }
 
-.loggedIn
-{
+.loggedIn {
     visibility: hidden;
     position: absolute;
-    top: 0%;
-    left: 90%;
+    top: 2%;
+    left: 95%;
     background: none;
     font-size: large;
     color: #fff;
 }
+
 .loggedIn a
 {
     font-size: large;
@@ -103,6 +103,17 @@
     background: none;
     color: #fff;
 }
+.logout
+{
+    visibility: hidden;
+    font-size: large;
+    position: absolute;
+    top: 2%;
+    left: 89%;
+    border-color: #fff;
+    background: none;
+    color: #fff;
+}
 .login:hover
 {
     text-decoration:underline;
@@ -111,6 +122,12 @@
 
 }
 .register:hover
+{
+    background-color: white;
+    color: gray;
+}
+
+.logout:hover
 {
     background-color: white;
     color: gray;

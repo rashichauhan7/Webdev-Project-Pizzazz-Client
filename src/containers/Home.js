@@ -34,6 +34,7 @@ export default class Home extends React.Component{
         this.searchBtn = React.createRef();
         this.toggleSignUpPopup = this.toggleSignUpPopup.bind(this);
         this.toggleLoginPopup = this.toggleLoginPopup.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount()
@@ -45,6 +46,7 @@ export default class Home extends React.Component{
                     $('.login').css('visibility', 'hidden');
                     $('.register').css('visibility', 'hidden');
                     $('.loggedIn').css('visibility', 'visible');
+                    $('.logout').css('visibility', 'visible');
                 }});
     }
 
@@ -55,7 +57,10 @@ export default class Home extends React.Component{
             .then((user) => {this.setState({user: user});
             if(user.username !== undefined){
                 $('.login').css('visibility', 'hidden');
+                $('.register').css('visibility', 'hidden');
                 $('.loggedIn').css('visibility', 'visible');
+                $('.logout').css('visibility', 'visible');
+
             }});
     }
     toggleSignUpPopup() {
@@ -75,6 +80,12 @@ export default class Home extends React.Component{
         this.getOptions(e.target.value);
         this.refs.searchbar.style.visibility = 'visible';
 
+    }
+
+    logout()
+    {
+        this.userService.logout();
+        window.location.reload();
     }
 
     getOptions(keyword)
@@ -116,6 +127,7 @@ let options = [];
                 <div className="topBanner" ref="topBanner">
                     <button className="btn login" onClick={this.toggleLoginPopup}>Login</button>
                     <button className="btn loggedIn"><Link to={`/profiles/${this.state.user.id}`}>{this.state.user.username}</Link></button>
+                    <button className="btn logout" onClick={this.logout}>Logout</button>
                     <button className="btn register" onClick={this.toggleSignUpPopup}>Sign Up</button>
                     {this.state.showLogin ? <Login close={this.toggleLoginPopup} maincontent={this.maincontent}/>: null }
                     {this.state.showSignUp ? <Register close={this.toggleSignUpPopup}/>: null}

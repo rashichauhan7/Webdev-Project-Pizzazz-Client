@@ -30,7 +30,15 @@ export default class Register extends React.Component {
 
         console.log(this.state.newUser);
         this.userService.createUser(this.state.newUser)
-            .then((loginUser)=>{alert('Saved Changes')})
+            .then((loginUser)=>{
+                console.log(loginUser);
+                $('.login').css('visibility', 'hidden');
+                $('.register').css('visibility', 'hidden');
+                $('.loggedIn').css('visibility', 'visible');
+                $('.logout').css('visibility', 'visible');
+                $('.loggedIn').html(loginUser.username);
+                this.props.close();
+            })
     };
 
     componentDidMount()
