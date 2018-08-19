@@ -31,8 +31,8 @@ class Maps extends React.Component {
                 google={this.props.google}
                 zoom={14}
                 center={{
-                    lat: this.state.lat,
-                    lng: this.state.lng,
+                    lat: this.props.lat,
+                    lng: this.props.lng,
                 }}
 
             />
