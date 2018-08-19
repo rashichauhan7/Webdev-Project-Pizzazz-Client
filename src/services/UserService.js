@@ -61,7 +61,7 @@ class UserService {
         })}
 
     createUser(user) {
-        return fetch(CUSTOMER_API_URL, {
+        return fetch(CUSTOMER_API_URL + '/api/user', {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
