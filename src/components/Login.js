@@ -118,7 +118,7 @@ class App extends Component {
                             $('.register').css('visibility', 'hidden');
                             $('.loggedIn').css('visibility', 'visible');
                             $('.logout').css('visibility', 'visible');
-                            $('.loggedIn').firstChild.html(loginUser.username);
+                            $('.loggedIn a:first-child').html(loginUser.username);
                             this.props.close();
                         })
                 }
