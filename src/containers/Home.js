@@ -123,10 +123,10 @@ let options = [];
             <div className="align-content-center" ref="maincontent">
                 <div className="mainbody">
                     <img className="logo" src={logo} ref="logo"/>
-                    <img width='10%' height="15%" className="logo1" src={logo1} ref="logo1" />
+                    <Link to='/home'><img width='10%' height="15%" className="logo1" src={logo1} ref="logo1" /></Link>
                 <div className="topBanner" ref="topBanner">
                     <button className="btn login" onClick={this.toggleLoginPopup}>Login</button>
-                    <button className="btn loggedIn"><Link to={`/profiles/${this.state.user.id}`}>{this.state.user.username}</Link></button>
+                    <button className="btn loggedIn" onclick={() => window.location.reload()}><Link to={`/profiles/${this.state.user.id}`}>{this.state.user.username}</Link></button>
                     <button className="btn logout" onClick={this.logout}>Logout</button>
                     <button className="btn register" onClick={this.toggleSignUpPopup}>Sign Up</button>
                     {this.state.showLogin ? <Login close={this.toggleLoginPopup} maincontent={this.maincontent}/>: null }

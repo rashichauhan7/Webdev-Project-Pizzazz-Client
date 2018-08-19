@@ -8,8 +8,8 @@ import SalonEditor from "./SalonEditor";
 
 class ProfileViewerComponent extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.userService = UserService.instance;
         this.salonService = SalonService.instance;
         this.state = {
@@ -335,7 +335,7 @@ class ProfileViewerComponent extends Component {
             import('../css/Profile.css');
         }
         return (
-                <div className="container">
+                <div className="container" style={{width: '100%'}}>
                     <div className="form-row">
                         <div className="col-sm-4 form-control-plaintext text-center">
                             <div className="card ">
