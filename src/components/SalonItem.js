@@ -254,7 +254,7 @@ export default class SalonItem extends React.Component{
                     })
                 }
             });
-        window.location.reload();
+        // window.location.reload();
         setTimeout(() => $('.post').html('Posted') , 2000);
         setTimeout(this.toggleReview, 3000);
     }
@@ -398,10 +398,12 @@ export default class SalonItem extends React.Component{
                         </div>
                         <div className="card col-lg-10">
                             <div style={{width: '100%' ,padding: '0%'}}>
+
                                 <img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center='+
                                 this.state.salon.location.display_address[0] + ','
                                 + this.state.salon.location.display_address[1] +
-                                '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBscU1D1hPtGZ0rQK-3ajLJBJEZC3ua1j8'}/>
+                                '&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&sensor=false&key=AIzaSyBf0ykIZXdK2sju-tm9HpyUNGyfiIB73hA'}/>
+                             {/*<img className="card-img-top" height="250px" src={'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&sensor=false'}/>*/}
                             </div>
                             <h5 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h5>
                             <span className="card-text">{this.state.salon.location.cross_streets}</span>

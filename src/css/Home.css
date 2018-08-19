@@ -50,6 +50,11 @@
     color: #fff;
 }
 
+.logout a
+{
+    font-size: large;
+    color: #fff;
+}
 .search
 {
     width: 58%;
@@ -129,8 +134,8 @@
 
 .logout:hover
 {
-    background-color: white;
-    color: gray;
+
+    color: black;
 }
 .card
 {

@@ -5,7 +5,7 @@ import SalonManagerComponent from "./SalonManager";
 import '../css/ProfileViewer.css'
 import SalonService from "../services/SalonService";
 import SalonEditor from "./SalonEditor";
-
+import $ from 'jquery';
 class ProfileViewerComponent extends Component {
 
     constructor(props) {
@@ -98,6 +98,8 @@ class ProfileViewerComponent extends Component {
     }
 
     componentDidMount() {
+
+        $('.sidebar').css('visibility','hidden');
         this.selectProfile
         (this.props.match.params.profileId);
 
