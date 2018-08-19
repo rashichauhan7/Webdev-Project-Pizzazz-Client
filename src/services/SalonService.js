@@ -1,8 +1,8 @@
 let _singleton = Symbol();
 
-const SALON_API_CONST ='http://localhost:8080/api/salon';
-const SALON_API_URL = 'http://localhost:8080/api/salon';
-   /* 'http://localhost:8080/api/salon';*/
+const SALON_API_CONST ='http://localhost:8080/';
+const SALON_API_URL = 'https://pizzazz-db-server.herokuapp.com/api/salon';
+   /* 'https://pizzazz-db-server.herokuapp.com/api/salon';*/
 /*'https://hw1akriti.herokuapp.com/api/course';*/
 
 class SalonService {
@@ -23,7 +23,7 @@ class SalonService {
     }
 
     findSalonById(salonId){
-        return fetch('http://localhost:8080/api/salon/' + salonId, {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/salon/' + salonId, {
             method: 'get',
             credentials : 'include',
             headers: {
@@ -36,7 +36,7 @@ class SalonService {
 
     findSalonByYelpId(salonId){
 
-        return fetch('http://localhost:8080/api/salonApi/' + salonId, {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/salonApi/' + salonId, {
             method: 'get',
             credentials : 'include',
             headers: {
@@ -48,7 +48,7 @@ class SalonService {
     }
 
     findCurrentSalon(){
-        return fetch('http://localhost:8080/api/checkSalon', {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/checkSalon', {
             method: 'get',
             credentials : 'include',
             headers: {
@@ -72,7 +72,7 @@ class SalonService {
 
 
     createApiSalon(salonId, name) {
-        return fetch('http://localhost:8080/api/salonforApi/' + salonId, + '/' + name, {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/salonforApi/' + salonId, + '/' + name, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -93,7 +93,7 @@ class SalonService {
         })}
 
     createAppointment(appt) {
-        return fetch('http://localhost:8080/api/appointment',{
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/appointment',{
             body: JSON.stringify(appt),
             credentials: 'include',
             headers: {
@@ -106,7 +106,7 @@ class SalonService {
     }
 
     createReview(review) {
-        return fetch('http://localhost:8080/api/review',{
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/review',{
             body: JSON.stringify(review),
             credentials: 'include',
             headers: {
@@ -119,7 +119,7 @@ class SalonService {
     }
 
     getSalonApp(salonId) {
-        return fetch('http://localhost:8080/api/salon/' + salonId + '/appointments', {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/salon/' + salonId + '/appointments', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ class SalonService {
     }
 
     getSalonReviews(salonId) {
-        return fetch('http://localhost:8080/api/salon/' + salonId + '/reviews', {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/salon/' + salonId + '/reviews', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -141,7 +141,7 @@ class SalonService {
     }
 
     updateAppointments(appts){
-        return fetch('http://localhost:8080/api/appointments',{
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/appointments',{
             method: 'put',
             body: JSON.stringify(appts),
             headers: {
@@ -153,7 +153,7 @@ class SalonService {
     }
 
     updateReviews(reviews){
-        return fetch('http://localhost:8080/api/reviews',{
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/reviews',{
             method: 'put',
             body: JSON.stringify(reviews),
             headers: {

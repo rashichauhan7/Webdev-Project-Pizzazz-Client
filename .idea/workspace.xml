@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="64b69281-f3f9-4012-97c6-aeb38162fad1" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SalonItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SalonItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/SalonService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/SalonService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,34 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SalonItem.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="92" column="39" lean-forward="true" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Profile.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Profile.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SalonService.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SalonService.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/SalonService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1177">
-              <caret line="156" column="2" selection-start-line="156" selection-start-column="2" selection-end-line="156" selection-end-column="2" />
+            <state relative-caret-position="-2980">
+              <caret line="2" column="28" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -59,10 +34,12 @@
       <find>getReviews</find>
       <find>login</find>
       <find>https://pizzazz-db-server.herokuapp.com</find>
+      <find>https://pizzaz-db-server.herokuapp.com</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>http://localhost:8080</replace>
+      <replace>https://pizzazz-db-server.herokuapp.com</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -81,8 +58,8 @@
         <option value="$PROJECT_DIR$/src/css/Home.css" />
         <option value="$PROJECT_DIR$/src/css/Salons.css" />
         <option value="$PROJECT_DIR$/src/components/Login.js" />
-        <option value="$PROJECT_DIR$/src/services/SalonService.js" />
         <option value="$PROJECT_DIR$/src/components/SalonItem.js" />
+        <option value="$PROJECT_DIR$/src/services/SalonService.js" />
       </list>
     </option>
   </component>
@@ -167,16 +144,16 @@
       <workItem from="1534524030518" duration="32863000" />
       <workItem from="1534580717170" duration="425000" />
       <workItem from="1534610046875" duration="27772000" />
-      <workItem from="1534651896310" duration="9173000" />
+      <workItem from="1534651896310" duration="9332000" />
+      <workItem from="1534662737273" duration="147000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70233000" />
+    <option name="totallyTimeSpent" value="70539000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.24960254" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -205,6 +182,32 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9108">
+          <caret line="414" column="59" selection-start-line="414" selection-start-column="59" selection-end-line="414" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/SalonService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3432">
+          <caret line="156" column="2" selection-start-line="156" selection-start-column="2" selection-end-line="156" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1848">
@@ -374,9 +377,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1795">
           <caret line="150" column="19" lean-forward="true" selection-start-line="150" selection-start-column="19" selection-end-line="150" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -390,10 +390,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/SalonService.js">
+    <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1177">
-          <caret line="156" column="2" selection-start-line="156" selection-start-column="2" selection-end-line="156" selection-end-column="2" />
+        <state relative-caret-position="9108">
+          <caret line="414" column="59" selection-start-line="414" selection-start-column="59" selection-end-line="414" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -406,13 +409,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
+    <entry file="file://$PROJECT_DIR$/src/services/SalonService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="92" column="39" lean-forward="true" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-2980">
+          <caret line="2" column="28" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
         </state>
       </provider>
     </entry>
