@@ -179,6 +179,9 @@ class ProfileViewerComponent extends Component {
             reviewer : this.state.selectedUser
         }
         this.userService.createInvite(this.state.invitation)
+            .then(()=>{
+                alert('Invitation Sent to Reviewer')
+            })
     }
 
     formChangedPassword = (event) => {
@@ -363,10 +366,10 @@ class ProfileViewerComponent extends Component {
                                                 <a className="text-danger">'{review.salonName}' </a>
                                             )}
 
-                                        <div className="container-fluid"><button className="btn btn-info"
+                                        <div className="form-row"><button className="btn btn-info"
                                                                                  hidden={this.state.cannotBeInvited}
                                                                                  onClick={this.inviteToReview}>
-                                            <i className="fa fa-envelope"></i> Invite to Review Salon
+                                            <i className="fa fa-envelope"></i> Invite {this.state.selectedUser.firstName} to Review My Salon
                                         </button></div>
                                         <div className="form-row">
                                             <button hidden={this.state.isDifferentUser}
