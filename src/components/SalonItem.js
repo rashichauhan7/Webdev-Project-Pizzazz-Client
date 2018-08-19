@@ -6,8 +6,10 @@ import {Link} from 'react-router-dom';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/scss/bootstrap.scss'
 import SalonService from '../services/SalonService';
+import UserService from '../services/UserService';
 import $ from 'jquery';
 import Review from './Review';
+
 export default class SalonItem extends React.Component{
     constructor(props)
     {
@@ -16,6 +18,7 @@ export default class SalonItem extends React.Component{
             showReview: false,
             salonId: '',
             salon: {photos: [],
+                name:[],
                 categories: [],
                 location:
                     {display_address: [], cross_streets: '', address2: ""},
@@ -25,7 +28,9 @@ export default class SalonItem extends React.Component{
             reviews: [],
             dateValue: new Date().toJSON().slice(0,10),
             timeValue: '',
-            cssLoaded: false
+            cssLoaded: false,
+            currentUser : {},
+
         }
 
         this.yelp = YelpApiService.instance;
@@ -41,6 +46,7 @@ export default class SalonItem extends React.Component{
         this.toggleReview = this.toggleReview.bind(this);
 
         this.SalonService = SalonService.instance;
+        this.UService = UserService.instance;
 
     }
 
@@ -145,7 +151,7 @@ export default class SalonItem extends React.Component{
         this.SalonService.findSalonByYelpId(this.state.salonId)
             .then(salon => {
                 if (salon.id === 0){
-                    this.SalonService.createApiSalon(this.state.salonId)
+                    this.SalonService.createApiSalon(this.state.salonId, this.state.salon.name)
                         .then(salon => {
                             review = {
                                 rating: rating,
@@ -159,12 +165,21 @@ export default class SalonItem extends React.Component{
                         })
                 }
                 else {
+                    this.UService.findCurrentUser()
+                        .then(user => {
+                            this.setState({
+                                customer: user
+                            });
+                        })
+
                     this.SalonService.getSalonReviews(salon.id)
                         .then(reviews =>{
                             review = {
                                 rating: rating,
                                 comment: comment,
-                                salon: salon
+                                salon: salon,
+                                customer : this.state.customer
+
                             }
                             reviews = [...reviews, review];
                             this.SalonService.updateReviews(reviews)
@@ -237,7 +252,7 @@ export default class SalonItem extends React.Component{
         this.SalonService.findSalonByYelpId(this.state.salonId)
             .then(salon => {
                if (salon.id === 0){
-                   this.SalonService.createApiSalon(this.state.salonId)
+                   this.SalonService.createApiSalon(this.state.salonId, this.state.salon.name)
                        .then(salon => {
                            appoint = {
                                time: time,

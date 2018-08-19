@@ -1,11 +1,9 @@
 let _singleton = Symbol();
 
-const SALON_API_CONST ='https://pizzazz-db-server.herokuapp.com/';
-const SALON_API_URL =
-    'https://pizzazz-db-server.herokuapp.com/api/salon';
+const SALON_API_CONST ='http://localhost:8080/';
+const SALON_API_URL = 'https://pizzazz-db-server.herokuapp.com/api/salon';
    /* 'http://localhost:8080/api/salon';*/
 /*'https://hw1akriti.herokuapp.com/api/course';*/
-
 
 class SalonService {
     constructor(singletonToken) {
@@ -37,6 +35,7 @@ class SalonService {
     }
 
     findSalonByYelpId(salonId){
+
         return fetch('https://pizzazz-db-server.herokuapp.com/api/salonApi/' + salonId, {
             method: 'get',
             credentials : 'include',
@@ -70,6 +69,7 @@ class SalonService {
                 }).then(function (response) {
                     return response.json();
         })}
+
 
     createApiSalon(salonId) {
         return fetch('https://pizzazz-db-server.herokuapp.com/api/salonforApi/' + salonId, {

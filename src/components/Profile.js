@@ -86,6 +86,40 @@ class ProfileComponent extends Component {
         })
     };
 
+    saveSalon=()=>
+
+    {
+        this.state.updatedSalon = {
+            name : this.state.name,
+            address : this.state.address,
+            city: this.state.city,
+            website: this.state.website,
+            phone: this.state.phone
+
+        }
+        console.log(this.state.updatedSalon);
+        this.salonService.createSalon(this.state.updatedSalon)
+            .then((loginUser)=>{alert('Saved Changes')})
+
+    };
+
+    updateSalon=()=>
+
+    {
+        this.state.updatedSalon = {
+            name : this.state.name,
+            address : this.state.address,
+            city: this.state.city,
+            website: this.state.website,
+            phone: this.state.phone
+
+        }
+        console.log(this.state.updatedSalon);
+        this.salonService.updateSalon(this.state.currentSalon.id, this.state.updatedSalon)
+            .then((loginUser)=>{alert('Saved Changes')})
+
+    };
+
 
     render() {
         if (this.state.cssLoaded === false) {

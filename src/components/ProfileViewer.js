@@ -1,14 +1,16 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import UserService from "../services/UserService";
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import SalonManagerComponent from "./SalonManager";
 import '../css/ProfileViewer.css'
+import SalonService from "../services/SalonService";
 
 class ProfileViewerComponent extends Component {
 
     constructor() {
         super();
         this.userService = UserService.instance;
+        this.salonService = SalonService.instance;
         this.state = {
             currentUser: '',
             newUser:'',
@@ -17,6 +19,7 @@ class ProfileViewerComponent extends Component {
             lastname:'',
             email:'',
             phone:'',
+            status: '',
             profileId : '',
             image : '',
             selectedUser: {},
@@ -33,9 +36,45 @@ class ProfileViewerComponent extends Component {
             },
             cannotBeInvited : true,
             editMode : true,
-            cssLoaded: false
+            editModeSalon : true,
+            cssLoaded: false,
+
+            currentSalon: '',
+            updatedSalon:'',
+
+            nameSalon :'',
+            address:'',
+            city:'',
+            website:'',
+            phoneSalon:'',
+            isPresent:'true'
         };
 
+    }
+
+    setCustomerState(customer){
+        this.setState({
+            currentUser : customer,
+            firstname : customer.firstName,
+            lastname : customer.lastName,
+            password : customer.password,
+            email : customer.email,
+            image : customer.image,
+            phone : customer.phone,
+            status : customer.status
+
+        })
+    }
+
+    setSalonState(salon){
+        this.setState({
+            currentSalon: salon,
+            nameSalon : salon.name,
+            address: salon.address,
+            city: salon.city,
+            website: salon.website,
+            phoneSalon: salon.phone
+        })
     }
 
     setReviews(reviews) {
@@ -56,7 +95,7 @@ class ProfileViewerComponent extends Component {
 
         this.userService.findCurrentUser()
             .then(user => {
-                this.setState({currentUser: user});
+                this.setCustomerState(user);
             }).then(()=>this.userService.findProfileById(this.state.profileId)
             .then(user => {
                 this.setState({selectedUser: user});
@@ -82,7 +121,9 @@ class ProfileViewerComponent extends Component {
             firstName: this.state.firstname,
             lastName: this.state.lastname,
             email: this.state.email,
-            phone: this.state.phone
+            phone: this.state.phone,
+            status : this.state.status,
+            image : this.state.image
 
         }
         console.log(this.state.newUser);
@@ -91,10 +132,28 @@ class ProfileViewerComponent extends Component {
 
     };
 
+
+
     changeEditState = () => {
         this.setState({
             editMode: !this.state.editMode
         })
+    };
+
+    changeEditSalonState = () => {
+        this.userService.findCurrentUser()
+            .then(user => {
+                this.setState({currentUser: user});
+            });
+        this.salonService.findCurrentSalon()
+            .then(salon =>{
+            this.setSalonState(salon);
+        }).then(()=>{if(this.state.currentSalon.id === 0){
+            this.setState({isPresent: "false"});
+            console.log(this.state.isPresent)
+        }}).then(()=>this.setState({
+            editModeSalon: !this.state.editModeSalon
+        }))
     };
 
     inviteToReview = () =>{
@@ -153,8 +212,102 @@ class ProfileViewerComponent extends Component {
         })
     };
 
+    formChangedStatus = (event) => {
+        console.log(event.target.value);
+        console.log(this.state.status);
+        this.setState({
+            status: event.target.value
+        })
+    };
 
 
+    formChangedPhoneSalon=(event)=>
+    {
+        console.log(event.target.value);
+        console.log(this.state.phoneSalon);
+        this.setState({
+            phoneSalon: event.target.value
+        })
+    };
+
+    formChangedWebsiteSalon=(event)=>
+    {
+        console.log(event.target.value);
+        console.log(this.state.website);
+        this.setState({
+            website: event.target.value
+        })
+    };
+
+    formChangedCitySalon=(event)=>
+    {
+        console.log(event.target.value);
+        console.log(this.state.city);
+        this.setState({
+            city: event.target.value
+        })
+    };
+
+    formChangedAddressSalon=(event)=>
+    {
+        console.log(event.target.value);
+        console.log(this.state.address);
+        this.setState({
+            address: event.target.value
+        })
+    };
+
+    formChangedNameSalon=(event)=>
+    {
+        console.log(event.target.value);
+        console.log(this.state.nameSalon);
+        this.setState({
+            nameSalon: event.target.value
+        })
+    };
+
+    saveSalon=()=>
+
+    {
+        this.state.updatedSalon = {
+            name : this.state.nameSalon,
+            address : this.state.address,
+            city: this.state.city,
+            website: this.state.website,
+            phone: this.state.phoneSalon
+
+        }
+        console.log(this.state.updatedSalon);
+        this.salonService.createSalon(this.state.updatedSalon)
+            .then((salon)=>{
+                this.setState({
+                    currentSalon : salon
+                })
+            })
+            .then(()=>{alert('Saved Changes')})
+    };
+
+    updateSalon=()=>
+
+    {
+        this.state.updatedSalon = {
+            name : this.state.nameSalon,
+            address : this.state.address,
+            city: this.state.city,
+            website: this.state.website,
+            phone: this.state.phoneSalon
+
+        }
+        console.log(this.state.updatedSalon);
+        this.salonService.updateSalon( this.state.updatedSalon , this.state.currentSalon.id)
+            .then((salon)=>{
+                this.setState({
+                    currentSalon : salon
+                })
+            })
+            .then(()=>{alert('Saved Changes')})
+
+    };
 
     render() {
             if (this.state.cssLoaded === false) {
@@ -177,9 +330,9 @@ class ProfileViewerComponent extends Component {
 
                     <div  className="col-sm-8 form-control-plaintext">
 
-                        <div id="viewerProfile" hidden={!this.state.editMode}>
+                        <div id="viewerProfile" hidden={!this.state.editMode} >
 
-                        <div className="row">
+                        <div className="row border card-body" >
                         <div className="col-md-6">
                             <h6>About</h6>
                             <h3>
@@ -194,20 +347,23 @@ class ProfileViewerComponent extends Component {
                                     <a href={review.salon.id} className="tag tag-default tag-pill">{review.salon.name}</a>
                                 )}
                             </ul>
-                            <div><button className="btn btn-info"
+                            <div className="container-fluid"><button className="btn btn-info"
                                          hidden={this.state.cannotBeInvited}
                                          onClick={this.inviteToReview}>
                                 <i className="fa fa-envelope"></i> Invite to Review Salon
                             </button></div>
+                            <div className="form-row">
                             <button hidden={this.state.isDifferentUser}
                                     onClick={this.changeEditState}
-                                    className="btn btn-warning">
-                                <i className="fa fa-pencil"></i> Edit Profile</button>
+                                    className="btn btn-danger">
+                                <i className="fa fa-pencil"></i>  Edit Profile</button>
+                            </div>
+
                         </div>
                         </div>
 
                         <div className="row">
-                            <div className="col-md-12 fa-border rounded-right">
+                            <div className="col-md-12 ">
                                 <h4 className="m-t-2"><span
                                     className="fa fa-star ion-clock pull-xs-right"></span> Reviews Posted</h4>
                                 <table className="table table-danger">
@@ -235,7 +391,7 @@ class ProfileViewerComponent extends Component {
                         <div className="row">
                             <h5>Profile Editor</h5>
                         </div>
-                            <form>
+                            <form  onSubmit={this.saveUser}>
 
                             <div className="form-group row">
                                 <label htmlFor="username" className="col-sm-2 col-form-label">Username</label>
@@ -249,8 +405,8 @@ class ProfileViewerComponent extends Component {
                             <div className="form-group row">
                                 <label htmlFor="password" className="col-sm-2 col-form-label">Password</label>
                                 <div className="col-sm-10">
-                                    <input type="password" required className="form-control" id="password"
-                                           placeholder="New Password" onChange={this.formChanged}/>
+                                    <input type="password" required className="form-control" id="password" value=  {this.state.password}
+                                           placeholder="New Password" onChange={this.formChangedPassword}/>
                                 </div>
                             </div>
 
@@ -259,8 +415,8 @@ class ProfileViewerComponent extends Component {
                                     Name </label>
                                 <div className="col-sm-10">
                                     <input type="text" required className="form-control" id="firstName"
-                                           value= {this.state.currentUser.firstName}
-                                           placeholder="First name" onChange={this.formChanged2}/>
+                                           value= {this.state.firstname}
+                                           placeholder="First name" onChange={this.formChangedFirstName}/>
                                 </div>
                             </div>
 
@@ -270,8 +426,8 @@ class ProfileViewerComponent extends Component {
                                 <div className="col-sm-10">
                                     <input type="text" className="form-control" id="lastName"
 
-                                           value= {this.state.currentUser.lastName}
-                                           placeholder="Last Name" onChange={this.formChanged3}/>
+                                           value= {this.state.lastname}
+                                           placeholder="Last Name" onChange={this.formChangedLastName}/>
                                 </div>
                             </div>
 
@@ -280,7 +436,7 @@ class ProfileViewerComponent extends Component {
                                 <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
                                 <div className="col-sm-10">
                                     <input type="email" required className="form-control" id="email"
-                                           placeholder= {this.state.currentUser.email} onChange={this.formChanged4}/>
+                                           value= {this.state.email} onChange={this.formChangedEmail}/>
                                 </div>
                             </div>
 
@@ -288,7 +444,7 @@ class ProfileViewerComponent extends Component {
                                 <label htmlFor="phone" className="col-sm-2 col-form-label">Phone</label>
                                 <div className="col-sm-10">
                                     <input type="tel" required className="form-control" id="phone"
-                                           value= {this.state.currentUser.phone} onChange={this.formChanged5}/>
+                                           value= {this.state.phone} onChange={this.formChangedPhone}/>
                                 </div>
                             </div>
 
@@ -296,7 +452,7 @@ class ProfileViewerComponent extends Component {
                                     <label htmlFor="img" className="col-sm-2 col-form-label">Image URL</label>
                                     <div className="col-sm-10">
                                         <input type="link" required className="form-control" id="img"
-                                               value= {this.state.currentUser.image} onChange={this.formChanged5}/>
+                                               value= {this.state.image} onChange={this.formChangedImage}/>
                                     </div>
                                 </div>
 
@@ -304,7 +460,7 @@ class ProfileViewerComponent extends Component {
                                     <label htmlFor="status" className="col-sm-2 col-form-label">Status</label>
                                     <div className="col-sm-10">
                                         <input  className="form-control" id="status"
-                                               value= {this.state.currentUser.status} onChange={this.formChanged5}/>
+                                               value= {this.state.status} onChange={this.formChangedStatus}/>
                                     </div>
                                 </div>
 
@@ -312,18 +468,8 @@ class ProfileViewerComponent extends Component {
                                 <div className="form-group row">
 
                                     <div className="col">
-                                        <button className="btn btn-block btn-dark" type="submit" value="Submit">Save Changes</button>
-                                    </div>
-
-                                    <div className="col">
-                                        <button className="btn btn-block btn-secondary" onClick={this.changeEditState}>Cancel</button>
-                                    </div>
-
-                                    <div className="col">
-                                        <a className="btn btn-primary" hidden={this.state.currentUser.role !== 'owner'}
-                                           href="/manageSalon">
-                                            Manage My Salon
-                                        </a>
+                                        <button className="btn btn-block btn-danger" type="submit" value="Submit">
+                                            <i className="fa fa-check"></i> Save Changes</button>
                                     </div>
 
                                 </div>
@@ -331,10 +477,94 @@ class ProfileViewerComponent extends Component {
 
                             </form>
 
+                            <div className="form-group row float-lg-right ">
+
+                                <div>
+                                    <button className="btn btn-danger" onClick={this.changeEditState}>
+                                        <i className="fa fa-times"></i> Cancel Without Saving</button>
+
+                                </div>
+                                <div  className="col">
+                                    <button className="btn btn-danger" hidden={this.state.currentUser.role !== 'owner'}
+                                            onClick={this.changeEditSalonState}> <i className="fa fa-scissors">
+
+                                    </i> Manage My Salon
+                                    </button>
+                                </div>
+
+                            </div>
+
+
+
+                            <div id="salonEditor" hidden={this.state.editModeSalon} className="float-lg-left">
+
+                                <div>
+                                    <div className="text-center"><h3>{this.state.currentUser.firstName}'s Salon</h3></div>
+                                    <div className="form-group row">
+                                        <label htmlFor="username" className="col-sm-2 col-form-label">Name</label>
+                                        <div className="col-sm-10">
+                                            <input type="text"  className="form-control" value= {this.state.nameSalon} onChange={this.formChangedNameSalon}/>
+                                        </div> </div>
+
+                                    <div className="form-group row">
+                                        <label htmlFor="email" className="col-sm-2 col-form-label">Website</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="email"
+                                                   value = {this.state.website} onChange={this.formChangedWebsiteSalon}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row">
+                                        <label htmlFor="email" className="col-sm-2 col-form-label">Address</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="email"
+                                                   value = {this.state.address} onChange={this.formChangedAddressSalon}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row">
+                                        <label htmlFor="email" className="col-sm-2 col-form-label">City</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="email"
+                                                   value = {this.state.city} onChange={this.formChangedCitySalon}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row">
+                                        <label htmlFor="phone" className="col-sm-2 col-form-label">Phone</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="phone"
+                                                   value = {this.state.phoneSalon} onChange={this.formChangedPhoneSalon}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <button id="saveBtn" type="button" onClick={this.saveSalon}
+                                                    hidden={this.state.currentSalon.id !== 0}
+                                                    className="btn btn-success btn-block">Create New Salon</button>
+                                        </div>
+
+                                        <div className="col">
+                                            <button id="updateBtn" type="button" onClick={this.updateSalon}
+                                                    hidden={this.state.currentSalon.id === 0}
+                                                    className="btn btn-success btn-block">Update Salon Changes</button>
+                                        </div>
+
+                                        <div className="col">
+                                            <button className="btn btn-danger" onClick={this.changeEditSalonState}>
+                                                <i className="fa fa-reply"></i> Cancel Without Saving</button>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
                         </div>
-
-
-
                     </div>
                     </div>
                 </div>

@@ -73,7 +73,7 @@ class SalonManagerComponent extends Component {
     };
 
 
-    formChangedPhone=(event)=>
+    formChangedPhoneSalon=(event)=>
     {
         console.log(event.target.value);
         console.log(this.state.phone);
@@ -82,7 +82,7 @@ class SalonManagerComponent extends Component {
         })
     };
 
-    formChangedWebsite=(event)=>
+    formChangedWebsiteSalon=(event)=>
     {
         console.log(event.target.value);
         console.log(this.state.website);
@@ -91,7 +91,7 @@ class SalonManagerComponent extends Component {
         })
     };
 
-    formChangedCity=(event)=>
+    formChangedCitySalon=(event)=>
     {
         console.log(event.target.value);
         console.log(this.state.city);
@@ -100,7 +100,7 @@ class SalonManagerComponent extends Component {
         })
     };
 
-    formChangedAddress=(event)=>
+    formChangedAddressSalon=(event)=>
     {
         console.log(event.target.value);
         console.log(this.state.address);
@@ -109,7 +109,7 @@ class SalonManagerComponent extends Component {
         })
     };
 
-    formChangedName=(event)=>
+    formChangedNameSalon=(event)=>
     {
         console.log(event.target.value);
         console.log(this.state.name);
