@@ -1,4 +1,6 @@
 let _singleton = Symbol();
+
+const SALON_API_CONST ='https://pizzazz-db-server.herokuapp.com/';
 const SALON_API_URL =
     'https://pizzazz-db-server.herokuapp.com/api/salon';
    /* 'http://localhost:8080/api/salon';*/
@@ -70,7 +72,7 @@ class SalonService {
         })}
 
     createApiSalon(salonId) {
-        return fetch('http://localhost:8080/api/salonforApi/' + salonId, {
+        return fetch(SALON_API_CONST+'api/salonforApi/' + salonId, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -91,7 +93,7 @@ class SalonService {
         })}
 
     createAppointment(appt) {
-        return fetch('http://localhost:8080/api/appointment',{
+        return fetch(SALON_API_CONST+'api/appointment',{
             body: JSON.stringify(appt),
             credentials: 'include',
             headers: {
@@ -104,7 +106,7 @@ class SalonService {
     }
 
     createReview(review) {
-        return fetch('http://localhost:8080/api/review',{
+        return fetch(SALON_API_CONST+'api/review',{
             body: JSON.stringify(review),
             credentials: 'include',
             headers: {
@@ -117,7 +119,7 @@ class SalonService {
     }
 
     getSalonApp(salonId) {
-        return fetch('http://localhost:8080/api/salon/' + salonId + '/appointments', {
+        return fetch(SALON_API_CONST+' api/salon/' + salonId + '/appointments', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -128,7 +130,7 @@ class SalonService {
     }
 
     getSalonReviews(salonId) {
-        return fetch('http://localhost:8080/api/salon/' + salonId + '/reviews', {
+        return fetch(SALON_API_CONST+ 'api/salon/' + salonId + '/reviews', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -139,7 +141,7 @@ class SalonService {
     }
 
     updateAppointments(appts){
-        return fetch('http://localhost:8080/api/appointments',{
+        return fetch(SALON_API_CONST+ 'api/appointments',{
             method: 'put',
             body: JSON.stringify(appts),
             headers: {
@@ -151,7 +153,7 @@ class SalonService {
     }
 
     updateReviews(reviews){
-        return fetch('http://localhost:8080/api/reviews',{
+        return fetch(SALON_API_CONST+ 'api/reviews',{
             method: 'put',
             body: JSON.stringify(reviews),
             headers: {
