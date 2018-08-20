@@ -259,7 +259,7 @@ console.log("rev "+rev.length);
                     })
                 }
             });
-        // window.location.reload();
+        window.location.reload();
         setTimeout(() => $('.post').html('Posted') , 2000);
         setTimeout(this.toggleReview, 3000);
     }
