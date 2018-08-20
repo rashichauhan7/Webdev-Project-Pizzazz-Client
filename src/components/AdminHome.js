@@ -120,7 +120,7 @@ export default class AdminHomeComponent extends Component{
 
     deleteReviewer=(userId)=> {
         this.userService.deleteUser(userId)
-            .then( ()=>{
+            .then(()=>{
                 this.userService.findAllReviewers()
                     .then(users=>this.setReviewers(users))
                 this.userService.findAllOwners()
@@ -204,24 +204,24 @@ export default class AdminHomeComponent extends Component{
                 </div>
                 <div className="col">
 
-                    <input type="text" id="defaultRegisterFormLastName" required className="form-control"
+                    <input type="text" required className="form-control"
                            placeholder="Last name" onChange={this.formChangedLastName}/>
                 </div>
                 <div className="col">
 
-                    <input type="email" id="defaultRegisterFormLastName" required className="form-control"
+                    <input type="email" required className="form-control"
                            placeholder="Email" onChange={this.formChangedEmail}/>
                 </div></div>
                 <div className="form-row mb-4 border-dark">
 
                 <div className="col">
 
-                    <input type="text" id="defaultRegisterFormLastName" required className="form-control"
+                    <input type="text" required className="form-control"
                            placeholder="Username" onChange={this.formChangedUsername}/>
                 </div>
                 <div className="col">
 
-                    <input type="password" id="defaultRegisterFormLastName" required className="form-control"
+                    <input type="password" required className="form-control"
                            placeholder="Password" onChange={this.formChangedPassword}/>
                 </div>
                 <div className="col">
@@ -265,7 +265,7 @@ export default class AdminHomeComponent extends Component{
 
                     <ul className="list-group">
                     {this.state.reviewers.map((reviewer)=>
-                        <div className="form-row mb-3 border-dark">
+                        <div key= {reviewer.id} className="form-row mb-3 border-dark">
                             <div className="col">
                                 <strong>{reviewer.id}</strong>
                             </div>
@@ -319,7 +319,7 @@ export default class AdminHomeComponent extends Component{
 
                     <ul className="list-group">
                         {this.state.owners.map((reviewer)=>
-                            <div className="form-row mb-3 border-dark">
+                            <div key={reviewer.id} className="form-row mb-3 border-dark">
                                 <div className="col">
                                     <strong>{reviewer.id}</strong>
                                 </div>
@@ -375,7 +375,7 @@ export default class AdminHomeComponent extends Component{
 
                     <ul className="list-group">
                         {this.state.customers.map((reviewer)=>
-                            <div className="form-row mb-3 border-dark">
+                            <div key={reviewer.id} className="form-row mb-3 border-dark">
                                 <div className="col">
                                     <strong>{reviewer.id}</strong>
                                 </div>
@@ -393,8 +393,10 @@ export default class AdminHomeComponent extends Component{
                                 </div>
                                 <div className="col">
                                     <button className="btn btn btn-danger"
-                                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Profile?'))
-                                                this.deleteReviewer(reviewer.id)}}>Delete Profile</button>
+                                            onClick={(e) => {
+                                                if (window.confirm('Are you sure you wish to delete this Profile?')) {
+                                                    this.deleteReviewer(reviewer.id);
+                                                }}}>Delete Profile</button>
                                 </div>
                             </div>
                         )}
@@ -467,7 +469,7 @@ export default class AdminHomeComponent extends Component{
 
                     <ul className="list-group">
                         {this.state.salons.map((reviewer)=>
-                            <div className="form-row mb-3 border-dark">
+                            <div key={reviewer.id} className="form-row mb-3 border-dark">
                                 <div className="col">
                                     <strong>{reviewer.id}</strong>
                                 </div>
