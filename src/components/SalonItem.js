@@ -20,6 +20,7 @@ export default class SalonItem extends React.Component{
             salonId: '',
             yelpreviews: [],
             comments: [],
+            reviewz: [],
             salon: {photos: [],
                 name:[],
                 categories: [],
@@ -150,7 +151,7 @@ export default class SalonItem extends React.Component{
                     else {
                         review.user = user;
                         rev = [...rev, review];
-                        this.setState({reviews: rev});
+                        this.setState({reviewz: rev});
                     }
                 });
             console.log(rev);
@@ -183,7 +184,7 @@ export default class SalonItem extends React.Component{
 
      renderReview() {
 
-                    let rev = this.state.reviews.map((review) => {
+                    let rev = this.state.reviewz.map((review) => {
                         if(review!= undefined && review.user!== undefined) {
                             return <li className="list-group-item reviewz">
                                 {review.user.image !== null &&
