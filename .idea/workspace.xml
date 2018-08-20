@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64b69281-f3f9-4012-97c6-aeb38162fad1" name="Default" comment="">
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SalonItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SalonItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/SalonService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/SalonService.js" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/src/components/AdminHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AdminHome.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/SalonService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/SalonService.js" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/UserService.js" afterDir="false" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,23 +28,125 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="AdminHome.js" pinned="false" current-in-tab="false">
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="SalonItem.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7898">
+              <caret line="359" column="48" selection-start-line="359" selection-start-column="48" selection-end-line="359" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+=======
+      <file leaf-file-name="SalonService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/SalonService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="36" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminHome.js" pinned="false" current-in-tab="true">
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
         <entry file="file://$PROJECT_DIR$/src/components/AdminHome.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="154">
               <caret line="96" column="50" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="50" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="SalonService.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/SalonService.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="205">
               <caret line="107" column="14" lean-forward="true" selection-start-line="107" selection-start-column="14" selection-end-line="107" selection-end-column="14" />
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="Register.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Register.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="924">
+              <caret line="42" column="52" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
+=======
+      <file leaf-file-name="UserService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2559">
+              <caret line="5" column="40" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="YelpServices.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="60" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfileViewer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/ProfileViewer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="553" column="23" lean-forward="true" selection-start-line="553" selection-start-column="23" selection-end-line="553" selection-end-column="23" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="Login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2804">
+              <caret line="72" column="17" lean-forward="true" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+=======
+      <file leaf-file-name="Profile.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Profile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="505">
+              <caret line="193" column="45" lean-forward="true" selection-start-line="193" selection-start-column="45" selection-end-line="193" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="UserService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-546">
+              <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+=======
+      <file leaf-file-name="Login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="312">
+              <caret line="201" column="41" lean-forward="true" selection-start-line="201" selection-start-column="41" selection-end-line="201" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
             </state>
           </provider>
         </entry>
@@ -42,6 +155,22 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      <find>hre</find>
+      <find>getReviews</find>
+      <find>login</find>
+      <find>https://pizzazz-db-server.herokuapp.com</find>
+      <find>https://pizzaz-db-server.herokuapp.com</find>
+      <find>local</find>
+      <find>http://localhost:8080</find>
+      <find>localho</find>
+=======
+      <find>about</find>
+      <find>Hi</find>
+      <find>hi</find>
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
       <find>setstate</find>
       <find>website</find>
       <find>Manages</find>
@@ -66,12 +195,16 @@
       <find>Link</find>
       <find>loca</find>
       <find>local</find>
+<<<<<<< HEAD
       <find>delet</find>
       <find>new sal</find>
       <find>apisa</find>
       <find>salon</find>
       <find>createap</find>
       <find>SALON_API_CONST</find>
+=======
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
     </findStrings>
     <replaceStrings>
       <replace />
@@ -92,6 +225,14 @@
         <option value="$PROJECT_DIR$/src/css/Profile.css" />
         <option value="$PROJECT_DIR$/src/css/Home.css" />
         <option value="$PROJECT_DIR$/src/css/Salons.css" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/components/Login.js" />
+        <option value="$PROJECT_DIR$/src/components/Profile.js" />
+        <option value="$PROJECT_DIR$/src/services/UserService.js" />
+        <option value="$PROJECT_DIR$/src/services/SalonService.js" />
+        <option value="$PROJECT_DIR$/src/components/SalonItem.js" />
+        <option value="$PROJECT_DIR$/src/components/Register.js" />
+=======
         <option value="$PROJECT_DIR$/src/components/SalonItem.js" />
         <option value="$PROJECT_DIR$/src/components/Profile.js" />
         <option value="$PROJECT_DIR$/src/components/Register.js" />
@@ -99,7 +240,11 @@
         <option value="$PROJECT_DIR$/src/components/ProfileViewer.js" />
         <option value="$PROJECT_DIR$/src/components/Login.js" />
         <option value="$PROJECT_DIR$/src/components/AdminHome.js" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/services/SalonService.js" />
+=======
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
       </list>
     </option>
   </component>
@@ -147,12 +292,15 @@
               <item name="Webdev-Project-Pizzazz-Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="Webdev-Project-Pizzazz-Client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+=======
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Webdev-Project-Pizzazz-Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="Webdev-Project-Pizzazz-Client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
               <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -192,12 +340,20 @@
       <workItem from="1534610046875" duration="27772000" />
       <workItem from="1534651896310" duration="9332000" />
       <workItem from="1534662737273" duration="147000" />
-      <workItem from="1534700727347" duration="7241000" />
+      <workItem from="1534700727347" duration="23051000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="97561000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="93590000" />
+=======
+    <option name="totallyTimeSpent" value="94337000" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -239,6 +395,18 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/IntialList.js</url>
+          <line>26</line>
+          <properties lambdaOrdinal="-1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es6.d.ts">
@@ -509,32 +677,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/SalonItem.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2442">
-          <caret line="111" column="23" lean-forward="true" selection-start-line="111" selection-start-column="23" selection-end-line="111" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SalonEditor.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1034">
           <caret line="47" column="14" lean-forward="true" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9108">
-          <caret line="414" column="59" selection-start-line="414" selection-start-column="59" selection-end-line="414" selection-end-column="59" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/css/Profile.css">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/components/ProfileViewer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-164">
+          <caret line="386" column="38" selection-start-line="386" selection-start-column="38" selection-end-line="386" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1342">
+          <caret line="193" column="45" lean-forward="true" selection-start-line="193" selection-start-column="45" selection-end-line="193" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/SalonItem.css">
+=======
+    <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2442">
+          <caret line="111" column="23" lean-forward="true" selection-start-line="111" selection-start-column="23" selection-end-line="111" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/SalonManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/Profile.css">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="880">
+          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/IntialList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+=======
         <state relative-caret-position="616">
           <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
         </state>
@@ -549,17 +761,51 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/components/Profile.js">
+=======
+    <entry file="file://$PROJECT_DIR$/src/components/SignUp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="193" column="45" selection-start-line="193" selection-start-column="45" selection-end-line="193" selection-end-column="45" />
+        <state relative-caret-position="131">
+          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
+          </folding>
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Register.js">
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="924">
+          <caret line="42" column="52" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
+=======
+        <state relative-caret-position="505">
+<<<<<<< HEAD
+          <caret line="193" column="45" selection-start-line="193" selection-start-column="45" selection-end-line="193" selection-end-column="45" />
+=======
+          <caret line="193" column="45" lean-forward="true" selection-start-line="193" selection-start-column="45" selection-end-line="193" selection-end-column="45" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/components/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2804">
+          <caret line="72" column="17" lean-forward="true" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/components/Register.js">
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2559">
           <caret line="5" column="40" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="40" />
@@ -575,6 +821,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ProfileViewer.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="188">
           <caret line="174" column="11" lean-forward="true" selection-start-line="174" selection-start-column="11" selection-end-line="174" selection-end-column="11" />
         </state>
@@ -594,6 +841,41 @@
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="238">
+          <caret line="553" column="23" lean-forward="true" selection-start-line="553" selection-start-column="23" selection-end-line="553" selection-end-column="23" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/services/UserService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-546">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/services/YelpServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="60" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/SalonItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="7898">
+          <caret line="359" column="48" selection-start-line="359" selection-start-column="48" selection-end-line="359" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+=======
+        <state relative-caret-position="-2559">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="40" />
+>>>>>>> b0431c00cb30c85c8c003e2b1a1da513708980e6
         </state>
       </provider>
     </entry>
@@ -613,6 +895,7 @@
           <caret line="96" column="50" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="50" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+>>>>>>> 1d83350b2b78dc5bd499d8adf85b1c065deca74f
           </folding>
         </state>
       </provider>

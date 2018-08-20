@@ -2,8 +2,6 @@ let _singleton = Symbol();
 
 const SALON_API_CONST ='https://pizzazz-db-server.herokuapp.com/';
 const SALON_API_URL = 'https://pizzazz-db-server.herokuapp.com/api/salon';
-   /* 'https://pizzazz-db-server.herokuapp.com/api/salon';*/
-/*'https://hw1akriti.herokuapp.com/api/course';*/
 
 class SalonService {
     constructor(singletonToken) {
@@ -27,7 +25,7 @@ class SalonService {
             method: 'get',
             credentials : 'include',
             headers: {
-                'content-type': 'application/json'
+                'Content-type': 'application/json'
             },
         }).then(function (response) {
             return response.json();
@@ -58,7 +56,7 @@ class SalonService {
             method: 'get',
             credentials : 'include',
             headers: {
-                'content-type': 'application/json'
+                'Content-type': 'application/json'
             },
         }).then(function (response) {
             return response.json();
@@ -70,7 +68,7 @@ class SalonService {
             method: 'get',
             credentials : 'include',
             headers: {
-                'content-type': 'application/json'
+                'Content-type': 'application/json'
             },
         }).then(function (response) {
             return response.json();
@@ -194,6 +192,5 @@ class SalonService {
             return response.json();
         })
     }
-
 }
 export default SalonService;
