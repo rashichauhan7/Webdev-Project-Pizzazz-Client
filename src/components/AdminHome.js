@@ -123,9 +123,9 @@ export default class AdminHomeComponent extends Component{
 
         console.log(this.state.newUser);
         this.userService.findUserByUsername(this.state.username)
-            .then(user=>{
-                if(user.id ===0){
-                    this.userService.createUser(this.state.newUser)
+            .then(response=>{
+                if (response.length === 0){
+                    this.userService.createUserFromAdminPage(this.state.newUser)
                         .then((loginUser)=>{this.userService.findAllReviewers()
                             .then(users=>this.setReviewers(users))})
                 } else {

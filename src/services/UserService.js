@@ -106,6 +106,20 @@ class UserService {
             return response.json();
         })}
 
+
+
+    createUserFromAdminPage(user) {
+        return fetch(CUSTOMER_API_URL2, {
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+            return response.json();
+        })}
+
+
     deleteUser(userId) {
         fetch(CUSTOMER_API_URL + '/api/user/' + userId, {
             method: 'delete'
