@@ -350,69 +350,78 @@ console.log("rev "+rev.length);
     }
 
     getValue(date, time) {
-        let appoint;
-        if (time === ""){
-            alert('select time')
-        }
-        else {
-            this.SalonService.findSalonByYelpId(this.state.salonId)
-                .then(salon => {
-                    if (salon.id === 0){
-                        this.UService.findCurrentUser()
-                            .then(user => {
-                                this.setState({
-                                    customer: user
-                                });
-                            })
-                        this.SalonService.createApiSalon(this.state.salonId, this.state.salon.name)
-                            .then(salon => {
-                                appoint = {
-                                    time: time,
-                                    date: date,
-                                    salon: salon,
-                                    customer: this.state.customer
-                                };
-                                this.SalonService.createAppointment(appoint)
-                                    .then(appt => {
-                                        console.log(appt);
-                                    })
-                            })
+        this.UService.findCurrentUser()
+            .then(user => {
+                if(user.username !== undefined ) {
+                    let appoint;
+                    if (time === ""){
+                        alert('select time')
                     }
                     else {
-                        this.SalonService.getSalonApp(salon.id)
-                            .then(appts =>{
-                                console.log(appts)
-                                for(let appt in appts){
-                                    if (appts[appt].time === time && appts[appt].date === date){
-                                        alert('appointment not available select different date and time');
-                                        return;
-                                    }
+                        this.SalonService.findSalonByYelpId(this.state.salonId)
+                            .then(salon => {
+                                if (salon.id === 0){
+                                    this.UService.findCurrentUser()
+                                        .then(user => {
+                                            this.setState({
+                                                customer: user
+                                            });
+                                        })
+                                    this.SalonService.createApiSalon(this.state.salonId, this.state.salon.name)
+                                        .then(salon => {
+                                            appoint = {
+                                                time: time,
+                                                date: date,
+                                                salon: salon,
+                                                customer: this.state.customer
+                                            };
+                                            this.SalonService.createAppointment(appoint)
+                                                .then(appt => {
+                                                    console.log(appt);
+                                                })
+                                        })
                                 }
-                                console.log(appts);
-                                this.UService.findCurrentUser()
-                                    .then(user => {
-                                        this.setState({
-                                            customer: user
-                                        });
-                                    })
-                                appoint = {
-                                    time: time,
-                                    date: date,
-                                    salon: salon,
-                                    customer: this.state.currentUser
-                                }
-                                appts = [...appts, appoint];
-                                this.SalonService.updateAppointments(appts)
-                                    .then(appts => {
-                                        console.log(appts);
-                                        alert('Appointment Booked')
-                                    })
+                                else {
+                                    this.SalonService.getSalonApp(salon.id)
+                                        .then(appts =>{
+                                            console.log(appts)
+                                            for(let appt in appts){
+                                                if (appts[appt].time === time && appts[appt].date === date){
+                                                    alert('appointment not available select different date and time');
+                                                    return;
+                                                }
+                                            }
+                                            console.log(appts);
+                                            this.UService.findCurrentUser()
+                                                .then(user => {
+                                                    this.setState({
+                                                        customer: user
+                                                    });
+                                                })
+                                            appoint = {
+                                                time: time,
+                                                date: date,
+                                                salon: salon,
+                                                customer: this.state.currentUser
+                                            }
+                                            appts = [...appts, appoint];
+                                            this.SalonService.updateAppointments(appts)
+                                                .then(appts => {
+                                                    console.log(appts);
+                                                    alert('Appointment Booked')
+                                                })
 
 
-                            })
+                                        })
+                                }
+                            });
                     }
-                });
-        }
+                }
+                else {
+                    alert("Please log in to book an appointment");
+                }
+            })
+
     }
 
     handleTimeChange = (event) => {
