@@ -23,6 +23,7 @@ export default class Manager extends React.Component {
                     <Route path='/register' component={Register}/>
                     <Route path="*" component={Home}></Route>
                     <Route path="/home" component={InitialList}/>
+                    <Route path="/home?sort=:sid" component={InitialList}/>
                     <Route path="/category/:category" component = {Category}/>
                     <Route path="/category/:category?sort=:sid" component = {Category}/>
                     <Route path="/salon/:salonId" component={SalonEditor}></Route>

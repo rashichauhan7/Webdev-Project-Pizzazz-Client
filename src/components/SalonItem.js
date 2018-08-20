@@ -178,8 +178,6 @@ export default class SalonItem extends React.Component{
             }
         });
         console.log("rev "+rev.length);
-        if(rev.length === 0)
-            rev = <h4> No Reviews yet!</h4>
         return rev;
     }
 
@@ -203,7 +201,8 @@ export default class SalonItem extends React.Component{
                         }
                     });
 console.log("rev "+rev.length);
-
+         if(rev.length === 0)
+             rev = <h4> No Reviews yet!</h4>
         return rev;
     }
 
