@@ -53,6 +53,7 @@ export default class Register extends React.Component {
                            $('.loggedIn').css('visibility', 'visible');
                            $('.logout').css('visibility', 'visible');
                            this.props.close();
+                           window.location.reload();
                        }).then(()=>{
                        this.setStateOfAll();
                    })
@@ -191,8 +192,8 @@ export default class Register extends React.Component {
                                htmlFor="defaultRegisterFormNewsletter">Register as a salon owner</label>
                     </div>
 
-                    <button className="btn btn-dark my-4 btn-block"
-                            type="submit">Register
+                    <button  onClick={this.saveUser} className="btn btn-dark my-4 btn-block"
+                            type="button">Register
                     </button>
 
                         <p>By clicking
