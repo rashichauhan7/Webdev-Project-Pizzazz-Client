@@ -2,8 +2,6 @@ let _singleton = Symbol();
 
 const SALON_API_CONST ='http://localhost:8080/';
 const SALON_API_URL = 'https://pizzazz-db-server.herokuapp.com/api/salon';
-   /* 'https://pizzazz-db-server.herokuapp.com/api/salon';*/
-/*'https://hw1akriti.herokuapp.com/api/course';*/
 
 class SalonService {
     constructor(singletonToken) {
@@ -27,10 +25,28 @@ class SalonService {
             method: 'get',
             credentials : 'include',
             headers: {
+                'Content-type': 'application/json'
+            },
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
+    findSalonByUserId(userId){
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/' + userId +'/salonOwner/', {
+            method: 'get',
+            credentials : 'include',
+            headers: {
                 'content-type': 'application/json'
             },
         }).then(function (response) {
             return response.json();
+        })
+    }
+
+    deleteSalon(salonId) {
+        return fetch('https://pizzazz-db-server.herokuapp.com' + '/api/'+ salonId+'/salon' , {
+            method: 'delete'
         })
     }
 
@@ -40,7 +56,7 @@ class SalonService {
             method: 'get',
             credentials : 'include',
             headers: {
-                'content-type': 'application/json'
+                'Content-type': 'application/json'
             },
         }).then(function (response) {
             return response.json();
@@ -52,7 +68,7 @@ class SalonService {
             method: 'get',
             credentials : 'include',
             headers: {
-                'content-type': 'application/json'
+                'Content-type': 'application/json'
             },
         }).then(function (response) {
             return response.json();
@@ -71,8 +87,9 @@ class SalonService {
         })}
 
 
-    createApiSalon(salonId, name) {
-        return fetch('https://pizzazz-db-server.herokuapp.com/api/salonforApi/' + salonId + '/' + name, {
+    createApiSalon(ownerId, salon) {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/' + ownerId + '/salonFromAdmin' , {
+            body: JSON.stringify(salon),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -163,6 +180,5 @@ class SalonService {
             return response.json();
         })
     }
-
 }
 export default SalonService;
