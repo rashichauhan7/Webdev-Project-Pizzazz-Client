@@ -47,6 +47,7 @@ export default class Register extends React.Component {
                if (response.length === 0){
                    this.userService.createUser(this.state.newUser)
                        .then((loginUser)=>{
+                           {alert('Registration Successful')}
                            console.log(loginUser);
                            $('.login').css('visibility', 'hidden');
                            $('.register').css('visibility', 'hidden');
