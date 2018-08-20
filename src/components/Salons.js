@@ -49,9 +49,9 @@ export default class Salon extends React.Component{
         return (
             <div className="row salonItem " align="center" style={{marginLeft:"25%"}}>
                 <div className="imgdiv col-2 float-left ">
-                    <img className="img" src = {this.props.salons.image_url}/>
+                    <img className="img" src = {this.props.salons.image_url.length === 0? 'https://www.iconspng.com/images/hotel-icon-hair-salon/hotel-icon-hair-salon.jpg': this.props.salons.image_url}/>
                 </div>
-                    <div className="col-8 name list-group ">
+                    <div className="col-8 name list-group">
                         <Link to={`/salon/${this.props.salons.id}`} onClick={() =>
                                 document.getElementById('sidebar').style.visibility = "hidden"
                         } className="title list-group-item">
