@@ -172,8 +172,11 @@ class ProfileComponent extends Component {
                 <div className="form-group row">
                     <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="email"
-        placeholder= {this.state.currentUser.email} onChange={this.formChanged4}/>
+                        <input type="text"
+                               className="form-control"
+                               id="email"
+                               placeholder= {this.state.currentUser.email}
+                               onChange={this.formChanged4}/>
                     </div>
                 </div>
 

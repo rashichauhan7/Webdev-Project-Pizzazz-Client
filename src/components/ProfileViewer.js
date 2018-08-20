@@ -337,13 +337,29 @@ class ProfileViewerComponent extends Component {
             import('../css/Profile.css');
         }
         return (
-                <div className="container" style={{width: '100%'}}>
+
+                <div className="container" style={{width:'100%'}}>
+
                     <div className="form-row">
                         <div className="col-sm-4 form-control-plaintext text-center">
                             <div className="card ">
                                 <img src={this.state.selectedUser.image}  className="card-header crop" alt="avatar"/>
 
                                 <h1 className="card-body">{this.state.selectedUser.firstName} {this.state.selectedUser.lastName}</h1>
+                                <h5 hidden ={this.state.selectedUser.role !== 'reviewer'}><i className="fa fa-star"></i>Verified Reviewer<i className="fa fa-star"></i></h5>
+                                    <button hidden={this.state.isDifferentUser}
+                                            onClick={this.changeEditState}
+                                            className="btn btn-danger">
+                                        <i className="fa fa-pencil"></i>  Edit Profile</button>
+
+                                <button className="btn btn-info"
+                                                                  hidden={this.state.cannotBeInvited}
+                                                                  onClick={this.inviteToReview}>
+                                    <i className="fa fa-envelope"></i> Invite to Review My Salon
+                                </button>
+
+
+
                             </div>
                         </div>
 
@@ -360,25 +376,16 @@ class ProfileViewerComponent extends Component {
                                         </h3>
                                     </div>
 
-                                    <div className="col-md-6">
-                                        <h5>Likes</h5>
-                                            {this.state.likes.map((review)=>
-                                                <a className="text-danger">'{review.salonName}' </a>
-                                            )}
 
-                                        <div className="form-row"><button className="btn btn-info"
-                                                                                 hidden={this.state.cannotBeInvited}
-                                                                                 onClick={this.inviteToReview}>
-                                            <i className="fa fa-envelope"></i> Invite {this.state.selectedUser.firstName} to Review My Salon
-                                        </button></div>
-                                        <div className="form-row">
-                                            <button hidden={this.state.isDifferentUser}
-                                                    onClick={this.changeEditState}
-                                                    className="btn btn-danger">
-                                                <i className="fa fa-pencil"></i>  Edit Profile</button>
+
+                                        <div  className="form-row col-md-6 float-right" hidden={this.state.isDifferentUser}>
+                                            <button className="btn  btn-dark"
+                                                    hidden={this.state.selectedUser.role !== 'admin'}
+                                                    onClick={(e) => window.location.replace(`/manage`)}>
+                                                <i className="fa fa-home"></i>  <h6>Admin Home</h6>
+                                            </button>
                                         </div>
 
-                                    </div>
                                 </div>
 
                                 <div className="row">
@@ -465,7 +472,7 @@ class ProfileViewerComponent extends Component {
                                     <div className="form-group row">
                                         <label htmlFor="phone" className="col-sm-2 col-form-label">Phone</label>
                                         <div className="col-sm-10">
-                                            <input type="tel" required className="form-control" id="phone"
+                                            <input type="tel" className="form-control" id="phone"
                                                    value= {this.state.phone} onChange={this.formChangedPhone}/>
                                         </div>
                                     </div>
@@ -531,7 +538,7 @@ class ProfileViewerComponent extends Component {
                                         <div className="form-group row">
                                             <label htmlFor="email" className="col-sm-2 col-form-label">Website</label>
                                             <div className="col-sm-10">
-                                                <input type="text" className="form-control" id="email"
+                                                <input type="url" className="form-control" id="email"
                                                        value = {this.state.website} onChange={this.formChangedWebsiteSalon}/>
                                             </div>
                                         </div>
