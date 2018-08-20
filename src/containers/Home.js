@@ -127,7 +127,7 @@ let options = [];
                 <div className="topBanner" ref="topBanner">
                     <button className="btn login" onClick={this.toggleLoginPopup}>Login</button>
                     <button className="btn loggedIn" onclick={() => window.location.reload()}><Link to={`/profiles/${this.state.user.id}`}>{this.state.user.username}</Link></button>
-                    <button className="btn logout" onClick={this.logout}>Logout</button>
+                    <button className="btn logout" onClick={this.logout}><Link to='/home'>Logout</Link></button>
                     <button className="btn register" onClick={this.toggleSignUpPopup}>Sign Up</button>
                     {this.state.showLogin ? <Login close={this.toggleLoginPopup} maincontent={this.maincontent}/>: null }
                     {this.state.showSignUp ? <Register close={this.toggleSignUpPopup}/>: null}

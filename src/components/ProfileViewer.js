@@ -5,7 +5,7 @@ import SalonManagerComponent from "./SalonManager";
 import '../css/ProfileViewer.css'
 import SalonService from "../services/SalonService";
 import SalonEditor from "./SalonEditor";
-
+import $ from 'jquery';
 class ProfileViewerComponent extends Component {
 
     constructor(props) {
@@ -98,6 +98,8 @@ class ProfileViewerComponent extends Component {
     }
 
     componentDidMount() {
+
+        $('.sidebar').css('visibility','hidden');
         this.selectProfile
         (this.props.match.params.profileId);
 
@@ -341,8 +343,9 @@ class ProfileViewerComponent extends Component {
                     <div className="form-row">
                         <div className="col-sm-4 form-control-plaintext text-center">
                             <div className="card ">
-                                <img src={this.state.selectedUser.image}  className="card-header crop" alt="avatar"/>
-
+                                <div className="card-img-top">
+                                <img src={this.state.selectedUser.image}  className="crop" alt="avatar"/>
+                                </div>
                                 <h1 className="card-body">{this.state.selectedUser.firstName} {this.state.selectedUser.lastName}</h1>
                                 <h6 className="card-body">{this.state.selectedUser.username}</h6>
                                 <h5 hidden ={this.state.selectedUser.role !== 'reviewer'}>
