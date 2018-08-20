@@ -302,6 +302,7 @@ export default class SalonItem extends React.Component{
             start1 = [...start1, i];
             end1 = [...end1, i + 100];
         }
+
         options = start1.map((start,index)=> {
         if(index === 0)
         {
@@ -316,48 +317,54 @@ export default class SalonItem extends React.Component{
 
     getValue(date, time) {
         let appoint;
-        this.SalonService.findSalonByYelpId(this.state.salonId)
-            .then(salon => {
-               if (salon.id === 0){
-                   this.SalonService.createApiSalon(this.state.salonId, this.state.salon.name)
-                       .then(salon => {
-                           appoint = {
-                               time: time,
-                               date: date,
-                               salon: salon
-                           };
-                           this.SalonService.createAppointment(appoint)
-                               .then(appt => {
-                                   console.log(appt);
-                               })
-                       })
-               }
-               else {
-                    this.SalonService.getSalonApp(salon.id)
-                        .then(appts =>{
-                            console.log(appts)
-                            for(let appt in appts){
-                                if (appts[appt].time === time && appts[appt].date === date){
-                                    alert('appointment not available select different date and time');
-                                    return;
+        if (time === ""){
+            alert('select time')
+        }
+        else {
+            this.SalonService.findSalonByYelpId(this.state.salonId)
+                .then(salon => {
+                    if (salon.id === 0){
+                        this.SalonService.createApiSalon(this.state.salonId, this.state.salon.name)
+                            .then(salon => {
+                                appoint = {
+                                    time: time,
+                                    date: date,
+                                    salon: salon
+                                };
+                                this.SalonService.createAppointment(appoint)
+                                    .then(appt => {
+                                        console.log(appt);
+                                    })
+                            })
+                    }
+                    else {
+                        this.SalonService.getSalonApp(salon.id)
+                            .then(appts =>{
+                                console.log(appts)
+                                for(let appt in appts){
+                                    if (appts[appt].time === time && appts[appt].date === date){
+                                        alert('appointment not available select different date and time');
+                                        return;
+                                    }
                                 }
-                            }
-                            console.log(appts);
-                            appoint = {
-                                time: time,
-                                date: date,
-                                salon: salon
-                            }
-                            appts = [...appts, appoint];
-                            this.SalonService.updateAppointments(appts)
-                                .then(appts => {
-                                    console.log(appts);
-                                })
+                                console.log(appts);
+                                appoint = {
+                                    time: time,
+                                    date: date,
+                                    salon: salon
+                                }
+                                appts = [...appts, appoint];
+                                this.SalonService.updateAppointments(appts)
+                                    .then(appts => {
+                                        console.log(appts);
+                                        alert('Appointment Booked')
+                                    })
 
 
-                    })
-               }
-            });
+                            })
+                    }
+                });
+        }
     }
 
     handleTimeChange = (event) => {
@@ -430,7 +437,8 @@ export default class SalonItem extends React.Component{
                                         <div>
                                             <select id = "dropdown"
                                                     onChange={this.handleTimeChange}
-                                                    value={this.state.value}>
+                                                    value={this.state.timeValue}>
+                                                <option>select time</option>
                                                 {this.getTimes()}
                                             </select>
                                         </div>
