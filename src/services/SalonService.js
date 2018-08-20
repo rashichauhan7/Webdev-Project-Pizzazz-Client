@@ -1,6 +1,6 @@
 let _singleton = Symbol();
 
-const SALON_API_CONST ='http://localhost:8080/';
+const SALON_API_CONST ='https://pizzazz-db-server.herokuapp.com/';
 const SALON_API_URL = 'https://pizzazz-db-server.herokuapp.com/api/salon';
    /* 'https://pizzazz-db-server.herokuapp.com/api/salon';*/
 /*'https://hw1akriti.herokuapp.com/api/course';*/
@@ -89,7 +89,7 @@ class SalonService {
         })}
 
 
-    createApiSalon(ownerId, salon) {
+    createApiSalonFromScreen(ownerId, salon) {
         return fetch('https://pizzazz-db-server.herokuapp.com/api/' + ownerId + '/salonFromAdmin' , {
             body: JSON.stringify(salon),
             headers: {
@@ -99,6 +99,18 @@ class SalonService {
         }).then(function (response) {
             return response.json();
         })}
+
+
+    createApiSalon(salonId, name) {
+        return fetch(SALON_API_CONST+'api/salonforApi/' + salonId + '/' + name, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+            return response.json();
+        })}
+
 
     updateSalon(salon, salonId) {
         return fetch(SALON_API_URL + '/' + salonId, {

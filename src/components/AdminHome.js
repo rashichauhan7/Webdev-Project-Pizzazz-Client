@@ -94,7 +94,7 @@ export default class AdminHomeComponent extends Component{
             website : this.state.salonWebsite,
             salonOwner : this.state.salonOwnerId
         }
-        this.salonService.createApiSalon(this.state.salonOwnerId,this.state.newSalon)
+        this.salonService.createApiSalonFromScreen(this.state.salonOwnerId,this.state.newSalon)
             .then(response=>{
                 this.userService.findAllSalonsFromAdmin()
                     .then(salons=>this.setSalons(salons))
