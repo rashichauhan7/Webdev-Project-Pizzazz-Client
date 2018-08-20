@@ -94,11 +94,20 @@ export default class AdminHomeComponent extends Component{
             website : this.state.salonWebsite,
             salonOwner : this.state.salonOwnerId
         }
-        this.salonService.createApiSalonFromScreen(this.state.salonOwnerId,this.state.newSalon)
-            .then(response=>{
-                this.userService.findAllSalonsFromAdmin()
-                    .then(salons=>this.setSalons(salons))
+        this.salonService.validateOwner(this.state.salonOwnerId)
+            .then((user)=>{
+                if(user.id === 0){
+                    {alert('Please enter a valid owner Id')}
+                }else{
+                    this.salonService.createApiSalonFromScreen(this.state.salonOwnerId,this.state.newSalon)
+                        .then(response=>{
+                            this.userService.findAllSalonsFromAdmin()
+                                .then(salons=>this.setSalons(salons))
+                        })
+                }
             })
+
+
     }
 
 
