@@ -37,6 +37,27 @@ class UserService {
             });
     }
 
+    findAllOwners() {
+        return fetch(CUSTOMER_API_URL+'/api/owners')
+            .then(function(response){
+                return response.json();
+            });
+    }
+
+    findAllCustomers() {
+        return fetch(CUSTOMER_API_URL+'/api/customers')
+            .then(function(response){
+                return response.json();
+            });
+    }
+
+    findAllSalonsFromAdmin() {
+        return fetch(CUSTOMER_API_URL+'/api/salonsFromAdmin')
+            .then(function(response){
+                return response.json();
+            });
+    }
+
     findUserByUsername(username) {
         return fetch(CUSTOMER_API_URL2 + username + '/username', {
             method: 'get',
@@ -88,9 +109,6 @@ class UserService {
         return fetch(CUSTOMER_API_URL + '/api/user/' + userId, {
             method: 'delete'
         })
-            .then(function(response){
-                return response;
-            });
     }
 
     updateUser(userId,user) {
