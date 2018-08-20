@@ -343,8 +343,9 @@ class ProfileViewerComponent extends Component {
                     <div className="form-row">
                         <div className="col-sm-4 form-control-plaintext text-center">
                             <div className="card ">
-                                <img src={this.state.selectedUser.image}  className="card-header crop" alt="avatar"/>
-
+                                <div className="card-img-top">
+                                <img src={this.state.selectedUser.image}  className="crop" alt="avatar"/>
+                                </div>
                                 <h1 className="card-body">{this.state.selectedUser.firstName} {this.state.selectedUser.lastName}</h1>
                                 <h5 hidden ={this.state.selectedUser.role !== 'reviewer'}><i className="fa fa-star"></i>Verified Reviewer<i className="fa fa-star"></i></h5>
                                     <button hidden={this.state.isDifferentUser}
