@@ -2,6 +2,8 @@ import React from 'react'
 import Salon from '../components/Salons'
 import YelpApiService from "../services/YelpServices";
 import $ from 'jquery';
+import Loader from 'react-loader-spinner';
+import Fullscreen from "react-full-screen";
 export default class InitialList extends React.Component {
 
     constructor(props)
@@ -10,7 +12,8 @@ export default class InitialList extends React.Component {
         this.state = {
             keyword: '',
             location: 'boston , ma',
-            salons:[]
+            salons:[],
+            loaded: false
         };
         this.renderSalons = this.renderSalons.bind(this);
         this.yelp = YelpApiService.instance;
@@ -50,6 +53,7 @@ export default class InitialList extends React.Component {
                     });
                     //console.log(this.state.salons);
                 }
+                this.setState({loaded: true});
             })
     }
     sort(sortId)
@@ -109,7 +113,24 @@ export default class InitialList extends React.Component {
     }
     render() {
 
+        if(!this.state.loaded) {
 
+            return (
+                <Fullscreen>
+                    <div style={{ zIndex: '200',
+                        background: 'rgba(0,0,0,0.5)', position: 'absolute',
+                        width: '100%', height: '100%', paddingLeft: '45%'
+                    }}>
+                        <Loader
+                            type="Puff"
+                            color="#00BFFF"
+                            height="100"
+                            width="100"
+                        />
+                    </div>
+                </Fullscreen>
+            );
+        }
         return (
             <div className="row">
                 {this.renderSalons()}

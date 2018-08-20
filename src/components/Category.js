@@ -2,7 +2,8 @@ import React from 'react'
 import YelpApiService from "../services/YelpServices";
 import Salon from "../components/Salons"
 import $ from 'jquery';
-import  { BrowserRouter as Router } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
+import Fullscreen from "react-full-screen";
 export default class Category extends React.Component {
 
     constructor(props)
@@ -21,11 +22,15 @@ export default class Category extends React.Component {
         this.state = {category: '',
             location: 'boston , ma',
             salons:[],
-            cssLoaded: false
+            cssLoaded: false,
+            loaded: false
         };
 
     }
 
+componentDidUpdate(){
+
+}
 
 
     selectCategory(category) {
@@ -129,6 +134,7 @@ export default class Category extends React.Component {
                     console.log(this.state.salons);
                     this.sort(this.props.location.search);
                 }
+                this.setState({loaded: true});
             })
     }
     renderSalons() {
@@ -143,11 +149,27 @@ export default class Category extends React.Component {
             this.state.cssLoaded = true;
             import('../css/Profile.css');
         }
+        if(!this.state.loaded) {
 
+            return (
+                <Fullscreen>
+                    <div style={{ zIndex: '200',
+                        background: 'rgba(0,0,0,0.5)', position: 'absolute',
+                        width: '100%', height: '100%', paddingLeft: '45%'
+                    }}>
+                        <Loader
+                            type="Puff"
+                            color="#00BFFF"
+                            height="100"
+                            width="100"
+                        />
+                    </div>
+                </Fullscreen>
+            );
+        }
         return (
 
             <div className="list-group" style={{marginRight: '10%'}}>
-
                 {this.renderSalons()}
 
             </div>

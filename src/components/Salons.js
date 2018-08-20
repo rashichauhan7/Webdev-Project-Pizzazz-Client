@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import StarRatings from '../../node_modules/react-star-ratings';
 
 export default class Salon extends React.Component{
     constructor(props)
@@ -24,12 +23,11 @@ export default class Salon extends React.Component{
         this.setState({cssLoaded: false});
     }
 
-    componentWillReceiveProps (newProps)
-    {
+    componentWillReceiveProps (newProps) {
         this.setState({salonId: newProps.salons.id});
         this.setState({is_open_now: !newProps.salons.is_closed});
-        this.setState({cssLoaded: false});
-        }
+    }
+
 
     categories()
     {
@@ -38,6 +36,7 @@ export default class Salon extends React.Component{
             return <Link onClick ={() => this.setState({cssLoaded: true})} className="category2"
                          to={`/category/${categories.title}`}>{categories.title} &nbsp;</Link>
         });
+
         return categorie;
     }
     render () {
