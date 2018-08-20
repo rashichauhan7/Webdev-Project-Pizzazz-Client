@@ -19,6 +19,7 @@ export default class SalonItem extends React.Component{
             showReview: false,
             salonId: '',
             yelpreviews: [],
+            comments: [],
             salon: {photos: [],
                 name:[],
                 categories: [],
@@ -51,6 +52,7 @@ export default class SalonItem extends React.Component{
         this.renderReviews = this.renderReviews.bind(this);
         this.renderYelpReviews = this.renderYelpReviews.bind(this);
         this.renderReview = this.renderReview.bind(this);
+        this.renderComments = this.renderComments.bind(this);
         this.SalonService = SalonService.instance;
         this.UService = UserService.instance;
 
@@ -135,16 +137,50 @@ export default class SalonItem extends React.Component{
 
     renderReviews() {
         let rev = [];
+        let comments = [];
         this.state.reviews.map((review) => {
             this.UService.findProfileById(review.reviewerId)
                 .then((user) => {
-                    review.user = user;
-                    rev= [...rev,  review];
-                    this.setState({reviews: rev});
+                    if(user.role.localeCompare("reviewer") !== 0)
+                    {
+                        review.user = user;
+                        comments = [...comments, review];
+                        this.setState({comments: comments});
+                    }
+                    else {
+                        review.user = user;
+                        rev = [...rev, review];
+                        this.setState({reviews: rev});
+                    }
                 });
             console.log(rev);
         });
 
+
+
+    }
+    renderComments() {
+        let rev = this.state.comments.map((review) => {
+            if(review!= undefined && review.user!== undefined) {
+                return <li className="list-group-item reviewz">
+                    {review.user.image !== null &&
+                    <img className="image" height="60px" width="60px" src={review.user.image}/>}
+                    {review.user.image === null && <img className="image" height="60px" width="60px"
+                                                        src='http://strongvoicespublishing.com/wp-content/uploads/2017/06/user.png'/>}
+
+                    <Link to={`/profiles/${review.user.id}`}><b style={{fontStyle: "Verdana"}}>{review.user.username}</b></Link>
+                    <StarRatings
+                        rating={review.rating}
+                        starDimension="30px"
+                        starSpacing="2px"
+                        starRatedColor="red"/>
+                    <p>{review.comment}</p></li>
+            }
+        });
+        console.log("rev "+rev.length);
+        if(rev.length === 0)
+            rev = <h4> No Reviews yet!</h4>
+        return rev;
     }
 
      renderReview() {
@@ -167,8 +203,7 @@ export default class SalonItem extends React.Component{
                         }
                     });
 console.log("rev "+rev.length);
-                    if(rev.length === 0)
-                        rev = <h4> No reviews yet!</h4>
+
         return rev;
     }
 
@@ -299,6 +334,7 @@ console.log("rev "+rev.length);
                 if (salon.id !== 0){
                     this.SalonService.getSalonReviews(salon.id)
                         .then(reviews =>{
+                            // if(reviews.reviewerId)
                             this.setState({reviews: reviews});
                             this.setState({reviewCount: reviews.length});
                             this.renderReviews();
@@ -536,7 +572,9 @@ console.log("rev "+rev.length);
                         </div>
                     <ul className="list-group">
                     <h1>Comments</h1>
+                        {this.renderComments()}
                     {this.renderYelpReviews()}
+
                     </ul>
                     </div>
                 </div>
