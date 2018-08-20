@@ -186,7 +186,7 @@ class App extends Component {
 
             <div className="popup_inner logincomponent">
 
-                <button onClick={this.props.close} className="close btn btn-danger float-right closeBtn"><i className="fa fa-close"/> </button>
+                <button onClick={this.props.close} className="btn btn-danger float-right closeBtn"><i className="fa fa-close"/> </button>
                 <form className="text-center border border-light p-5">
                     <h1>Sign In</h1>
                     <input type="text" className="form-control mb-4 wbdv" placeholder="username" onChange={this.formChanged}/>
@@ -194,11 +194,11 @@ class App extends Component {
                            placeholder="Password"  onChange={this.formChanged2}/>
                     <button className="btn btn-dark btn-block my-4" type="button" onClick={this.loginUser}>Continue</button>
 
-                    <p>Not a member?
-                        <a href="">Register</a>
+                    <p>
+                        or
                     </p>
 
-                    <p>or sign in with:</p>
+
                     <div className="App">
                         {content}
                     </div>
