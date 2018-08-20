@@ -97,6 +97,7 @@ class UserService {
     createUser(user) {
         return fetch(CUSTOMER_API_URL2, {
             body: JSON.stringify(user),
+            credentials : 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

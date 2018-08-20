@@ -122,9 +122,17 @@ export default class AdminHomeComponent extends Component{
         }
 
         console.log(this.state.newUser);
-        this.userService.createUser(this.state.newUser)
-            .then((loginUser)=>{this.userService.findAllReviewers()
-                .then(users=>this.setReviewers(users))})
+        this.userService.findUserByUsername(this.state.username)
+            .then(user=>{
+                if(user.id ===0){
+                    this.userService.createUser(this.state.newUser)
+                        .then((loginUser)=>{this.userService.findAllReviewers()
+                            .then(users=>this.setReviewers(users))})
+                } else {
+                    {alert('Username already taken')}
+                }
+            })
+
     };
 
     deleteReviewer=(userId)=> {
