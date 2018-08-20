@@ -106,10 +106,12 @@ class UserService {
         })}
 
     deleteUser(userId) {
-        return fetch(CUSTOMER_API_URL + '/api/user/' + userId, {
+        fetch(CUSTOMER_API_URL + '/api/user/' + userId, {
             method: 'delete'
-        })
-    }
+        }).then(function (response) {
+            return response.json();
+        })}
+    
 
     updateUser(userId,user) {
         return fetch(CUSTOMER_API_URL2  + userId, {
