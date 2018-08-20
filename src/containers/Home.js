@@ -266,7 +266,6 @@ let options = [];
                     </div>
                 </div>
                 </div>
-
               </div>
         );
     }
