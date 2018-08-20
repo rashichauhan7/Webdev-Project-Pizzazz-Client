@@ -32,7 +32,8 @@ export default class SalonItem extends React.Component{
             dateValue: new Date().toJSON().slice(0,10),
             timeValue: '',
             cssLoaded: false,
-            currentUser : {}
+            currentUser : {},
+            reviewCount: 0
         }
 
         this.yelp = YelpApiService.instance;
@@ -165,7 +166,9 @@ export default class SalonItem extends React.Component{
                                 <p>{review.comment}</p></li>
                         }
                     });
-
+console.log("rev "+rev.length);
+                    if(rev.length === 0)
+                        rev = <h4> No reviews yet!</h4>
         return rev;
     }
 
@@ -269,6 +272,7 @@ export default class SalonItem extends React.Component{
                     this.SalonService.getSalonReviews(salon.id)
                         .then(reviews =>{
                             this.setState({reviews: reviews});
+                            this.setState({reviewCount: reviews.length});
                             this.renderReviews();
                     })
                 }
@@ -387,7 +391,7 @@ export default class SalonItem extends React.Component{
                             starSpacing="2px"
                             starRatedColor="gold"/>
                         </span>
-                        <span><h4>Reviews {this.state.salon.review_count}</h4></span>
+                        <span><h4>Reviews {this.state.reviewCount}</h4></span>
                         <span>
                             <button className="btn btn-danger" onClick={this.toggleReview}>
                         <StarRatings rating= {1.0} starDimension="25px"
@@ -402,10 +406,6 @@ export default class SalonItem extends React.Component{
                             <div className="card-img-top" style={{width: '300px' , height: '100px',padding: '0%'}}>
                                     <Maps lat = {this.state.salon.coordinates.latitude} lng={this.state.salon.coordinates.longitude}/>
                             </div>
-                            <h5 className="card-text">{this.state.salon.location.display_address[0]}, &nbsp; {this.state.salon.location.display_address[1]}</h5>
-                            <span className="card-text">{this.state.salon.location.cross_streets}</span>
-
-                            <span className="card-text" style={{fontSize: "large"}}><i className="fa fa-phone"></i>&nbsp;{this.state.salon.phone}</span>
 
                         </div>
                         <ul className="list-group">
@@ -420,14 +420,23 @@ export default class SalonItem extends React.Component{
                                 {this.photos()}
                             </div>
                             <div className="side">
+                                <div className="card" style={{ marginLeft: '20%' , width: '40%', height: '30%'}}>
+                                    <div className="card-text">
+                                        <h3> <i className="fa fa-location-arrow"/> Address</h3>
+                                        {this.state.salon.location.display_address[0]},
+                                        &nbsp; {this.state.salon.location.display_address[1]}, &nbsp;
+                                        {this.state.salon.location.cross_streets}</div>
+
+                                <span className="card-text" style={{fontSize: "large"}}><i className="fa fa-phone"></i>&nbsp;{this.state.salon.phone}</span>
+                                </div>
                                 <div className="row timing container-fluid">
-                                    <label><b>Make an Appointment</b></label>
+                                    <label><i className="fa fa-calendar-times-o fa-2x"/> Make an Appointment</label>
                                     <div style={{alignContent: "center" ,margin: '5%'}}>
-                                        <input type="date"
+                                        <input className="form-control" type="date"
                                                onChange={this.handleDateChange}
                                                value={this.state.dateValue}/>
                                         <div>
-                                            <select id = "dropdown"
+                                            <select className="form-control" id = "dropdown"
                                                     onChange={this.handleTimeChange}
                                                     value={this.state.value}>
                                                 {this.getTimes()}
