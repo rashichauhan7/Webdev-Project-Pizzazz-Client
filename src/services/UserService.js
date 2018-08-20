@@ -111,6 +111,17 @@ class UserService {
         })
     }
 
+    updateUserFromAdmin(userId, user){
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/userFromAdmin/'  + userId, {
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(function (response) {
+            return response.json();
+        })}
+
     updateUser(userId,user) {
         return fetch(CUSTOMER_API_URL2  + userId, {
             body: JSON.stringify(user),

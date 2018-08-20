@@ -65,6 +65,11 @@ export default class AdminHomeComponent extends Component{
         $('.topBanner').css('padding-bottom','0%');
         $('.logo').css('visibility','hidden');
         $('.logo1').css('visibility','visible');
+
+        $('.customertag').hide();
+        $('.reviewertag').hide();
+        $('.ownertag').hide();
+
         this.userService.findCurrentUser()
             .then(user => this.setCurrentUser(user))
             .then(()=>{
@@ -117,6 +122,75 @@ export default class AdminHomeComponent extends Component{
             .then((loginUser)=>{this.userService.findAllReviewers()
                 .then(users=>this.setReviewers(users))})
     };
+
+    EditReviewer = (user)=> {
+        if(user.role === "reviewer"){
+            $('.r-user-id').val(user.id);
+            $('.r-first-name').val(user.firstName);
+            $('.r-last-name').val(user.lastName);
+            $('.r-username').val(user.username);
+            $('.r-email').val(user.email);
+        }
+
+        if(user.role === "owner"){
+            $('.o-user-id').val(user.id);
+            $('.o-first-name').val(user.firstName);
+            $('.o-last-name').val(user.lastName);
+            $('.o-username').val(user.username);
+            $('.o-email').val(user.email);
+        }
+
+        if(user.role === ""){
+            $('.c-user-id').val(user.id);
+            $('.c-first-name').val(user.firstName);
+            $('.c-last-name').val(user.lastName);
+            $('.c-username').val(user.username);
+            $('.c-email').val(user.email);
+        }
+
+        if(user.role.localeCompare('') === 0)
+            $('.customertag').show();
+        if(user.role.localeCompare('reviewer') === 0)
+            $('.reviewertag').show();
+        if(user.role.localeCompare('owner') === 0)
+            $('.ownertag').show();
+
+
+    }
+
+    UpdateReviewer = (u)=> {
+        let user;
+        if(u === "r"){
+             user = {
+                id: $('.r-user-id').val(),
+                firstName: $('.r-first-name').val(),
+                lastName: $('.r-last-name').val(),
+                username: $('.r-username').val(),
+                email: $('.r-email').val()
+            }
+        }
+        if(u === "o"){
+            user = {
+                id: $('.o-user-id').val(),
+                firstName: $('.o-first-name').val(),
+                lastName: $('.o-last-name').val(),
+                username: $('.o-username').val(),
+                email: $('.o-email').val()
+            }
+        }
+        if(u === "c"){
+            user = {
+                id: $('.c-user-id').val(),
+                firstName: $('.c-first-name').val(),
+                lastName: $('.c-last-name').val(),
+                username: $('.c-username').val(),
+                email: $('.c-email').val()
+            }
+        }
+        console.log(user);
+        this.userService.updateUserFromAdmin(user.id, user)
+            .then(() => { window.location.reload()});
+    }
 
     deleteReviewer=(userId)=> {
         this.userService.deleteUser(userId)
@@ -188,310 +262,388 @@ export default class AdminHomeComponent extends Component{
     render() {
         return(
             <div>
-            <div className="border fa-border" hidden={this.state.isAdmin}>
-                <form className="text-center border border-light p-5"  onSubmit={this.addReviewer}>
+                <div className="border fa-border" hidden={this.state.isAdmin}>
+                    <form className="text-center border border-light p-5"  onSubmit={this.addReviewer}>
 
-                    <div className="form-row mb-3 border-dark">
-                        <div className="float-left">
-                            <h4>Add New Reviewer</h4>
+                        <div className="form-row mb-3 border-dark">
+                            <div className="float-left">
+                                <h4>Add New Reviewer</h4>
+                            </div>
                         </div>
-                    </div>
-            <div className="form-row mb-3 border-dark">
-                <div className="col">
-
-                    <input type="text" id="defaultRegisterFormFirstName" required className="form-control"
-                           placeholder="First name" onChange={this.formChangedFirstName}/>
-                </div>
-                <div className="col">
-
-                    <input type="text" id="defaultRegisterFormLastName" required className="form-control"
-                           placeholder="Last name" onChange={this.formChangedLastName}/>
-                </div>
-                <div className="col">
-
-                    <input type="email" id="defaultRegisterFormLastName" required className="form-control"
-                           placeholder="Email" onChange={this.formChangedEmail}/>
-                </div></div>
-                <div className="form-row mb-4 border-dark">
-
-                <div className="col">
-
-                    <input type="text" id="defaultRegisterFormLastName" required className="form-control"
-                           placeholder="Username" onChange={this.formChangedUsername}/>
-                </div>
-                <div className="col">
-
-                    <input type="password" id="defaultRegisterFormLastName" required className="form-control"
-                           placeholder="Password" onChange={this.formChangedPassword}/>
-                </div>
-                <div className="col">
-                    <div className="form-row mb-1 border-dark">
-                        <div className="col">
-                    <button className="btn btn-block btn-dark" type="submit" value="Submit">Add Reviewer</button>
-                        </div> <div className="col">
-                    <button className="btn btn-block btn-dark" type="reset" value="Reset">Clear Fields</button>
-                    </div>
-                    </div>
-                </div>
-
-
-            </div>
-                </form>
-                <form className="text-center border border-light p-5">
-                    <div className="form-row mb-3 border-dark">
-                    <h3>Reviewer Profiles</h3>
-                    </div>
-
-                    <div className="form-row mb-3 border-dark">
-                        <div className="col">
-                            <h6>ID</h6>
-                        </div>
-                        <div className="col">
-                            <h6>First Name</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Last Name</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Username</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Email</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Action</h6>
-                        </div>
-                    </div>
-
-                    <ul className="list-group">
-                    {this.state.reviewers.map((reviewer)=>
                         <div className="form-row mb-3 border-dark">
                             <div className="col">
-                                <strong>{reviewer.id}</strong>
+
+                                <input type="text" id="defaultRegisterFormFirstName" required className="form-control"
+                                       placeholder="First name" onChange={this.formChangedFirstName}/>
                             </div>
                             <div className="col">
-                                <strong>{reviewer.firstName}</strong>
+
+                                <input type="text" id="defaultRegisterFormLastName" required className="form-control"
+                                       placeholder="Last name" onChange={this.formChangedLastName}/>
                             </div>
                             <div className="col">
-                                <strong>{reviewer.lastName}</strong>
+
+                                <input type="email" id="defaultRegisterFormLastName" required className="form-control"
+                                       placeholder="Email" onChange={this.formChangedEmail}/>
+                            </div></div>
+                        <div className="form-row mb-4 border-dark">
+
+                            <div className="col">
+
+                                <input type="text" id="defaultRegisterFormLastName" required className="form-control"
+                                       placeholder="Username" onChange={this.formChangedUsername}/>
                             </div>
                             <div className="col">
-                                <strong>{reviewer.username}</strong>
+
+                                <input type="password" id="defaultRegisterFormLastName" required className="form-control"
+                                       placeholder="Password" onChange={this.formChangedPassword}/>
                             </div>
                             <div className="col">
-                                <strong>{reviewer.email}</strong>
+                                <div className="form-row mb-1 border-dark">
+                                    <div className="col">
+                                        <button className="btn btn-block btn-dark" type="submit" value="Submit">Add Reviewer</button>
+                                    </div> <div className="col">
+                                    <button className="btn btn-block btn-dark" type="reset" value="Reset">Clear Fields</button>
+                                </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                    <form className="text-center border border-light p-5">
+                        <div className="form-row mb-3 border-dark">
+                            <h3>Reviewer Profiles</h3>
+                        </div>
+
+                        <div className="form-row mb-3 border-dark">
+                            <div className="col">
+                                <h6>ID</h6>
                             </div>
                             <div className="col">
-                            <button className="btn btn btn-danger"
-                                    onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Reviewer?'))
-                                        this.deleteReviewer(reviewer.id)}}>Delete Profile</button>
+                                <h6>First Name</h6>
                             </div>
-                        </div>
-                    )}
-                </ul>
-                </form>
-
-                <form className="text-center border border-light p-5">
-                    <div className="form-row mb-3 border-dark">
-                        <h3>Owner Profiles</h3>
-                    </div>
-
-                    <div className="form-row mb-3 border-dark">
-                        <div className="col">
-                            <h6>ID</h6>
-                        </div>
-                        <div className="col">
-                            <h6>First Name</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Last Name</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Username</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Email</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Action</h6>
-                        </div>
-                    </div>
-
-                    <ul className="list-group">
-                        {this.state.owners.map((reviewer)=>
-                            <div className="form-row mb-3 border-dark">
-                                <div className="col">
-                                    <strong>{reviewer.id}</strong>
-                                </div>
-                                <div className="col">
-                                    <strong>{reviewer.firstName}</strong>
-                                </div>
-                                <div className="col">
-                                    <strong>{reviewer.lastName}</strong>
-                                </div>
-                                <div className="col">
-                                    <strong>{reviewer.username}</strong>
-                                </div>
-                                <div className="col">
-                                    <strong>{reviewer.email}</strong>
-                                </div>
-                                <div className="col">
-                                    <button className="btn btn btn-danger"
-                                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Reviewer?'))
-                                                this.deleteReviewer(reviewer.id)}}>Delete Profile</button>
-                                </div>
+                            <div className="col">
+                                <h6>Last Name</h6>
                             </div>
-                        )}
-                    </ul>
-                </form>
-
-
-
-                <form className="text-center border border-light p-5">
-                    <div className="form-row mb-3 border-dark">
-                        <h3>Customer Profiles</h3>
-                    </div>
-
-                    <div className="form-row mb-3 border-dark">
-                        <div className="col">
-                            <h6>ID</h6>
-                        </div>
-                        <div className="col">
-                            <h6>First Name</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Last Name</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Username</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Email</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Action</h6>
-                        </div>
-                    </div>
-
-                    <ul className="list-group">
-                        {this.state.customers.map((reviewer)=>
-                            <div className="form-row mb-3 border-dark">
-                                <div className="col">
-                                    <strong>{reviewer.id}</strong>
-                                </div>
-                                <div className="col">
-                                    <strong>{reviewer.firstName}</strong>
-                                </div>
-                                <div className="col">
-                                    <strong>{reviewer.lastName}</strong>
-                                </div>
-                                <div className="col">
-                                    <strong>{reviewer.username}</strong>
-                                </div>
-                                <div className="col">
-                                    <strong>{reviewer.email}</strong>
-                                </div>
-                                <div className="col">
-                                    <button className="btn btn btn-danger"
-                                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Profile?'))
-                                                this.deleteReviewer(reviewer.id)}}>Delete Profile</button>
-                                </div>
+                            <div className="col">
+                                <h6>Username</h6>
                             </div>
-                        )}
-                    </ul>
-                </form>
-
-
-                <form className="text-center border border-light p-5"  onSubmit={this.addSalon}>
-                    <div className="form-row mb-3 border-dark">
-                        <div className="float-left">
-                            <h4>Add New Salon</h4>
-                        </div>
-                    </div>
-                    <div className="form-row mb-3 border-dark">
-                        <div className="col">
-
-                            <input type="text"  required className="form-control"
-                                   placeholder="Salon Name" onChange={this.formChangedNameSalon}/>
-                        </div>
-                        <div className="col">
-
-
-                            <input type="text" required className="form-control"
-                                   placeholder="Website" onChange={this.formChangedWebsiteSalon}/>
-                        </div>
-
-                        <div className="col">
-
-                            <input type="number"  required className="form-control"
-                                   placeholder="Owner Id" onChange={this.formChangedOwnerSalon}/>
-                        </div>
-
-                        <div className="col">
-                            <div className="form-row mb-1 border-dark">
-                                <div className="col">
-                                    <button className="btn btn-block btn-dark" type="submit" value="Submit">Add Salon</button>
-                                </div> <div className="col">
-                                <button className="btn btn-block btn-dark" type="reset" value="Reset">Clear Fields</button>
+                            <div className="col">
+                                <h6>Email</h6>
                             </div>
+                            <div className="col">
+                                <h6>Action</h6>
                             </div>
                         </div>
 
-
-                    </div>
-                </form>
-
-
-                <form className="text-center border border-light p-5">
-                    <div className="form-row mb-3 border-dark">
-                        <h3>Pizzazz Verified Salons</h3>
-                    </div>
-
-                    <div className="form-row mb-3 border-dark">
-                        <div className="col">
-                            <h6>ID</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Salon Name</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Website</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Owner Id</h6>
-                        </div>
-                        <div className="col">
-                            <h6>Action</h6>
-                        </div>
-                    </div>
-
-                    <ul className="list-group">
-                        {this.state.salons.map((reviewer)=>
-                            <div className="form-row mb-3 border-dark">
+                        <ul className="list-group">
+                            <div className="form-row mb-3 border-dark reviewertag">
                                 <div className="col">
-                                    <strong>{reviewer.id}</strong>
+                                    <input disabled className="r-user-id form-control"/>
                                 </div>
                                 <div className="col">
-                                    <strong>{reviewer.name}</strong>
+                                    <input className="r-first-name form-control"/>
                                 </div>
                                 <div className="col">
-                                    <strong>{reviewer.website}</strong>
+                                    <input className="r-last-name form-control"/>
                                 </div>
                                 <div className="col">
-                                    <strong>{reviewer.salonOwner}</strong>
+                                    <input disabled className="r-username form-control"/>
                                 </div>
                                 <div className="col">
-                                    <button className="btn btn btn-danger"
-                                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Salon?'))
-                                                this.deleteSalon(reviewer.id)}}>Delete Salon</button>
+                                    <input className="r-email form-control"/>
+                                </div>
+                                <div className="col">
+                                    <button className="btn btn-light"
+                                            type="button"
+                                            onClick={()=> {this.UpdateReviewer("r")}}>
+                                        Update
+                                    </button>
                                 </div>
                             </div>
-                        )}
-                    </ul>
-                </form>
+                            {this.state.reviewers.map((reviewer)=>
+                                <div className="form-row mb-3 border-dark">
+                                    <div  className="col">
+                                        <strong>{reviewer.id}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.firstName}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.lastName}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.username}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.email}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <button style={{marginRight: '5%'}} className="btn btn btn-danger delete"
+                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Reviewer?'))
+                                                    this.deleteReviewer(reviewer.id)}}><i className="fa fa-trash"></i></button>
+                                        <button type="button" className="btn btn btn-danger edit"
+                                                onClick={()=> {this.EditReviewer(reviewer)}}><i className="fa fa-pencil"></i></button>
+                                    </div>
+                                </div>
+                            )}
+                        </ul>
+                    </form>
+
+                    <form className="text-center border border-light p-5">
+                        <div className="form-row mb-3 border-dark">
+                            <h3>Owner Profiles</h3>
+                        </div>
+
+                        <div className="form-row mb-3 border-dark ">
+                            <div className="col">
+                                <h6>ID</h6>
+                            </div>
+                            <div className="col">
+                                <h6>First Name</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Last Name</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Username</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Email</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Action</h6>
+                            </div>
+                        </div>
+
+                        <ul className="list-group">
+                            <div className="form-row mb-3 border-dark ownertag">
+                                <div className="col">
+                                    <input disabled className="o-user-id"/>
+                                </div>
+                                <div className="col">
+                                    <input className="o-first-name"/>
+                                </div>
+                                <div className="col">
+                                    <input className="o-last-name"/>
+                                </div>
+                                <div className="col">
+                                    <input disabled className="o-username"/>
+                                </div>
+                                <div className="col">
+                                    <input className="o-email"/>
+                                </div>
+                                <div className="col">
+                                    <button className="btn btn-light"
+                                            type="button"
+                                            onClick={()=> {this.UpdateReviewer("o")}}>
+                                        Update
+                                    </button>
+                                </div>
+                            </div>
+                            {this.state.owners.map((reviewer)=>
+                                <div className="form-row mb-3 border-dark">
+                                    <div className="col">
+                                        <strong>{reviewer.id}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.firstName}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.lastName}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.username}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.email}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <button style={{marginRight: '5%'}} className="btn btn btn-danger delete"
+                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Reviewer?'))
+                                                    this.deleteReviewer(reviewer.id)}}><i className="fa fa-trash"></i></button>
+                                        <button type="button" className="btn btn btn-danger edit"
+                                                onClick={()=> {this.EditReviewer(reviewer)}}><i className="fa fa-pencil"></i></button>
+                                    </div>
+                                </div>
+                            )}
+                        </ul>
+                    </form>
 
 
-            </div>
+
+                    <form className="text-center border border-light p-5">
+                        <div className="form-row mb-3 border-dark">
+                            <h3>Customer Profiles</h3>
+                        </div>
+
+                        <div className="form-row mb-3 border-dark ">
+                            <div className="col">
+                                <h6>ID</h6>
+                            </div>
+                            <div className="col">
+                                <h6>First Name</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Last Name</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Username</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Email</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Action</h6>
+                            </div>
+                        </div>
+
+                        <ul className="list-group">
+                            <div className="form-row mb-3 border-dark customertag">
+                                <div className="col">
+                                    <input disabled className="c-user-id"/>
+                                </div>
+                                <div className="col">
+                                    <input className="c-first-name"/>
+                                </div>
+                                <div className="col">
+                                    <input className="c-last-name"/>
+                                </div>
+                                <div className="col">
+                                    <input disabled className="c-username"/>
+                                </div>
+                                <div className="col">
+                                    <input className="c-email"/>
+                                </div>
+                                <div className="col">
+                                    <button className="btn btn-light"
+                                            type="button"
+                                            onClick={()=> {this.UpdateReviewer("c")}}>
+                                        Update
+                                    </button>
+                                </div>
+                            </div>
+                            {this.state.customers.map((reviewer)=>
+                                <div className="form-row mb-3 border-dark">
+                                    <div className="col">
+                                        <strong>{reviewer.id}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.firstName}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.lastName}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.username}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.email}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <button style={{marginRight: '5%'}} className="btn btn btn-danger delete"
+                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Reviewer?'))
+                                                    this.deleteReviewer(reviewer.id)}}><i className="fa fa-trash"></i></button>
+                                        <button type="button" className="btn btn btn-danger edit"
+                                                onClick={()=> {this.EditReviewer(reviewer)}}><i className="fa fa-pencil"></i></button>
+                                    </div>
+                                </div>
+                            )}
+                        </ul>
+                    </form>
+
+
+                    <form className="text-center border border-light p-5"  onSubmit={this.addSalon}>
+                        <div className="form-row mb-3 border-dark">
+                            <div className="float-left">
+                                <h4>Add New Salon</h4>
+                            </div>
+                        </div>
+                        <div className="form-row mb-3 border-dark">
+                            <div className="col">
+
+                                <input type="text"  required className="form-control"
+                                       placeholder="Salon Name" onChange={this.formChangedNameSalon}/>
+                            </div>
+                            <div className="col">
+
+
+                                <input type="text" required className="form-control"
+                                       placeholder="Valid Salon Id" onChange={this.formChangedWebsiteSalon}/>
+                            </div>
+
+                            <div className="col">
+
+                                <input type="number"  required className="form-control"
+                                       placeholder="Owner Id" onChange={this.formChangedOwnerSalon}/>
+                            </div>
+
+                            <div className="col">
+                                <div className="form-row mb-1 border-dark">
+                                    <div className="col">
+                                        <button style={{marginRight: '5%'}} className="btn btn-block btn-dark" type="submit" value="Submit">Add Salon</button>
+                                    </div> <div className="col">
+                                    <button className="btn btn-block btn-dark" type="reset" value="Reset">Clear Fields</button>
+                                </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+
+
+                    <form className="text-center border border-light p-5">
+                        <div className="form-row mb-3 border-dark">
+                            <h3>Pizzazz Verified Salons</h3>
+                        </div>
+
+                        <div className="form-row mb-3 border-dark">
+                            <div className="col">
+                                <h6>ID</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Salon Name</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Pizzazz Salon Id</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Owner Id</h6>
+                            </div>
+                            <div className="col">
+                                <h6>Action</h6>
+                            </div>
+                        </div>
+
+                        <ul className="list-group">
+                            {this.state.salons.map((reviewer)=>
+                                <div className="form-row mb-3 border-dark">
+                                    <div className="col">
+                                        <strong>{reviewer.id}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.name}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.website}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <strong>{reviewer.salonOwner}</strong>
+                                    </div>
+                                    <div className="col">
+                                        <button className="btn btn btn-danger"
+                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Salon?'))
+                                                    this.deleteSalon(reviewer.id)}}>Delete Salon</button>
+                                    </div>
+                                </div>
+                            )}
+                        </ul>
+                    </form>
+
+
+                </div>
 
                 <div className="alert alert-danger" hidden={!this.state.isAdmin}>
                     <strong>Safety Breach!</strong> You need Admin Access to view .
