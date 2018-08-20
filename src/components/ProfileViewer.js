@@ -347,9 +347,10 @@ class ProfileViewerComponent extends Component {
                                 <img src={this.state.selectedUser.image}  className="crop" alt="avatar"/>
                                 </div>
                                 <h1 className="card-body">{this.state.selectedUser.firstName} {this.state.selectedUser.lastName}</h1>
-                                <h6 className="card-body">{this.state.selectedUser.username}</h6>
-                                <h5 hidden ={this.state.selectedUser.role !== 'reviewer'}>
-                                    <i className="fa fa-star"></i>Verified Reviewer<i className="fa fa-star"></i></h5>
+                                <strong>{this.state.selectedUser.username}</strong>
+                                <i className="fa fa-pencil"> {this.state.selectedUser.email}</i>
+                                <h5 hidden ={this.state.selectedUser.role !== 'reviewer'}><strong>
+                                    <i className="fa fa-star"></i>Verified Reviewer<i className="fa fa-star"></i></strong></h5>
                                     <button hidden={this.state.isDifferentUser}
                                             onClick={this.changeEditState}
                                             className="btn btn-danger">
