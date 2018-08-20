@@ -34,7 +34,7 @@ export default class Category extends React.Component {
     }
 
     componentDidMount() {
-
+        $('.sidebar').css('visibility','visible');
         this.getSalons(this.props.match.params.category);
         this.sort(this.props.location.search);
     }

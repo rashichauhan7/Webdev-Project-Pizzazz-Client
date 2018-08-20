@@ -15,8 +15,21 @@ export default class Register extends React.Component {
             firstname:'',
             lastname:'',
             email:'',
-            role:''
+            role:'',
+            hiddenSuccess : true
         }; }
+
+
+        setStateOfAll(){
+        this.setState({
+            password :'',
+            firstname:'',
+            lastname:'',
+            email:'',
+            role:'',
+            hiddenSuccess : false
+        })
+        }
 
     saveUser=()=> {
         this.state.newUser = {
@@ -40,8 +53,9 @@ export default class Register extends React.Component {
                            $('.loggedIn').css('visibility', 'visible');
                            $('.logout').css('visibility', 'visible');
                            this.props.close();
-                           window.location.reload();
-                       })
+                       }).then(()=>{
+                       this.setStateOfAll();
+                   })
                }
                else {
                    alert('username already exists');
@@ -62,32 +76,32 @@ export default class Register extends React.Component {
     formChangedpassword=(event)=> {
         console.log(event.target.value);
         console.log(this.state.password);
-        this.setState({ password: event.target.value }) };
+        this.setState({ password: event.target.value , hiddenSuccess: true}) };
 
     formChangedusername=(event)=> {
         console.log(event.target.value);
         console.log(this.state.username);
-        this.setState({ username: event.target.value }) };
+        this.setState({ username: event.target.value , hiddenSuccess: true }) };
 
     formChangedFirstName=(event)=> {
         console.log(event.target.value);
         console.log(this.state.firstname);
-        this.setState({ firstname: event.target.value }) };
+        this.setState({ firstname: event.target.value , hiddenSuccess: true}) };
 
     formChangedLastName=(event)=> {
         console.log(event.target.value);
         console.log(this.state.lastname);
-        this.setState({ lastname: event.target.value }) };
+        this.setState({ lastname: event.target.value , hiddenSuccess: true }) };
 
     formChangedEmail=(event)=> {
         console.log(event.target.value);
         console.log(this.state.email);
-        this.setState({ email: event.target.value}) };
+        this.setState({ email: event.target.value , hiddenSuccess: true}) };
 
     formChangedRole=(event)=> {
         console.log(event.target.checked);
         console.log(this.state.role);
-        this.setState({ role: event.target.checked}) };
+        this.setState({ role: event.target.checked , hiddenSuccess: true}) };
 
     handleChange({target}){
         if (target.checked){
@@ -113,6 +127,10 @@ export default class Register extends React.Component {
                 <h1>Sign Up</h1>
 
                 <div className="form-row mb-4">
+                    <div className="alert alert-success" hidden={this.state.hiddenSuccess}>
+                        <strong>Success!</strong> Please Login Using the Credentials created
+                    </div>
+
                     <div className="col">
 
                         <input type="text"
@@ -161,6 +179,7 @@ export default class Register extends React.Component {
                        required
                        className="form-control"
                        placeholder="Password"
+
                        onChange={this.formChangedpassword}/>
 
                     <div className="custom-control custom-checkbox">
@@ -172,17 +191,15 @@ export default class Register extends React.Component {
                                htmlFor="defaultRegisterFormNewsletter">Register as a salon owner</label>
                     </div>
 
-
                     <button className="btn btn-dark my-4 btn-block"
-                            type="submit"
-                    >Register
+                            type="submit">Register
                     </button>
 
                         <p>By clicking
-                            <em>Register</em> you agree to our
-                            <a href="" target="_blank">terms of service</a> and
-                            <a href="" target="_blank">terms of service</a>. </p>
-            </form>
-</div>
+                            <em> Register</em> you agree to our
+                            <a > terms of service</a> and
+                            <a >terms of conditions</a>. </p>
+                </form>
+            </div>
     ) }
 }

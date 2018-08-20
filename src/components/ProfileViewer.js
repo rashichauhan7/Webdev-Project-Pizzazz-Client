@@ -5,7 +5,7 @@ import SalonManagerComponent from "./SalonManager";
 import '../css/ProfileViewer.css'
 import SalonService from "../services/SalonService";
 import SalonEditor from "./SalonEditor";
-
+import $ from 'jquery';
 class ProfileViewerComponent extends Component {
 
     constructor(props) {
@@ -98,6 +98,8 @@ class ProfileViewerComponent extends Component {
     }
 
     componentDidMount() {
+
+        $('.sidebar').css('visibility','hidden');
         this.selectProfile
         (this.props.match.params.profileId);
 
@@ -111,10 +113,10 @@ class ProfileViewerComponent extends Component {
             this.userService.findReviewsById(this.state.selectedUser.id)
                 .then(reviews => {
                     this.setReviews(reviews)})
-                .then(()=>{
-                    this.userService.findLikesById(this.state.selectedUser.id)
-                        .then(likes =>
-                        this.setLikes(likes))
+                .then(()=>{this.salonService.findSalonByUserId(this.state.selectedUser.id)
+                    .then(salon =>{
+                        this.setSalonState(salon);
+                    })
                 })
         })
             .then(()=>{
@@ -341,10 +343,13 @@ class ProfileViewerComponent extends Component {
                     <div className="form-row">
                         <div className="col-sm-4 form-control-plaintext text-center">
                             <div className="card ">
-                                <img src={this.state.selectedUser.image}  className="card-header crop" alt="avatar"/>
-
+                                <div className="card-img-top">
+                                <img src={this.state.selectedUser.image}  className="crop" alt="avatar"/>
+                                </div>
                                 <h1 className="card-body">{this.state.selectedUser.firstName} {this.state.selectedUser.lastName}</h1>
-                                <h5 hidden ={this.state.selectedUser.role !== 'reviewer'}><i className="fa fa-star"></i>Verified Reviewer<i className="fa fa-star"></i></h5>
+                                <h6 className="card-body">{this.state.selectedUser.username}</h6>
+                                <h5 hidden ={this.state.selectedUser.role !== 'reviewer'}>
+                                    <i className="fa fa-star"></i>Verified Reviewer<i className="fa fa-star"></i></h5>
                                     <button hidden={this.state.isDifferentUser}
                                             onClick={this.changeEditState}
                                             className="btn btn-danger">
@@ -355,8 +360,6 @@ class ProfileViewerComponent extends Component {
                                                                   onClick={this.inviteToReview}>
                                     <i className="fa fa-envelope"></i> Invite to Review My Salon
                                 </button>
-
-
 
                             </div>
                         </div>
@@ -371,9 +374,22 @@ class ProfileViewerComponent extends Component {
                                         <h6>About</h6>
                                         <h3>
                                             {this.state.selectedUser.status}
+
                                         </h3>
                                     </div>
+                                    <div  className="form-row col-md-6" hidden={this.state.selectedUser.role !== 'owner'}>
+                                        <h3><i className="fa fa-scissors"></i>Manages <Link to={`/salon/${this.state.website}`}>
+                                            <strong> {this.state.nameSalon}
+                                            </strong>
+                                        </Link></h3>
 
+                                        {/*  <div><h6>{this.state.nameSalon} owns
+                                    <Link to= {`/salon/${this.state.website}`}>
+                                        <strong> {this.state.salonName} </strong>
+                                    </Link>
+                                     </h6>
+                                </div>*/}
+                                    </div>
 
 
                                         <div  className="form-row col-md-6 float-right" hidden={this.state.isDifferentUser}>
@@ -383,6 +399,8 @@ class ProfileViewerComponent extends Component {
                                                 <i className="fa fa-home"></i>  <h6>Admin Home</h6>
                                             </button>
                                         </div>
+
+
 
                                 </div>
 
@@ -530,13 +548,13 @@ class ProfileViewerComponent extends Component {
                                         <div className="form-group row">
                                             <label htmlFor="username" className="col-sm-2 col-form-label">Name</label>
                                             <div className="col-sm-10">
-                                                <input type="text"  className="form-control" value= {this.state.nameSalon} onChange={this.formChangedNameSalon}/>
+                                                <input type="text" disabled className="form-control" value= {this.state.nameSalon} onChange={this.formChangedNameSalon}/>
                                             </div> </div>
 
                                         <div className="form-group row">
                                             <label htmlFor="email" className="col-sm-2 col-form-label">Website</label>
                                             <div className="col-sm-10">
-                                                <input type="url" className="form-control" id="email"
+                                                <input type="url" disabled className="form-control" id="email"
                                                        value = {this.state.website} onChange={this.formChangedWebsiteSalon}/>
                                             </div>
                                         </div>
@@ -569,7 +587,8 @@ class ProfileViewerComponent extends Component {
                                             <div className="col">
                                                 <button id="saveBtn" type="button" onClick={this.saveSalon}
                                                         hidden={this.state.currentSalon.id !== 0}
-                                                        className="btn btn-success btn-block">Create New Salon</button>
+                                                        disabled
+                                                        className="btn btn-success btn-block">Contact Admin To Create New Salon</button>
                                             </div>
 
                                             <div className="col">

@@ -32,6 +32,24 @@ class SalonService {
         })
     }
 
+    findSalonByUserId(userId){
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/' + userId +'/salonOwner/', {
+            method: 'get',
+            credentials : 'include',
+            headers: {
+                'content-type': 'application/json'
+            },
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
+    deleteSalon(salonId) {
+        return fetch('https://pizzazz-db-server.herokuapp.com' + '/api/'+ salonId+'/salon' , {
+            method: 'delete'
+        })
+    }
+
     findSalonByYelpId(salonId){
 
         return fetch('https://pizzazz-db-server.herokuapp.com/api/salonApi/' + salonId, {
@@ -69,8 +87,9 @@ class SalonService {
         })}
 
 
-    createApiSalon(salonId, name) {
-        return fetch('https://pizzazz-db-server.herokuapp.com/api/salonforApi/' + salonId + '/' + name, {
+    createApiSalon(ownerId, salon) {
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/' + ownerId + '/salonFromAdmin' , {
+            body: JSON.stringify(salon),
             headers: {
                 'Content-Type': 'application/json'
             },

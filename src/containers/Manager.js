@@ -11,6 +11,8 @@ import ProfileComponent from "../components/Profile";
 import ProfileViewerComponent from "../components/ProfileViewer";
 import SalonManagerComponent from "../components/SalonManager";
 import AdminHomeComponent from "../components/AdminHome";
+import Maps from "../components/Maps";
+
 export default class Manager extends React.Component {
 
     render() {
@@ -31,6 +33,7 @@ export default class Manager extends React.Component {
                     <Route path="/manageSalon" component={SalonManagerComponent}></Route>
                     <Route path="/profiles/:profileId" component={ProfileViewerComponent}></Route>
                     <Route path="/manage" component={AdminHomeComponent}></Route>
+                    <Route path="/maps" component={Maps}></Route>
 
 
                 </div>

@@ -9,7 +9,7 @@ import $ from 'jquery';
 
 class App extends Component {
 
-     constructor(props) {
+    constructor(props) {
         super(props);
         this.state = { newUser:'', isAuthenticated: false, user: null, token: '' , username : '' , password : '' , loginUser : ''};
         this.userService = UserService.instance;
@@ -34,7 +34,7 @@ class App extends Component {
     componentDidMount()
     {
         $('.topBanner').css('pointer-events','none');
-         $('.logincomponent').css('pointer-events','auto');
+        $('.logincomponent').css('pointer-events','auto');
     }
 
     componentWillUnmount()
@@ -51,10 +51,10 @@ class App extends Component {
 
     loginUser = () => {
 
-            this.state.loginUser = {
-                username : this.state.username,
-                password : this.state.password
-            }
+        this.state.loginUser = {
+            username : this.state.username,
+            password : this.state.password
+        }
 
         console.log(this.state.loginUser);
         this.userService.findUserByUsernameAndPassword(this.state.loginUser)
@@ -79,16 +79,16 @@ class App extends Component {
         console.log(event.target.value);
         console.log(this.state.username);
         this.setState({
-                username: event.target.value
-            })
+            username: event.target.value
+        })
     };
 
     formChanged2 = (event) => {
         console.log(event.target.value);
         console.log(this.state.password);
         this.setState({
-                password: event.target.value
-            })
+            password: event.target.value
+        })
     };
 
 
@@ -168,24 +168,17 @@ class App extends Component {
                 </div>
             ) :
             (
-                <div className="container-fluid">
+                <div className="container-fluid ">
                     <FacebookLogin
                         appId={config.FACEBOOK_APP_ID}
                         autoLoad={false}
                         fields="name,email,picture"
                         callback={this.facebookResponse}
-                        cssClass="my-facebook-button-class"
-                        icon="fa fa-facebook"/>
 
-                    <GoogleLogin
-                        clientId={config.GOOGLE_CLIENT_ID}
-                        onSuccess={this.googleResponse}
-                        onFailure={this.onFailure}>
-                        <span>
-                            <i className="fa fa-google"/>
-                        </span>
-                        <span> Login with Google</span>
-                    </GoogleLogin>
+                        icon="fa fa-facebook">
+
+                    </FacebookLogin>
+
                 </div>
             );
         return (
@@ -193,13 +186,13 @@ class App extends Component {
 
             <div className="popup_inner logincomponent">
 
-            <button onClick={this.props.close} className="close btn btn-danger float-right closeBtn"><i className="fa fa-close"/> </button>
+                <button onClick={this.props.close} className="close btn btn-danger float-right closeBtn"><i className="fa fa-close"/> </button>
                 <form className="text-center border border-light p-5">
                     <h1>Sign In</h1>
                     <input type="text" className="form-control mb-4 wbdv" placeholder="username" onChange={this.formChanged}/>
-                        <input type="password" id="defaultLoginFormPassword" className="form-control mb-4"
-                               placeholder="Password"  onChange={this.formChanged2}/>
-                            <button className="btn btn-dark btn-block my-4" type="button" onClick={this.loginUser}>Continue</button>
+                    <input type="password" id="defaultLoginFormPassword" className="form-control mb-4"
+                           placeholder="Password"  onChange={this.formChanged2}/>
+                    <button className="btn btn-dark btn-block my-4" type="button" onClick={this.loginUser}>Continue</button>
 
                     <p>Not a member?
                         <a href="">Register</a>
