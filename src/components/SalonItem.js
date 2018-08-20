@@ -194,12 +194,24 @@ console.log("rev "+rev.length);
 
     getTime()
     {
-        var today = new Date().getDay();
-        this.state.is_open_now = !this.state.salon.closed_now;
+        var now = new Date();
+        var today = now.getDay();
+        var hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+        var minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+
+        var time = hour + minute;
+         // this.state.is_open_now = !this.state.salon.closed_now;
         if(this.state.salon.hours !== undefined && this.state.salon.hours.length > today) {
             let hours = this.state.salon.hours[0].open;
             let start = hours[today].start;
             let end = hours[today].end;
+            console.log(start);
+            console.log(end);
+            console.log(time);
+            if(time > start && time < end)
+                this.state.is_open_now = true;
+            else
+                this.state.is_open_now = false;
             start = start.substr(0,2) > 12 ? start.substr(0,2)- 12 + ':' + start.substr(2,2) + 'pm' : start.substr(0,2) + ':' + start.substr(2,2) + 'am';
             end = end.substr(0,2) > 12 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
             return <span> Today:  <b>{start} - {end}</b></span>;
@@ -208,6 +220,13 @@ console.log("rev "+rev.length);
             let hours = this.state.salon.hours[0].open;
             let start = hours[0].start;
             let end = hours[0].end;
+            console.log(start);
+            console.log(end);
+            console.log(time);
+            if(time > start && time < end)
+                this.state.is_open_now = true;
+            else
+                this.state.is_open_now = false;
             start = start.substr(0,2) > 12 ? start.substr(0,2)- 12 + ':' + start.substr(2,2) + 'pm' : start.substr(0,2) + ':' + start.substr(2,2) + 'am';
             end = end.substr(0,2) > 12 ? end.substr(0,2)- 12 + ':' + end.substr(2,2) + 'pm' : end.substr(0,2) + ':' + end.substr(2,2) + 'am';
             return <span> Today:  <b>{start} - {end}</b></span>;
