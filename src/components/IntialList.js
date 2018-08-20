@@ -1,6 +1,7 @@
 import React from 'react'
 import Salon from '../components/Salons'
 import YelpApiService from "../services/YelpServices";
+import $ from 'jquery';
 export default class InitialList extends React.Component {
 
     constructor(props)
@@ -20,6 +21,7 @@ export default class InitialList extends React.Component {
     componentWillMount()
     {
         this.defaultData();
+        $('.sidebar').css('visibility','visible');
     }
 
     componentWillReceiveProps(newProps)

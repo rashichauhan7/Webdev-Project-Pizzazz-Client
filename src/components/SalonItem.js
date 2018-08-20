@@ -222,14 +222,22 @@ console.log("rev "+rev.length);
                 if (salon.id === 0){
                     this.SalonService.createApiSalon(this.state.salonId, this.state.salon.name)
                         .then(salon => {
+                            this.UService.findCurrentUser()
+                                .then(user => {
+                                    this.setState({
+                                        customer: user
+                                    });
+                                })
                             review = {
                                 rating: rating,
                                 comment: comment,
-                                salon: salon
+                                salon: salon,
+                                customer : this.state.customer
                             }
                             this.SalonService.createReview(review)
                                 .then(review => {
                                     console.log(review);
+                                    window.location.reload();
                                 })
                         })
                 }
@@ -255,11 +263,12 @@ console.log("rev "+rev.length);
                             this.SalonService.updateReviews(reviews)
                                 .then(response => {
                                     console.log(response);
+                                    window.location.reload();
                                 })
                     })
                 }
             });
-        window.location.reload();
+
         setTimeout(() => $('.post').html('Posted') , 2000);
         setTimeout(this.toggleReview, 3000);
     }
@@ -330,12 +339,19 @@ console.log("rev "+rev.length);
             this.SalonService.findSalonByYelpId(this.state.salonId)
                 .then(salon => {
                     if (salon.id === 0){
+                        this.UService.findCurrentUser()
+                            .then(user => {
+                                this.setState({
+                                    customer: user
+                                });
+                            })
                         this.SalonService.createApiSalon(this.state.salonId, this.state.salon.name)
                             .then(salon => {
                                 appoint = {
                                     time: time,
                                     date: date,
-                                    salon: salon
+                                    salon: salon,
+                                    customer: this.state.customer
                                 };
                                 this.SalonService.createAppointment(appoint)
                                     .then(appt => {
@@ -354,10 +370,17 @@ console.log("rev "+rev.length);
                                     }
                                 }
                                 console.log(appts);
+                                this.UService.findCurrentUser()
+                                    .then(user => {
+                                        this.setState({
+                                            customer: user
+                                        });
+                                    })
                                 appoint = {
                                     time: time,
                                     date: date,
-                                    salon: salon
+                                    salon: salon,
+                                    customer: this.state.currentUser
                                 }
                                 appts = [...appts, appoint];
                                 this.SalonService.updateAppointments(appts)
@@ -390,7 +413,7 @@ console.log("rev "+rev.length);
         return (
             <div className="item container-fluid">
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-4 col-lg-4 col-sm-12">
                         <h1>{this.state.salon.name}</h1>
                         <span> <StarRatings
                             rating={this.state.salon.rating}
@@ -422,7 +445,7 @@ console.log("rev "+rev.length);
                     </div>
 
 
-                        <div className="col-8 list-group">
+                        <div className="col-8 col-lg-8 col-sm-12 list-group">
                             <div className="list-group-item">
                                 {this.photos()}
                             </div>
