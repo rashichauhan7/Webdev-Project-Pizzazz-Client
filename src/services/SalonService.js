@@ -181,6 +181,17 @@ class SalonService {
         })
     }
 
+    validateOwner(salonOwnerId){
+        return fetch('https://pizzazz-db-server.herokuapp.com/api/'+salonOwnerId+'/ownerValidation',{
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
     updateReviews(reviews){
         return fetch('https://pizzazz-db-server.herokuapp.com/api/reviews',{
             method: 'put',

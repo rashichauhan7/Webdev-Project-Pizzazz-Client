@@ -94,11 +94,20 @@ export default class AdminHomeComponent extends Component{
             website : this.state.salonWebsite,
             salonOwner : this.state.salonOwnerId
         }
-        this.salonService.createApiSalonFromScreen(this.state.salonOwnerId,this.state.newSalon)
-            .then(response=>{
-                this.userService.findAllSalonsFromAdmin()
-                    .then(salons=>this.setSalons(salons))
+        this.salonService.validateOwner(this.state.salonOwnerId)
+            .then((user)=>{
+                if(user.id === 0){
+                    {alert('Please enter a valid owner Id')}
+                }else{
+                    this.salonService.createApiSalonFromScreen(this.state.salonOwnerId,this.state.newSalon)
+                        .then(response=>{
+                            this.userService.findAllSalonsFromAdmin()
+                                .then(salons=>this.setSalons(salons))
+                        })
+                }
             })
+
+
     }
 
 
@@ -113,9 +122,17 @@ export default class AdminHomeComponent extends Component{
         }
 
         console.log(this.state.newUser);
-        this.userService.createUser(this.state.newUser)
-            .then((loginUser)=>{this.userService.findAllReviewers()
-                .then(users=>this.setReviewers(users))})
+        this.userService.findUserByUsername(this.state.username)
+            .then(response=>{
+                if (response.length === 0){
+                    this.userService.createUserFromAdminPage(this.state.newUser)
+                        .then((loginUser)=>{this.userService.findAllReviewers()
+                            .then(users=>this.setReviewers(users))})
+                } else {
+                    {alert('Username already taken')}
+                }
+            })
+
     };
 
     deleteReviewer=(userId)=> {

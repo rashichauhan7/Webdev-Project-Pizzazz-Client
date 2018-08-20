@@ -97,6 +97,7 @@ class UserService {
     createUser(user) {
         return fetch(CUSTOMER_API_URL2, {
             body: JSON.stringify(user),
+            credentials : 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -105,11 +106,27 @@ class UserService {
             return response.json();
         })}
 
+
+
+    createUserFromAdminPage(user) {
+         fetch(CUSTOMER_API_URL2, {
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+            return response.json();
+        })}
+
+
     deleteUser(userId) {
-        return fetch(CUSTOMER_API_URL + '/api/user/' + userId, {
+        fetch(CUSTOMER_API_URL + '/api/user/' + userId, {
             method: 'delete'
-        })
-    }
+        }).then(function (response) {
+            return response.json();
+        })}
+    
 
     updateUser(userId,user) {
         return fetch(CUSTOMER_API_URL2  + userId, {
