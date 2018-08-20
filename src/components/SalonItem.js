@@ -432,7 +432,7 @@ console.log("rev "+rev.length);
                             <span className="float-left" style={{marginRight: "10px"}}>{this.state.salon.price}</span>
                             <span>{this.categories()}</span>
                         </div>
-                        <div className="card col-lg-10">
+                        <div className="card col-12 col-sm-12 col-lg-10">
                             <div className="card-img-top" style={{width: '300px' , height: '100px',padding: '0%'}}>
                                     <Maps lat = {this.state.salon.coordinates.latitude} lng={this.state.salon.coordinates.longitude}/>
                             </div>
