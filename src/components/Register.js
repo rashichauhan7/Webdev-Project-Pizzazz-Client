@@ -192,10 +192,9 @@ export default class Register extends React.Component {
                         <label className="custom-control-label"
                                htmlFor="defaultRegisterFormNewsletter">Register as a salon owner</label>
                     </div>
-
-                    <button  onClick={this.saveUser} className="btn btn-dark my-4 btn-block"
-                             value="submit"
-                            type="button">Register
+                
+                    <button className="btn btn-dark my-4 btn-block"
+                            type="submit">Register
                     </button>
 
                         <p>By clicking
