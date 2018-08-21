@@ -109,27 +109,31 @@ class App extends Component {
                     window.location.reload();
                 }
                 else {
-                    this.state.newUser = {
-                        username: response.email,
-                        password: response.id,
-                        firstName: response.name.split(' ')[0],
-                        lastName: response.name.split(' ')[1],
-                        email: response.email,
-                        role: ''
+                    if (user.username !== null) {
+                        this.state.newUser = {
+                            username: response.email,
+                            password: response.id,
+                            firstName: response.name.split(' ')[0],
+                            lastName: response.name.split(' ')[1],
+                            email: response.email,
+                            role: ''
+                        }
+                        console.log(this.state.newUser);
+                        this.userService.createUser(this.state.newUser)
+                            .then((loginUser) => {
+                                $('.login').css('visibility', 'hidden');
+                                $('.register').css('visibility', 'hidden');
+                                $('.loggedIn').css('visibility', 'visible');
+                                $('.logout').css('visibility', 'visible');
+                                this.props.close();
+                                window.location.reload();
+                            })
                     }
-                    console.log(this.state.newUser);
-                    this.userService.createUser(this.state.newUser)
-                        .then((loginUser)=>{
-                            $('.login').css('visibility', 'hidden');
-                            $('.register').css('visibility', 'hidden');
-                            $('.loggedIn').css('visibility', 'visible');
-                            $('.logout').css('visibility', 'visible');
-                            this.props.close();
-                            window.location.reload();
-                        })
+
+                    else {
+                        this.props.close();
+                    }
                 }
-
-
             });
 
     };
