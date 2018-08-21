@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import YelpApiService from "../services/YelpServices";
 import '../css/SalonItem.css'
 import StarRatings from '../../node_modules/react-star-ratings';
@@ -35,7 +36,8 @@ export default class SalonItem extends React.Component{
             timeValue: '',
             cssLoaded: false,
             currentUser : {},
-            reviewCount: 0
+            reviewCount: 0,
+            loaded: false
         }
 
         this.yelp = YelpApiService.instance;
@@ -56,7 +58,7 @@ export default class SalonItem extends React.Component{
         this.renderComments = this.renderComments.bind(this);
         this.SalonService = SalonService.instance;
         this.UService = UserService.instance;
-
+        this.loadMap = this.loadMap.bind(this);
     }
 
     componentDidMount()
@@ -91,6 +93,21 @@ export default class SalonItem extends React.Component{
             .then(reviews => this.setState({yelpreviews: reviews.reviews}));
     }
 
+    loadMap()
+    {
+        var _this = this;
+        //wait for a paint to do scrolly stuff
+        if(this.state.loaded === false) {
+            window.requestAnimationFrame(function () {
+                var node = ReactDOM.findDOMNode(_this);
+                if (node !== undefined) {
+                    //and scroll them!
+                    _this.setState({loaded: true});
+                }
+            });
+        }
+
+    }
     renderYelpReviews()
     {
         let reviews = this.state.yelpreviews.map((review) => {
@@ -337,6 +354,7 @@ export default class SalonItem extends React.Component{
                             this.setState({reviews: reviews});
                             this.setState({reviewCount: reviews.length});
                             this.renderReviews();
+                            this.loadMap();
                     })
                 }
             });
@@ -496,9 +514,9 @@ export default class SalonItem extends React.Component{
                             <span>{this.categories()}</span>
                         </div>
                         <div className="card col-12 col-sm-12 col-lg-10">
-                            <div className="card-img-top" style={{width: '300px' , height: '100px',padding: '0%'}}>
+                            {this.state.loaded && <div className="card-img-top" style={{width: '300px' , height: '100px',padding: '0%'}}>
                                     <Maps lat = {this.state.salon.coordinates.latitude} lng={this.state.salon.coordinates.longitude}/>
-                            </div>
+                            </div>}
 
                         </div>
                         <ul className="list-group">
