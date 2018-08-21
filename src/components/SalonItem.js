@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import YelpApiService from "../services/YelpServices";
 import '../css/SalonItem.css'
 import StarRatings from '../../node_modules/react-star-ratings';
@@ -57,7 +58,7 @@ export default class SalonItem extends React.Component{
         this.renderComments = this.renderComments.bind(this);
         this.SalonService = SalonService.instance;
         this.UService = UserService.instance;
-
+        this.loadMap = this.loadMap.bind(this);
     }
 
     componentDidMount()
@@ -92,9 +93,20 @@ export default class SalonItem extends React.Component{
             .then(reviews => this.setState({yelpreviews: reviews.reviews}));
     }
 
-    componentDidUpdate()
+    loadMap()
     {
-        this.setState({loaded: true});
+        var _this = this;
+        //wait for a paint to do scrolly stuff
+        if(this.state.loaded === false) {
+            window.requestAnimationFrame(function () {
+                var node = ReactDOM.findDOMNode(_this);
+                if (node !== undefined) {
+                    //and scroll them!
+                    _this.setState({loaded: true});
+                }
+            });
+        }
+
     }
     renderYelpReviews()
     {
@@ -342,6 +354,7 @@ export default class SalonItem extends React.Component{
                             this.setState({reviews: reviews});
                             this.setState({reviewCount: reviews.length});
                             this.renderReviews();
+                            this.loadMap();
                     })
                 }
             });
