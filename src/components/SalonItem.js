@@ -35,7 +35,8 @@ export default class SalonItem extends React.Component{
             timeValue: '',
             cssLoaded: false,
             currentUser : {},
-            reviewCount: 0
+            reviewCount: 0,
+            loaded: false
         }
 
         this.yelp = YelpApiService.instance;
@@ -91,6 +92,10 @@ export default class SalonItem extends React.Component{
             .then(reviews => this.setState({yelpreviews: reviews.reviews}));
     }
 
+    componentDidUpdate()
+    {
+        this.setState({loaded: true});
+    }
     renderYelpReviews()
     {
         let reviews = this.state.yelpreviews.map((review) => {
@@ -496,9 +501,9 @@ export default class SalonItem extends React.Component{
                             <span>{this.categories()}</span>
                         </div>
                         <div className="card col-12 col-sm-12 col-lg-10">
-                            <div className="card-img-top" style={{width: '300px' , height: '100px',padding: '0%'}}>
+                            {this.state.loaded && <div className="card-img-top" style={{width: '300px' , height: '100px',padding: '0%'}}>
                                     <Maps lat = {this.state.salon.coordinates.latitude} lng={this.state.salon.coordinates.longitude}/>
-                            </div>
+                            </div>}
 
                         </div>
                         <ul className="list-group">
