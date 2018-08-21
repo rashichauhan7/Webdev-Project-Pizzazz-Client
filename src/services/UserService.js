@@ -59,7 +59,7 @@ class UserService {
     }
 
     findUserByUsername(username) {
-         fetch(CUSTOMER_API_URL2 + username + '/username', {
+        return fetch(CUSTOMER_API_URL2 + username + '/username', {
             method: 'get',
             headers: {
                 'content-type': 'application/json'
