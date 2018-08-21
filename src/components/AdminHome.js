@@ -99,11 +99,20 @@ export default class AdminHomeComponent extends Component{
             website : this.state.salonWebsite,
             salonOwner : this.state.salonOwnerId
         }
-        this.salonService.createApiSalonFromScreen(this.state.salonOwnerId,this.state.newSalon)
-            .then(response=>{
-                this.userService.findAllSalonsFromAdmin()
-                    .then(salons=>this.setSalons(salons))
+        this.salonService.validateOwner(this.state.salonOwnerId)
+            .then((user)=>{
+                if(user.id === 0){
+                    {alert('Please enter a valid owner Id')}
+                }else{
+                    this.salonService.createApiSalonFromScreen(this.state.salonOwnerId,this.state.newSalon)
+                        .then(response=>{
+                            this.userService.findAllSalonsFromAdmin()
+                                .then(salons=>this.setSalons(salons))
+                        })
+                }
             })
+
+
     }
 
 
@@ -118,9 +127,17 @@ export default class AdminHomeComponent extends Component{
         }
 
         console.log(this.state.newUser);
-        this.userService.createUser(this.state.newUser)
-            .then((loginUser)=>{this.userService.findAllReviewers()
-                .then(users=>this.setReviewers(users))})
+        this.userService.findUserByUsername(this.state.username)
+            .then(response=>{
+                if (response.length === 0){
+                    this.userService.createUserFromAdminPage(this.state.newUser)
+                        .then((loginUser)=>{this.userService.findAllReviewers()
+                            .then(users=>this.setReviewers(users))})
+                } else {
+                    {alert('Username already taken')}
+                }
+            })
+
     };
 
     EditReviewer = (user)=> {
@@ -194,7 +211,7 @@ export default class AdminHomeComponent extends Component{
 
     deleteReviewer=(userId)=> {
         this.userService.deleteUser(userId)
-            .then( ()=>{
+            .then(()=>{
                 this.userService.findAllReviewers()
                     .then(users=>this.setReviewers(users))
                 this.userService.findAllOwners()
@@ -308,7 +325,6 @@ export default class AdminHomeComponent extends Component{
                                 </div>
                             </div>
 
-
                         </div>
                     </form>
                     <form className="text-center border border-light p-5">
@@ -339,6 +355,7 @@ export default class AdminHomeComponent extends Component{
 
                         <ul className="list-group">
                             <div className="form-row mb-3 border-dark reviewertag">
+
                                 <div className="col">
                                     <input disabled className="r-user-id form-control"/>
                                 </div>
@@ -616,7 +633,7 @@ export default class AdminHomeComponent extends Component{
                                 <h6>Action</h6>
                             </div>
                         </div>
-
+                        
                         <ul className="list-group">
                             {this.state.salons.map((reviewer)=>
                                 <div className="form-row mb-3 border-dark">
