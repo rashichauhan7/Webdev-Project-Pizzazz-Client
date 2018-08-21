@@ -354,9 +354,10 @@ export default class SalonItem extends React.Component{
                             this.setState({reviews: reviews});
                             this.setState({reviewCount: reviews.length});
                             this.renderReviews();
-                            this.loadMap();
+
                     })
                 }
+                this.loadMap();
             });
     }
 
