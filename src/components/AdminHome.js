@@ -398,7 +398,7 @@ export default class AdminHomeComponent extends Component{
                                     </div>
                                     <div className="col">
                                         <button style={{marginRight: '5%'}} className="btn btn btn-danger delete"
-                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Reviewer?'))
+                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this User?'))
                                                     this.deleteReviewer(reviewer.id)}}><i className="fa fa-trash"></i></button>
                                         <button type="button" className="btn btn btn-danger edit"
                                                 onClick={()=> {this.EditReviewer(reviewer)}}><i className="fa fa-pencil"></i></button>
@@ -478,7 +478,7 @@ export default class AdminHomeComponent extends Component{
                                     </div>
                                     <div className="col">
                                         <button style={{marginRight: '5%'}} className="btn btn btn-danger delete"
-                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Reviewer?'))
+                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this User?'))
                                                     this.deleteReviewer(reviewer.id)}}><i className="fa fa-trash"></i></button>
                                         <button type="button" className="btn btn btn-danger edit"
                                                 onClick={()=> {this.EditReviewer(reviewer)}}><i className="fa fa-pencil"></i></button>
@@ -560,7 +560,7 @@ export default class AdminHomeComponent extends Component{
                                     </div>
                                     <div className="col">
                                         <button style={{marginRight: '5%'}} className="btn btn btn-danger delete"
-                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this Reviewer?'))
+                                                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this User?'))
                                                     this.deleteReviewer(reviewer.id)}}><i className="fa fa-trash"></i></button>
                                         <button type="button" className="btn btn btn-danger edit"
                                                 onClick={()=> {this.EditReviewer(reviewer)}}><i className="fa fa-pencil"></i></button>
