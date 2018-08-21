@@ -318,7 +318,7 @@ export default class AdminHomeComponent extends Component{
                             <div className="col">
                                 <div className="form-row mb-1 border-dark">
                                     <div className="col">
-                                        <button className="btn btn-block btn-dark" type="submit" value="Submit">Add Reviewer</button>
+                                        <button className="btn btn-block btn-dark" onClick={this.addReviewer} type="button" value="Submit">Add Reviewer</button>
                                     </div> <div className="col">
                                     <button className="btn btn-block btn-dark" type="reset" value="Reset">Clear Fields</button>
                                 </div>
@@ -599,7 +599,7 @@ export default class AdminHomeComponent extends Component{
                             <div className="col">
                                 <div className="form-row mb-1 border-dark">
                                     <div className="col">
-                                        <button style={{marginRight: '5%'}} className="btn btn-block btn-dark" type="submit" value="Submit">Add Salon</button>
+                                        <button style={{marginRight: '5%'}} onClick={this.addSalon} className="btn btn-block btn-dark" type="button" value="Submit">Add Salon</button>
                                     </div> <div className="col">
                                     <button className="btn btn-block btn-dark" type="reset" value="Reset">Clear Fields</button>
                                 </div>

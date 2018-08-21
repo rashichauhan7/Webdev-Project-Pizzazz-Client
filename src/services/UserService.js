@@ -110,7 +110,7 @@ class UserService {
 
 
     createUserFromAdminPage(user) {
-         fetch(CUSTOMER_API_URL2, {
+         return fetch(CUSTOMER_API_URL2, {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
