@@ -194,6 +194,7 @@ export default class Register extends React.Component {
                     </div>
 
                     <button  onClick={this.saveUser} className="btn btn-dark my-4 btn-block"
+                             value="submit"
                             type="button">Register
                     </button>
 
