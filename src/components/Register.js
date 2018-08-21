@@ -41,28 +41,41 @@ export default class Register extends React.Component {
             role: (this.state.role).toString()
         }
 
-        console.log(this.state.newUser);
-        this.userService.findUserByUsername(this.state.newUser.username)
-            .then(response => {
-               if (response.id === 0){
-                   this.userService.createUser(this.state.newUser)
-                       .then((loginUser)=>{
-                           {alert('Registration Successful')}
-                           console.log(loginUser);
-                           $('.login').css('visibility', 'hidden');
-                           $('.register').css('visibility', 'hidden');
-                           $('.loggedIn').css('visibility', 'visible');
-                           $('.logout').css('visibility', 'visible');
-                           this.props.close();
-                           window.location.reload();
-                       }).then(()=>{
-                       this.setStateOfAll();
-                   })
-               }
-               else {
-                   alert('username already exists');
-               }
-            })
+        if(this.state.username === ''){
+            alert('Enter Valid username');
+        } else if(this.state.password === ''){
+            alert('Enter Valid password');
+        } else if(this.state.firstname === ''){
+            alert('Enter Valid firstname');
+        } else if(this.state.lastname === ''){
+            alert('Enter Valid lastname');
+        } else if(this.state.email === ''){
+            alert('Enter Valid email');
+        } else{
+            console.log(this.state.newUser);
+            this.userService.findUserByUsername(this.state.newUser.username)
+                .then(response => {
+                    if (response.length === 0){
+                        this.userService.createUser(this.state.newUser)
+                            .then((loginUser)=>{
+                                {alert('Registration Successful')}
+                                console.log(loginUser);
+                                $('.login').css('visibility', 'hidden');
+                                $('.register').css('visibility', 'hidden');
+                                $('.loggedIn').css('visibility', 'visible');
+                                $('.logout').css('visibility', 'visible');
+                                this.props.close();
+                                window.location.reload();
+                            }).then(()=>{
+                            this.setStateOfAll();
+                        })
+                    }
+                    else {
+                        alert('username already exists');
+                    }
+                })
+        }
+
     };
 
     componentDidMount()
