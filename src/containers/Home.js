@@ -42,7 +42,7 @@ export default class Home extends React.Component{
 
         this.userService.findCurrentUser()
             .then((user) => {this.setState({user: user});
-                if(user.username !== undefined){
+                if(user.id !== 0){
                     $('.login').css('visibility', 'hidden');
                     $('.register').css('visibility', 'hidden');
                     $('.loggedIn').css('visibility', 'visible');
@@ -55,7 +55,7 @@ export default class Home extends React.Component{
     {
         this.userService.findCurrentUser()
             .then((user) => {this.setState({user: user});
-            if(user.username !== undefined){
+            if(user.id !== 0){
                 $('.login').css('visibility', 'hidden');
                 $('.register').css('visibility', 'hidden');
                 $('.loggedIn').css('visibility', 'visible');

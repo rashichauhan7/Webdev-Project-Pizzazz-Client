@@ -116,7 +116,7 @@ export default class SalonItem extends React.Component{
     toggleReview() {
         this.UService.findCurrentUser()
             .then(user => {
-                if(user.username !== undefined ) {
+                if(user.id !== 0 ) {
                     this.setState({
                         showReview: !this.state.showReview
                     });
@@ -387,7 +387,7 @@ export default class SalonItem extends React.Component{
     getValue(date, time) {
         this.UService.findCurrentUser()
             .then(user => {
-                if(user.username !== undefined ) {
+                if(user.id !== 0 ) {
                     let appoint;
                     if (time === ""){
                         alert('select time')
