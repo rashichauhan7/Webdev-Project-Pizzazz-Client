@@ -633,7 +633,7 @@ export default class AdminHomeComponent extends Component{
                                 <h6>Action</h6>
                             </div>
                         </div>
-                        
+
                         <ul className="list-group">
                             {this.state.salons.map((reviewer)=>
                                 <div className="form-row mb-3 border-dark">
