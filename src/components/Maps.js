@@ -8,9 +8,7 @@ class Maps extends React.Component {
         super(props);
         this.state =
             {
-                lat: 0,
-                lng: 0,
-                markers: [{
+                  markers: [{
                     position: {
                         lat: this.props.lat,
                         lng: this.props.lng,
@@ -19,31 +17,42 @@ class Maps extends React.Component {
             }
 
     }
+    shouldComponentUpdate(nextProps, nextState){
+        if(this.props.lat === nextProps.lat){
+            return false
+        }else{
+            return true
+        }
+    }
 
-    componentDidMount()
-    {
-        this.setState({lat: this.props.lat});
-        this.setState({lat: this.props.lat});
-    }
- componentWillReceiveProps(newprops)
-    {
-        this.setState({lat: newprops.lat});
-        this.setState({lng: newprops.lng});
-    }
+ //    componentDidMount()
+ //    {
+ //        this.setState({lat: this.props.lat});
+ //        this.setState({lat: this.props.lat});
+ //    }
+ // componentWillReceiveProps(newprops)
+ //    {
+ //        this.setState({lat: newprops.lat});
+ //        this.setState({lng: newprops.lng});
+ //    }
 
 
     render() {
-        return (
-            <Map
-                google={this.props.google}
-                zoom={14}
-                center={{
-                    lat: this.props.lat,
-                    lng: this.props.lng,
-                }}
-                markers = {this.state.markers}
-            />
-        );
+        if(this.props.lat !== undefined) {
+            return (
+                <Map
+                    google={this.props.google}
+                    zoom={14}
+                    center={{
+                        lat: this.props.lat,
+                        lng: this.props.lng,
+                    }}
+                    markers={this.state.markers}
+                />
+            );
+
+        }
+        return <div></div>;
     }
 }
 

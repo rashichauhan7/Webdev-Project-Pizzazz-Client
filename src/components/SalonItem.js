@@ -10,7 +10,7 @@ import SalonService from '../services/SalonService';
 import UserService from '../services/UserService';
 import $ from 'jquery';
 import Review from './Review';
-import Map from './Map';
+import Maps from './Maps';
 
 export default class SalonItem extends React.Component{
     constructor(props)
@@ -516,12 +516,7 @@ export default class SalonItem extends React.Component{
                         </div>
                         <div className="card col-12 col-sm-12 col-lg-10">
                             <div className="card-img-top" style={{width: '300px' , height: '100px',padding: '0%'}}>
-                                    {/*<Maps lat = {this.state.salon.coordinates.latitude} lng={this.state.salon.coordinates.longitude}/>*/}
-                                <Map
-                                    center={{lat: this.state.salon.coordinates.latitude, lng: this.state.salon.coordinates.longitude}}
-                                    height='300px'
-                                    zoom={15}
-                                />
+                                    <Maps lat = {this.state.salon.coordinates.latitude} lng={this.state.salon.coordinates.longitude}/>
                             </div>
 
                         </div>

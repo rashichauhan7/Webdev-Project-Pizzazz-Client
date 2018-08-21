@@ -1,6 +1,6 @@
 import React from 'react'
 import { withGoogleMap, GoogleMap } from "react-google-maps"
-// import withScriptjs from "react-google-maps/lib/async/withScriptjs"
+import withScriptjs from "react-google-maps/lib/async/withScriptjs"
 
 class Map extends React.Component{
 
@@ -17,7 +17,7 @@ class Map extends React.Component{
     }
 
     render(){
-        const AsyncMap =
+        const AsyncMap = withScriptjs(
             withGoogleMap(
                 props => (
                     <GoogleMap
@@ -27,7 +27,7 @@ class Map extends React.Component{
                     </GoogleMap>
                 )
             )
-
+        )
         var map
         if(this.props.center.lat !== undefined){
             map = <AsyncMap
