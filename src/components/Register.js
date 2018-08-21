@@ -11,6 +11,7 @@ export default class Register extends React.Component {
         this.state = {
             currentUser: '',
             newUser:'',
+            username: '',
             password :'',
             firstname:'',
             lastname:'',
