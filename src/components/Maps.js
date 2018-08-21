@@ -49,6 +49,6 @@ class Maps extends React.Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyAvRvErTtMRnxJPdPWPik8SuJw43wbAyvg",
+    apiKey: "AIzaSyB4AaB43cyOdRivyJT2Y41qPp_JfGaSQ_8",
     // apiKey: "",
 })(Maps);
