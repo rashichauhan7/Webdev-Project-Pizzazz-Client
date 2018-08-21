@@ -59,6 +59,7 @@ class UserService {
     }
 
     findUserByUsername(username) {
+
        return  fetch(CUSTOMER_API_URL2 + username + '/username', {
             method: 'get',
             headers: {

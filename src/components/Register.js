@@ -44,7 +44,7 @@ export default class Register extends React.Component {
         console.log(this.state.newUser);
         this.userService.findUserByUsername(this.state.newUser.username)
             .then(response => {
-               if (response.length === 0){
+               if (response.id === 0){
                    this.userService.createUser(this.state.newUser)
                        .then((loginUser)=>{
                            {alert('Registration Successful')}
