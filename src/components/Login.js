@@ -99,7 +99,7 @@ class App extends Component {
         }
         this.userService.findUserByUsernameAndPassword(this.state.loginUser)
             .then((user) => {
-                if(user.username != undefined)
+                if(user.username != undefined || user.username.length !== 0)
                 {
                     $('.login').css('visibility', 'hidden');
                     $('.register').css('visibility', 'hidden');
