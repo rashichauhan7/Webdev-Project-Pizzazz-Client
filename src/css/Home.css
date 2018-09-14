@@ -89,6 +89,17 @@
     margin-left:2% ;
     margin-top: 1%;
 }
+
+.users
+{
+    position: absolute;
+    top: 2%;
+    left: 96%;
+}
+.users i
+{
+    color: black;
+}
 .login
 {
     position: absolute;

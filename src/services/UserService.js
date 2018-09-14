@@ -23,7 +23,7 @@ class UserService {
         return this[_singleton]
     }
     findAllUsers() {
-        return fetch(CUSTOMER_API_URL)
+        return fetch(CUSTOMER_API_URL2)
             .then(function(response){
                 return response.json();
             });

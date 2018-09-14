@@ -12,6 +12,7 @@ import ProfileViewerComponent from "../components/ProfileViewer";
 import SalonManagerComponent from "../components/SalonManager";
 import AdminHomeComponent from "../components/AdminHome";
 import Maps from "../components/Maps";
+import Dashboard from '../components/bubbleChart'
 
 export default class Manager extends React.Component {
 
@@ -35,10 +36,11 @@ export default class Manager extends React.Component {
                     <Route path="/profiles/:profileId" component={ProfileViewerComponent}></Route>
                     <Route path="/manage" component={AdminHomeComponent}></Route>
                     <Route path="/maps" component={Maps}></Route>
+                    <Route path="/users" component={Dashboard}></Route>
 
 
                 </div>
             </Router>
-        )
+        );
     }
 }

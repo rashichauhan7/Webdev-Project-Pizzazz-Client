@@ -9,6 +9,7 @@
     "jquery": "^3.3.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
+    "react-d3-bubbles": "^1.2.1",
     "react-dom": "^16.4.1",
     "react-facebook-login": "^4.0.1",
     "react-full-screen": "^0.2.2",

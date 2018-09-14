@@ -120,7 +120,7 @@ let options = [];
 
 
         return (
-            <div className="align-content-center" ref="maincontent">
+            <div className="topbody align-content-center" ref="maincontent">
                 <div className="mainbody">
                     <img className="logo" src={logo} ref="logo"/>
                     <Link to='/home'><img width='10%' height="15%" className="logo1" src={logo1} ref="logo1" /></Link>
@@ -129,6 +129,7 @@ let options = [];
                     <button className="btn loggedIn" onClick={() => window.location.reload()}><Link to={`/profiles/${this.state.user.id}`}>{this.state.user.firstName}</Link></button>
                     <button className="btn logout" onClick={this.logout}><Link to='/home'>Logout</Link></button>
                     <button className="btn register" onClick={this.toggleSignUpPopup}>Sign Up</button>
+                    <Link to='/users'><button className="btn users"><i className="fa fa-users"></i></button></Link>
                     {this.state.showLogin ? <Login close={this.toggleLoginPopup} maincontent={this.maincontent}/>: null }
                     {this.state.showSignUp ? <Register close={this.toggleSignUpPopup}/>: null}
                     <div align="center">
